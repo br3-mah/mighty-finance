@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Dashboard - Mighty Finance Solution</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/theme/images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/web/images/favicon.png') }}">
     <link href="{{ asset('public/theme/vendor/jqvmap/css/jqvmap.min.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="{{ asset('public/theme/vendor/chartist/css/chartist.min.css') }}">
     <link href="{{ asset('public/theme/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
@@ -226,7 +226,9 @@
                         <ul aria-expanded="false">
                             @can('view loan requests')
                                 @role('user')
-                                <li><a href="{{ route('new-loan') }}">New Loan</a></li>
+                                    @if (App\Models\Loans::hasLoan(auth()->user()->id))
+                                    <li><a href="{{ route('new-loan') }}">New Loan</a></li>
+                                    @endif
                                 @else
                                 <li><a href="{{ route('proxy-loan-create') }}">New Loan</a></li>
                                 @endrole
