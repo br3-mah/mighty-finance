@@ -9,7 +9,7 @@
                     <div class="lead-hero-caption">
                         <h1 class="lead-hero-title">Get your loan today!</h1>
                         <p>With a wide selection of packages to meet your various financial needs. </p>
-                        <p class="lead mb0 text-white">From as low as<strong class="text-white">K10,000</strong></p>
+                        <p class="lead mb0 text-white">From as low as <strong class="text-white">K10,000</strong></p>
                         <span>(Minimum loan amount K10,000)</span>
                         <div class="rating-list">
                             <span><i class="fa fa-star"></i></span>
