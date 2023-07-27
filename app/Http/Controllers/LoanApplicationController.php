@@ -122,7 +122,7 @@ class LoanApplicationController extends Controller
                 'msg' => 'You have new a '.$form['type'].' loan application request, please visit the site to view more details'
             ];  
     
-            // $process = $this->send_loan_email($mail);
+            $process = $this->send_loan_email($mail);
             
             DB::commit();
             return response()->json([
@@ -133,6 +133,7 @@ class LoanApplicationController extends Controller
         }else{
             
             DB::rollback();
+            dd('failed');
             return response()->json([
                 "status" => 500, 
                 "success" => false, 

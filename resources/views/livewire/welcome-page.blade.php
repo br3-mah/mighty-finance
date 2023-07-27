@@ -63,7 +63,7 @@
                                     <div class="slider">
                                         <h4 class="text-white">Loan Amount</h4>
                                         <div style="margin-bottom: -60px;" id="pricipal-slide"><input value="1" oninput="this.nextElementSibling.value = this.value" onclick="checker()" step="50" type="range" min="10000" max="2000000" style="width:100%; height: 5px;" id="slidatious" title="Slide for amount">
-                                            <input id="update_side" oninput="checker()" step="50" value="10000" min="10000" max="2000000" style="outline: none;border-top-style: hidden; border-right-style: hidden; border-left-style: hidden; border-bottom-style: hidden; background-color: #662d91; display: block; font-size: 20px;font-weight: bold;color: #fff;text-align: center;margin: 15px 0;width: 100%;" class="output" type="number">
+                                            <input name="amount" id="update_side" oninput="checker()" step="50" value="10000" min="10000" max="2000000" style="outline: none;border-top-style: hidden; border-right-style: hidden; border-left-style: hidden; border-bottom-style: hidden; background-color: #662d91; display: block; font-size: 20px;font-weight: bold;color: #fff;text-align: center;margin: 15px 0;width: 100%;" class="output" type="number">
                                             <output></output>
                                         </div>
                                         <div>

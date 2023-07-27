@@ -48,7 +48,7 @@ trait LoanTrait{
                 // check if user already created a loan application 
                 // that is not approved yet and not complete
                 $check = Application::where('status', 0)->where('complete', 0)
-                                    ->where('user_id', $data['user_id'])->get();
+                                    ->where('user_id', $data['user_id'])->orderBy('id', 'desc')->get();
                     
                 if($data['email'] != ''){
                     $mail = [
@@ -61,7 +61,9 @@ trait LoanTrait{
                         'message' => 'Hi '.$data['fname'].' '.$data['lname'].', Thank you for choosing us as your lender and for your trust in our services. We appreciate your business and are committed to providing you with the best possible experience throughout your loan term Your loan request has been sent, please sign in to see the application status. Your username is '.$data['email'].' and Default Password is Mighty4you',
                     ];
                 }
+
                 if(!empty($check->toArray())){
+                    // dd($data);
                     $check->first()->update($data);
                     if($data['email'] != ''){
                         $contact_email = new LoanApplication($mail);
@@ -70,6 +72,7 @@ trait LoanTrait{
                     }
                     return $check->id;
                 }else{
+                    // dd('here 3');
                     $item = Application::create($data);
                     if($data['email'] != ''){
                         $contact_email = new LoanApplication($mail);
@@ -79,6 +82,7 @@ trait LoanTrait{
                 }
 
             } catch (\Throwable $th) {
+                dd($th);
                 return true;
             }
     }

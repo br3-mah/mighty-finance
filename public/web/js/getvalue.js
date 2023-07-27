@@ -454,7 +454,7 @@ function send() {
     // Submit Form Data
     var form = document.getElementById('form_calculater');
     var formData = new FormData(form);
-
+    console.log(formData);
     fetch(form.action, {
         method: 'POST',
         body: formData
