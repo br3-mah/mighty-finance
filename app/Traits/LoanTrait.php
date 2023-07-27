@@ -63,14 +63,8 @@ trait LoanTrait{
                 }
 
                 if(!empty($check->toArray())){
-                    // dd($data);
-                    $check->first()->update($data);
-                    if($data['email'] != ''){
-                        $contact_email = new LoanApplication($mail);
-                        $mail['message'] = 'Your Loan has been Updated';
-                        Mail::to($data['email'])->send($contact_email);
-                    }
-                    return $check->id;
+                    // redirect to you already have loan request
+                    return 1;
                 }else{
                     // dd('here 3');
                     $item = Application::create($data);

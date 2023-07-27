@@ -109,8 +109,16 @@ class LoanApplicationController extends Controller
                 'complete' => 0
             ];
             
-            $this->apply_loan($data);
-            // $application = $this->apply_loan($data);
+            // $this->apply_loan($data);
+            $res = $this->apply_loan($data);
+
+            if($res == 1){
+                return response()->json([
+                    "status" => 500, 
+                    "success" => false, 
+                    "message" => "Already have a Loan."
+                ]); 
+            }
             $mail = [
                 'user_id' => $user->id,
                 'name' => $form['name'].' '.$form['lname'],
@@ -122,7 +130,7 @@ class LoanApplicationController extends Controller
                 'msg' => 'You have new a '.$form['type'].' loan application request, please visit the site to view more details'
             ];  
     
-            $process = $this->send_loan_email($mail);
+            $this->send_loan_email($mail);
             
             DB::commit();
             return response()->json([

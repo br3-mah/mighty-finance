@@ -481,7 +481,7 @@ function send() {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong!:  Is your internet connectivity still active ? ',
+            text: 'Something went wrong! Login to your account and check your current loan request or check your internet connectivity.',
             footer: '<a href="faq.php">Why do I have this issue?</a>'
         })
     });
