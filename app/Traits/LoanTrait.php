@@ -48,7 +48,7 @@ trait LoanTrait{
                 // check if user already created a loan application 
                 // that is not approved yet and not complete
                 $check = Application::where('status', 0)->where('complete', 0)
-                                    ->where('user_id', $data['user_id'])->orderBy('id', 'desc')->get();
+                                    ->where('user_id', $data['user_id'])->orderBy('created_at', 'desc')->get();
                     
                 if($data['email'] != ''){
                     $mail = [
