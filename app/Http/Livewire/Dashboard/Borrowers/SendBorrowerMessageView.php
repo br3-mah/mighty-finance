@@ -47,13 +47,13 @@ class SendBorrowerMessageView extends Component
                     ];
                     
                     $resp = $this->send_loan_remainder($mail, $user);
-                    
-                    // if($resp){
+                    dd($resp);
+                    if($resp){
                     session()->flash('success', 'Email sent successfully.');
-                    // }else{
-                    //     dd($th);
-                    //     session()->flash('error', 'There was something wrong. Email could not be sent');
-                    // }
+                    }else{
+                        dd($th);
+                        session()->flash('error', 'There was something wrong. Email could not be sent');
+                    }
                 }else{
                     session()->flash('error', 'There was something wrong. Borrower has no active loan');
                 }

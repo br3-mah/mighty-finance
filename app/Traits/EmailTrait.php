@@ -68,8 +68,7 @@ trait EmailTrait{
             Notification::send($user, new LoanRemainder($data));
             return true;
         } catch (\Throwable $th) {
-            dd($th);
-            return false;
+            return $th;
         }
     }
 
