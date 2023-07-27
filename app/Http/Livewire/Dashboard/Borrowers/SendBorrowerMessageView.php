@@ -57,6 +57,7 @@ class SendBorrowerMessageView extends Component
                 }
             }
         } catch (\Throwable $th) {
+            dd($th);
             session()->flash('error', 'There was something wrong. Message Failed');
         }
     }
