@@ -47,6 +47,7 @@ class SendBorrowerMessageView extends Component
                     ];
                     
                     $resp = $this->send_loan_remainder($mail, $user);
+                    
                     // if($resp){
                     session()->flash('success', 'Email sent successfully.');
                     // }else{
