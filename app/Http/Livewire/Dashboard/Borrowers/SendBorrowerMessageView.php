@@ -50,14 +50,14 @@ class SendBorrowerMessageView extends Component
                     if($resp){
                         session()->flash('success', 'Email sent successfully.');
                     }else{
-                        session()->flash('error', 'There was something wrong. Message Failed');
+                        dd($th);
+                        session()->flash('error', 'There was something wrong. Email could not be sent');
                     }
                 }else{
-                    session()->flash('error', 'There was something wrong. Message Failed');
+                    session()->flash('error', 'There was something wrong. Borrower has no active loan');
                 }
             }
         } catch (\Throwable $th) {
-            dd($th);
             session()->flash('error', 'There was something wrong. Message Failed');
         }
     }
