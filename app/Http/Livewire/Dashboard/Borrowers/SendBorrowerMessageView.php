@@ -51,7 +51,6 @@ class SendBorrowerMessageView extends Component
                     if($resp){
                     session()->flash('success', 'Email sent successfully.');
                     }else{
-                        dd($th);
                         session()->flash('error', 'There was something wrong. Email could not be sent');
                     }
                 }else{
