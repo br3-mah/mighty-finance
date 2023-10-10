@@ -39,7 +39,7 @@ class UserController extends Controller
             }
             
             $u = $user->create(array_merge($request->all(), [
-                'password' => bcrypt('20230101bridge.@2you'),
+                'password' => bcrypt('Mighty4you'),
                 'active' => 1,
                 'profile_photo_path' => $url ?? ''
             ]));
@@ -51,10 +51,10 @@ class UserController extends Controller
                 $mail = [
                     'name' => $u->fname.' '.$u->lname,
                     'to' => $u->email,
-                    'from' => 'admin@bridgetrustfinance.co.zm',
+                    'from' => 'admin@mightyfinance.co.zm',
                     'phone' => $u->phone,
-                    'subject' => 'Your Brigetrust Finance Account',
-                    'message' => 'Hello '.$u->fname.' '.$u->lname.' Your Bridgetrust Finance account is now ready, Click on login to goto your dashboard. Your password is 20230101bridge.@2you  -  feel free to change your password.',
+                    'subject' => 'Your MFS Loan Account',
+                    'message' => 'Hello '.$u->fname.' '.$u->lname.' Your Mighty Finance Loan account is now ready, Click on login to goto your dashboard and complete your loan application. Your password is Mighty4you  -  feel free to change your password.',
                 ];
             }
             
@@ -80,7 +80,7 @@ class UserController extends Controller
                 DB::commit();
                 return back();
             } catch (\Throwable $th) {
-                Session::flash('error', "Failed. Check your internet connection and try again.");
+                Session::flash('error', "Failed. Check your internet connection and try again.".substr($th, 0, 40));
                 DB::rollback();
                 return back();
             }

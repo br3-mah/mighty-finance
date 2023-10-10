@@ -36,7 +36,7 @@ class BorrowerView extends Component
         $this->user_role = Role::pluck('name')->toArray();
         $this->permissions = Permission::get();
         $roles = Role::orderBy('id','DESC')->paginate(5);
-        $users = User::role('user')->orderBy('created_at', 'desc')->paginate(10);
+        $users = User::role('user')->orderBy('created_at', 'desc')->get();
 
         return view('livewire.dashboard.borrowers.borrower-view',[
             'users' => $users,
@@ -80,7 +80,7 @@ class BorrowerView extends Component
 
             $details = [
                 'title' => 'Your account has been created successfully, please visit the site to login',
-                'body' => 'Hi '.$u->fname.' '.$u->lname.' your current password is peace2u'
+                'body' => 'Hi '.$u->fname.' '.$u->lname.' your current password is Mighty4you'
             ];
 
             $u->syncRoles($this->assigned_role);

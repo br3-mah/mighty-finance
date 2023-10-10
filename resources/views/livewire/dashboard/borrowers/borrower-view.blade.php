@@ -96,7 +96,6 @@
                                 @endforelse 
                             </tbody>
                         </table>
-                        {{ $users->links()}}
                     </div>
                     @else
                     <div class="container">
