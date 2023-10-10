@@ -28,9 +28,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'mname',
         'fname',
         'lname',
         'phone',
+        'phone2',
         'address',
         'occupation',
         'nrc',
@@ -44,6 +46,11 @@ class User extends Authenticatable
         'id_type',
         'email',
         'password',
+
+        'employeeNo',
+        'jobTitle',
+        'ministry',
+        'department'
     ];
 
     /**
@@ -152,5 +159,8 @@ class User extends Authenticatable
 
     public function next_of_king(){
         return $this->hasMany(NextOfKing::class);
+    }
+    public function uploads(){
+        return $this->hasMany(UserFile::class);
     }
 }

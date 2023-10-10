@@ -78,8 +78,8 @@
                             </span>
                             <div class="media-body">
                                 <p class="mb-1">Invites</p>
-                                <h4 class="mb-0">34</h4>
-                                <span class="badge badge-success">-3.5%</span>
+                                <h4 class="mb-0">0</h4>
+                                <span class="badge badge-success">0%</span>
                             </div>
                         </div>
                     </div>
@@ -291,10 +291,8 @@
                                 <div class="tab-pane active show fade" id="Bank-Wallet" role="tabpanel">
                                     <div class="mb-4">
                                         @include('livewire.dashboard.__parts.current-balanace')
-                                        
                                     </div>
                                 </div>
-                                
                             </div>
                         </div>
                         @else
@@ -360,7 +358,7 @@
                                         <table class="table">
                                             <tbody>
                                                 @forelse($all_loan_requests as $loan)
-                                                    <tr>
+                                                    {{-- <tr>
                                                         <td>
                                                             <div class="media">
                                                                 <span class="bgl-primary p-3 mr-3">
@@ -377,7 +375,7 @@
                                                         </td>
                                                         <td class="font-w600 text-center">K{{ $loan->amount  }}</td>
                                                         <td><a class="btn-link text-success float-right" href="javascript:void(0);">Completed</a></td>
-                                                    </tr>
+                                                    </tr> --}}
                                                 @empty
                                                 <p>No Completed Loans</p>
                                                 @endforelse

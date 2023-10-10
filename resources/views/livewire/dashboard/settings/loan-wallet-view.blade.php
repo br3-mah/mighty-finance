@@ -134,7 +134,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger btn-square light" data-dismiss="modal">Close</button>
-                        <button id="update-loan-wallet-toastr-success-bottom-left" type="submit" data-dismiss="modal" class="btn btn-primary btn-square">Save changes</button>
+                        <button id="update-loan-wallet-toastr-success-bottom-left" type="submit" class="btn btn-primary btn-square">Save changes</button>
                     </div>  
                 </form>
             </div>

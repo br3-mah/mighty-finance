@@ -77,28 +77,28 @@
                                         <div class="form-group col-lg-12">
                                             <label style="width: 60vw;min-width: 360px;" class="radio-inline">
                                                 <input  id="smp" value="personal" type="radio" onclick="checker()" name="package"><span class="design"></span>
-                                                <span class="text">Personal Loan</span>
+                                                <span class="text">Civil Servant Loan</span>
                                             </label>
-                                            <label style="width: 60vw;min-width: 360px;" class="radio-inline">
+                                            {{-- <label style="width: 60vw;min-width: 360px;" class="radio-inline">
                                                 <input value="sml" type="radio" onclick="checker()" id="sml" name="package"><span class="design"></span>
                                                 <span class="text">Small Business</span>
                                             </label><label style="width: 60vw;min-width: 360px;" class="radio-inline">
                                                 <input value="sme" type="radio" onclick="checker()" id="sme" name="package"><span class="design"></span>
                                                 <span class="text">Small-Medium <br>Enterprise Businesses Loan</span>
-                                            </label>
+                                            </label> --}}
                                             <div style="left:-14px;" class="input-group">
                                                 <div id="dvPassport" style="display: none" class="slider">
                                                     <br>
-                                                    <h4 class="text-white">Personal Loan Type</h4>
+                                                    <h4 class="text-white">Civil Servant Loan Type</h4>
                                                     <radio>
-                                                        <label class="radio-inline">
+                                                        <label class="radio-inline" style="padding-left: 4%">
                                                             <input type="radio" onclick="checker()" id="salary_advance" name="package_personal" value="salary_advance"><span class="design"></span>
-                                                            <span class="text">Salary Advance</span>
+                                                            <span class="text">Civil Servant Loan</span>
                                                         </label>
-                                                        <label class="radio-inline">
+                                                        {{-- <label class="radio-inline">
                                                             <input type="radio" onclick="checker()" id="collateral" value="collateral" name="package_personal"><span class="design"></span>
                                                             <span class="text">Collateral Loan</span>
-                                                        </label>
+                                                        </label> --}}
                                                     </radio>
                                                 </div>
                                             </div>
@@ -118,8 +118,14 @@
                                 <div id="duration" style="display:block;" class="slider">
                                     <h5 class="text-white">Duration</h5>
                                     <h4 id="time_frame" class="text-white"></h4>
-                                    <div style="margin-bottom: -60px;" id="pricipal-slide"><input onclick="checker()" oninput="this.nextElementSibling.value = this.value" type="range" value="0" min="1" max="30" style="width:100%; height: 5px;" id="slidate" title="Slide for amount">
-                                        <input required onclick="checker()" style="outline: none;border-top-style: hidden; border-right-style: hidden; border-left-style: hidden; border-bottom-style: hidden; background-color: #662d91;  display: block; font-size: 30px; font-weight: bold; color: #fff; text-align: center; margin: 20px 0; width: 100%;" class="output" value="1" id="time_duration" min="1" max="100" type="number"><output></output>
+                                    <div style="margin-bottom: -60px;" id="pricipal-slide">
+                                        <input type="range" value="0" min="1" max="1" style="width:100%; height: 5px; " id="slidate" title="Slide for amount">
+                                        <input name="repayment_plan" style="outline: none;border-top-style: hidden; border-right-style: hidden; border-left-style: hidden; border-bottom-style: hidden; background-color: #662d91;  display: block; font-size: 30px; font-weight: bold; color: #fff; text-align: center; margin: 20px 0; width: 100%;" class="output" value="1" id="time_duration" min="1" max="100" type="number">
+                                        <output></output>
+
+                                        {{-- <input onclick="checker()" oninput="this.nextElementSibling.value = this.value" type="range" value="0" min="1" max="30" style="width:100%; height: 5px;" id="slidate" title="Slide for amount">
+                                        <input required onclick="checker()" style="outline: none;border-top-style: hidden; border-right-style: hidden; border-left-style: hidden; border-bottom-style: hidden; background-color: #662d91;  display: block; font-size: 30px; font-weight: bold; color: #fff; text-align: center; margin: 20px 0; width: 100%;" class="output" value="1" id="time_duration" min="1" max="100" type="number">
+                                        <output></output> --}}
                                     </div>
                                 </div>
                                 <br>
@@ -191,6 +197,12 @@
                                                     </radio>
                                                     <radio>
                                                     <h4 class="text-white"></h4>
+                                                    <label class="input-group">Middle Name
+                                                        <input required style="outline: none; border-top-style: hidden;border-right-style: hidden;border-left-style: hidden;background-color: #662d91;display: block;color: #fff;width: 100%;height: 1.5rem" type="text" id="lname" name="mname" placeholder="last name">
+                                                    </label>
+                                                    </radio>
+                                                    <radio>
+                                                    <h4 class="text-white"></h4>
                                                     <label class="input-group">Last Name
                                                         <input required style="outline: none; border-top-style: hidden;border-right-style: hidden;border-left-style: hidden;background-color: #662d91;display: block;color: #fff;width: 100%;height: 1.5rem" type="text" id="lname" name="lname" placeholder="last name">
                                                     </label>
@@ -205,6 +217,12 @@
                                                     <h4 class="text-white"></h4>
                                                     <label class="input-group">Mobile Number
                                                         <input required style="outline: none; border-top-style: hidden;border-right-style: hidden;border-left-style: hidden;background-color: #662d91;display: block;color: #fff;width: 100%;height: 1.5rem" type="tel" minlength="10" maxlength="10" id="phone" name="phone" placeholder="+260">
+                                                    </label>
+                                                    </radio>
+                                                    <radio>
+                                                    <h4 class="text-white"></h4>
+                                                    <label class="input-group">Mobile Number 2
+                                                        <input required style="outline: none; border-top-style: hidden;border-right-style: hidden;border-left-style: hidden;background-color: #662d91;display: block;color: #fff;width: 100%;height: 1.5rem" type="tel" minlength="10" maxlength="10" id="phone" name="phone2" placeholder="+260">
                                                     </label>
                                                     </radio>
                                                 </div>

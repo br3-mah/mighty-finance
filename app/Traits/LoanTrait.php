@@ -38,8 +38,16 @@ trait LoanTrait{
         }
     }
 
+    public function getCurrentLoan(){
+        return Application::with('loan')
+        ->where('email', auth()->user()->email)
+        ->orWhere('user_id', auth()->user()->id)
+        ->orderBy('created_at', 'desc') // Add this line to order by 'created_at' column in descending order
+        ->first();
+    }
     public function get_loan_details($id){
-        $data = Application::with('user.nextkin')->where('id', $id)->first();
+        $data = Application::with('user.nextkin')
+        ->with('user.uploads')->where('id', $id)->first();
         return $data;
     }
 
@@ -110,6 +118,12 @@ trait LoanTrait{
                 return 0;
             }
     }
+
+    public function updateGuarantors($data){
+        $application = Application::where('id', $data['application_id'])->first();
+        $application->update($data);
+    }
+
 
     public function remake_loan($loan_id, $new_due_date){
         $x = Application::where('id', $loan_id)->first();

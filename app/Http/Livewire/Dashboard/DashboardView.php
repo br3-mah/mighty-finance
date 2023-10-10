@@ -6,6 +6,7 @@ use App\Models\Application;
 use App\Models\Wallet;
 use App\Models\WithdrawRequest;
 use App\Traits\EmailTrait;
+use App\Traits\LoanTrait;
 use App\Traits\WalletTrait;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -13,7 +14,7 @@ use Illuminate\Support\Str;
 class DashboardView extends Component
 {
 
-    use EmailTrait, WalletTrait;
+    use EmailTrait, WalletTrait, LoanTrait;
     public $loan_requests, $loan_request, $all_loan_requests, $my_loan, $wallet;
     public $payment_method, $withdraw_amount, $mobile_number, $card_name, $bank_name, $card_number;
 
@@ -24,9 +25,7 @@ class DashboardView extends Component
         }else{
             $this->all_loan_requests = Application::orderBy('created_at', 'desc')->take(5)->get();
         }
-        $this->my_loan = Application::with('loan')->where('email', auth()->user()->email)
-                                    ->orWhere('user_id', auth()->user()->id)
-                                    ->get()->first();
+        $this->my_loan = $this->getCurrentLoan();
         $this->wallet = $this->getWalletBalance(auth()->user());
         return view('livewire.dashboard.dashboard-view')
         ->layout('layouts.dashboard');

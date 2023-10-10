@@ -2,7 +2,6 @@
     @if($my_loan !== null)
     <div class="row mb-4 mt-2">
         <div class="col-xl-6 col-lg-6 col-sm-12 col-xs-12 pt-3">
-            @if($my_loan !== null)
                 <span class=" text-black">
                     @if($my_loan->status == 1)
                     Amount Borrowed
@@ -12,43 +11,42 @@
                 </span>
                 <h2 class="fs-30 font-w600 ">K {{ $my_loan->amount ?? 0.00 }}</h2>
                 @if($my_loan->complete == 1)
-                <h4 class="mb-0 font-w500 text-white">
-                    @if($my_loan->status == 0)
-                    <span class="badge badge-sm light badge-danger">
-                        <i class="fa fa-circle text-danger me-1"></i>
-                        Pending for Approval
-                    </span>
-                    @elseif($my_loan->status == 1)
-                    <span class="badge badge-sm light badge-success">
-                        <i class="fa fa-circle text-success me-1"></i>
-                        Accepted
-                    </span>
-                    @elseif($my_loan->status == 2)
-                    <span class="badge badge-sm light badge-warning">
-                        <i class="fa fa-circle text-warning me-1"></i>
-                        Under Review
-                    </span>
-                    @else
+                    <h4 class="mb-0 font-w500 text-white">
+                        @if($my_loan->status == 0)
+                        <span class="badge badge-sm light badge-danger">
+                            <i class="fa fa-circle text-danger me-1"></i>
+                            Pending for Approval
+                        </span>
+                        @elseif($my_loan->status == 1)
+                        <span class="badge badge-sm light badge-success">
+                            <i class="fa fa-circle text-success me-1"></i>
+                            Accepted
+                        </span>
+                        @elseif($my_loan->status == 2)
+                        <span class="badge badge-sm light badge-warning">
+                            <i class="fa fa-circle text-warning me-1"></i>
+                            Under Review
+                        </span>
+                        @else
+                        <span class="badge badge-sm light badge-default">
+                            <i class="fa fa-circle text-warning me-1"></i>
+                            Rejected
+                        </span>
+                        @endif
+                    </h4>      
+                @else 
                     <span class="badge badge-sm light badge-default">
                         <i class="fa fa-circle text-warning me-1"></i>
-                        Rejected
+                        Incomplete KYC Profile
                     </span>
-                    @endif
-                </h4>
-            @else 
-                <span class="badge badge-sm light badge-default">
-                    <i class="fa fa-circle text-warning me-1"></i>
-                    Incomplete KYC Profile
-                </span>
-            @endif
-            @endif
+                @endif
         </div>
         <div class="col-xl-6 col-lg-6 col-sm-12 col-xs-12 pt-3 bg-primary">
             @if($my_loan !== null)
                 <span class="fs-18 text-white d-block mb-2">
                     Payback Amount
                 </span>
-                <h2 class="fs-30 text-white font-w600 ">K {{ $my_loan->amount ?? 0.00 }}</h2>
+                <h2 class="fs-30 text-white font-w600 ">K {{ App\Models\Application::payback($my_loan->amount, 1) }}</h2>
             @endif
         </div>
     </div>

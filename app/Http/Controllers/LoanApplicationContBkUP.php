@@ -568,6 +568,8 @@ class LoanApplicationController extends Controller
         }      
     }
 
+
+
     public function destroy($id)
     {
         //

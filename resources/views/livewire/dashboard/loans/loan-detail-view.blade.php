@@ -68,11 +68,13 @@
                                             </a> 
                                         </p>
                                         <p>Address: <span class="item">{{ $loan->user->address ?? 'None'}}</span></p>
-                                        <p>Phone No.: <span class="item">{{ $loan->phone ?? $loan->user->phone }}</span></p>
+                                        <p>Phone No.: <span class="item">{{ $loan->phone ?? '' }}</span></p>
+                                        <p>Phone No 2.: <span class="item">{{ $loan->user->phone2 }}</span></p>
                                         <p>NRC No.: <span class="item">{{ $loan->user->nrc_no }}</span></p>
                                         <p>Basic Pay.: <span class="item">{{ $loan->user->basic_pay }}</span></p>
                                         <p>Net Pay.: <span class="item">{{ $loan->user->net_pay }}</span></p>
                                         <p>Sex: <span class="item">{{ $loan->gender ?? $loan->user->gender }}</span></p>
+                                        <p>Age: <span class="item">{{ $loan->gender ?? $loan->user->gender }}</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -84,9 +86,9 @@
                                 <div class="product-detail-content">
                                     <!--Product details-->
                                     <div class="new-arrival-content pr">
-                                        <div class="d-table mb-2">
+                                        {{-- <div class="d-table mb-2">
                                             <p class="price float-start d-block"></p>
-                                        </div>
+                                        </div> --}}
                                         <p>
                                             Borrowed Amount: 
                                             <span class="item">
@@ -96,9 +98,9 @@
                                         <p>Duration: <span class="item">{{ $loan->repayment_plan }} Months</span> </p>
                                         <p>Interest: <span class="item">
                                             @if($loan->repayment_plan > 1)
-                                            44%
+                                            70%
                                             @else
-                                            20%
+                                            21%
                                             @endif
                                             {{-- per month --}}
                                         </span>
@@ -110,8 +112,8 @@
                                                 {{ App\Models\Loans::last_payment($loan->id)->created_at != null ? App\Models\Loans::last_payment($loan->id)->created_at->toFormattedDateString() : 'No record'  }}
                                                 </span>
                                             </p>
-                                            <p>Payback Amount: <span class="item"><b>K {{ App\Models\Application::payback($loan->amount, preg_replace('/[^0-9]/','', $loan->repayment_plan)) }}</b></span></p>
-                                            <p>Monthly Installments: <span class="item"><b>K {{ App\Models\Application::monthly_installment($loan->amount, preg_replace('/[^0-9]/','', $loan->repayment_plan)) }}</b></span></p>
+                                            <p>Payback Amount: <span class="item"><b>K {{ App\Models\Application::payback($loan->amount, 1) }}</b></span></p>
+                                            {{-- <p>Monthly Installments: <span class="item"><b>K {{ App\Models\Application::monthly_installment($loan->amount, preg_replace('/[^0-9]/','', $loan->repayment_plan)) }}</b></span></p> --}}
                                             {{-- <p>Total Interest Rate: <span class="item">
                                             @if($loan->repayment_plan > 1)
                                             {{ $loan->repayment_plan * 0.44 }}
@@ -121,7 +123,7 @@
                                             </span></p> --}}
                                         @endif
                                         
-                                        <p>Credit Score: 
+                                        {{-- <p>Credit Score: 
                                             <span class="item">
                                             @if(App\Models\Application::loan_assemenent_table($loan)['credit_score'])
                                             <a target="_blank" href="{{ route('score', ['id' => $loan->id]) }}">
@@ -133,7 +135,7 @@
                                             </a>
                                             @endif
                                             </span>
-                                        </p>
+                                        </p> --}}
                                         
                                         <p>Loan Progress:&nbsp;&nbsp;
                                             @if ($loan->status == 0)
@@ -173,7 +175,7 @@
                                 </div>
                             </div>
 
-                            @if($loan->type !== 'Asset Financing')
+                            {{-- @if($loan->type !== 'Asset Financing') --}}
                                 @if(!empty($loan->user->nextKin->toArray()))
                                     <div class="col-lg-6 col-xl-6 col-xxl-6 col-sm-12">
                                         <div class="title-sm">
@@ -182,24 +184,24 @@
                                         <p>Firstname: <span class="item">{{ $loan->user->nextKin->first()->fname }}</span></p>
                                         <p>Surname: <span class="item">{{ $loan->user->nextKin->first()->lname }}</span></p>
                                         <p>Phone No.: <span class="item">{{ $loan->user->nextKin->first()->phone }}</span></p>
-                                        <p>Email: <span class="item">{{ $loan->user->nextKin->first()->email }}</span></p>
+                                        {{-- <p>Email: <span class="item">{{ $loan->user->nextKin->first()->email }}</span></p> --}}
                                         <p>Relation: <span class="item">{{ $loan->user->nextKin->first()->address }}</span></p>
                                         {{-- <p>Occupation: <span class="item">{{ $loan->user->nextKin->first()->occupation }}</span></p> --}}
-                                        <p>Sex: <span class="item">{{ $loan->user->nextKin->first()->gender }}</span></p>
+                                        {{-- <p>Sex: <span class="item">{{ $loan->user->nextKin->first()->gender }}</span></p> --}}
                                     </div>
                                 @endif
-                            @else
+                            {{-- @else --}}
                                 <div class="col-lg-6 col-xl-6 col-xxl-6 col-sm-12">
                                     <div class="title-sm">
                                         <h5>First Guarantors</h5>
                                     </div>
                                     <p>1st Garantors Name: <span class="item">{{ $loan->gfname.' '.$loan->glname }}</span></p>
                                     <p>1st Garantors Phone No.: <span class="item">{{ $loan->gphone }}</span></p>
-                                    <p>1st Garantors Email: <span class="item">{{ $loan->gemail }}</span></p>
-                                    <p>1st Garantors Sex: <span class="item">{{ $loan->g_gender }}</span></p>
+                                    {{-- <p>1st Garantors Email: <span class="item">{{ $loan->gemail }}</span></p> --}}
+                                    {{-- <p>1st Garantors Sex: <span class="item">{{ $loan->g_gender }}</span></p> --}}
                                     <p>1st Garantors Relation: <span class="item">{{ $loan->g_relation }}</span></p>
                                 </div>
-                                <div class="col-lg-6 col-xl-6 col-xxl-6 col-sm-12">
+                                {{-- <div class="col-lg-6 col-xl-6 col-xxl-6 col-sm-12">
                                     <div class="title-sm">
                                         <h5>Second Guarantors</h5>
                                     </div>
@@ -208,8 +210,8 @@
                                     <p>2nd Garantors Email: <span class="item">{{ $loan->g2email }}</span></p>
                                     <p>2nd Garantors Sex: <span class="item">{{ $loan->g2_gender }}</span></p>
                                     <p>2nd Garantors Relation: <span class="item">{{ $loan->g_2relation }}</span></p>
-                                </div>
-                            @endif
+                                </div> --}}
+                            {{-- @endif --}}
 
                             <div class="col-xl-6 col-lg-6 col-md-6 col-xxl-6 col-sm-12">
                                 <div class="title-sm">
@@ -231,40 +233,34 @@
                                 </div>
                                 <div class="px-2 row">
                                     <div class="profile-email col-lg-3 px-2 pt-2">
-                                        <p class="text-muted mb-0">Payslip</p>
-                                        <a href="{{ 'public/'.Storage::url($loan->payslip_file) }}" download="{{ 'public/'.Storage::url($loan->payslip_file) }}">
+                                        <a href="{{ 'public/'.Storage::url($loan->user->uploads[4]->path) }}"  class="open-modal" data-toggle="modal" data-target="#fileModal" data-file-url="{{ 'public/'.Storage::url($loan->user->uploads[4]->path) }}">
                                             <img width="90" src="https://img.freepik.com/free-vector/illustration-folder-with-document_53876-37005.jpg?w=740&t=st=1676996943~exp=1676997543~hmac=d03d65c77d403c5ed653a733705504e21b5b3fb42e7cfe3c4340f90aaf55f9d2">
-                                            <br>
-                                            Payslip File
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                                            </svg>
                                         </a>
+                                        <p class="text-xs text-muted mb-0">NRC ID</p>
                                     </div>
                                     <div class="profile-email col-lg-3 px-2 pt-2">
-                                        <p class="text-muted mb-0">Tpin Certificate</p>
-                                        <a href="{{ 'public/'.Storage::url($loan->tpin_file) }}" download="{{ 'public/'.Storage::url($loan->tpin_file) }}">
+                                        <a href="{{ 'public/'.Storage::url($loan->user->uploads[0]->path) }}"  class="open-modal" data-toggle="modal" data-target="#fileModal" data-file-url="{{ 'public/'.Storage::url($loan->user->uploads[0]->path) }}">
                                             <img width="90" src="https://img.freepik.com/free-vector/illustration-folder-with-document_53876-37005.jpg?w=740&t=st=1676996943~exp=1676997543~hmac=d03d65c77d403c5ed653a733705504e21b5b3fb42e7cfe3c4340f90aaf55f9d2">
-                                            <br>
-                                            TPIN File
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                                            </svg>
                                         </a>
+                                        <p class="text-xs text-muted mb-0">Preapproval<br>Document</p>
                                     </div>
                                     <div class="profile-email col-lg-3 px-2 pt-2">
-                                        <p class="text-muted mb-0">NRC Copy</p>
-                                        <a href="{{ 'public/'.Storage::url($loan->nrc_file) }}" download="{{ 'public/'.Storage::url($loan->nrc_file) }}">
+                                        <a href="{{ 'public/'.Storage::url($loan->user->uploads[1]->path) }}"  class="open-modal" data-toggle="modal" data-target="#fileModal" data-file-url="{{ 'public/'.Storage::url($loan->user->uploads[1]->path) }}">
                                             <img width="90" src="https://img.freepik.com/free-vector/illustration-folder-with-document_53876-37005.jpg?w=740&t=st=1676996943~exp=1676997543~hmac=d03d65c77d403c5ed653a733705504e21b5b3fb42e7cfe3c4340f90aaf55f9d2">
-                                            <br>
-                                            NRC Copy 
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                                            </svg>
                                         </a>
+                                        <p class="text-xs text-muted mb-0">Passport Photo</p>
+                                    </div>
+                                    <div class="profile-email col-lg-3 px-2 pt-2">
+                                        <a href="{{ 'public/'.Storage::url($loan->user->uploads[2]->path) }}"  class="open-modal" data-toggle="modal" data-target="#fileModal" data-file-url="{{ 'public/'.Storage::url($loan->user->uploads[2]->path) }}">
+                                            <img width="90" src="https://img.freepik.com/free-vector/illustration-folder-with-document_53876-37005.jpg?w=740&t=st=1676996943~exp=1676997543~hmac=d03d65c77d403c5ed653a733705504e21b5b3fb42e7cfe3c4340f90aaf55f9d2">
+                                        </a>
+                                        <p class="text-xs text-muted mb-0">Bank Statement</p>
+                                    </div>
+                                    <div class="profile-email col-lg-3 px-2 pt-2">
+                                        <a href="{{ 'public/'.Storage::url($loan->user->uploads[3]->path) }}"  class="open-modal" data-toggle="modal" data-target="#fileModal" data-file-url="{{ 'public/'.Storage::url($loan->user->uploads[3]->path) }}">
+                                            <img width="90" src="https://img.freepik.com/free-vector/illustration-folder-with-document_53876-37005.jpg?w=740&t=st=1676996943~exp=1676997543~hmac=d03d65c77d403c5ed653a733705504e21b5b3fb42e7cfe3c4340f90aaf55f9d2">
+                                        </a>
+                                        <p class="text-xs text-muted mb-0">Latest Payslip</p>
                                     </div>
                                 </div>
                             </div>
@@ -357,6 +353,28 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="fileModal" tabindex="-1" role="dialog" aria-labelledby="fileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="fileModalLabel">
+                    <a id="downlink">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg>&nbsp;Download
+                    </a>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <iframe id="filePreview" src="" frameborder="0" width="100%" height="500"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
 <!-- html2canvas library -->
@@ -382,4 +400,15 @@
       doc.save(name+' Loan Details.pdf');
     });
   }
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('.open-modal').click(function () {
+      var fileUrl = $(this).data('file-url');
+      $('#filePreview').attr('src', fileUrl);
+      $('#downlink').attr('download', fileUrl);
+      $('#downlink').attr('href', fileUrl)
+    });
+  });
 </script>

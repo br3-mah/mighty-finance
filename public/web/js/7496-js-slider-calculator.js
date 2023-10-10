@@ -82,8 +82,8 @@ function checker() {
 */
 
         if (checked_person.value == "salary_advance") {
-
-            var my_returns = (slider_amount.value * 0.07) * parseInt((time_duration.value)) + parseInt((slider_amount.value));
+            var my_returns = (slider_amount.value * 0.21) * parseInt(time_duration.value) + parseInt(slider_amount.value);
+            // var my_returns = (slider_amount.value * 0.07) * parseInt((time_duration.value)) + parseInt((slider_amount.value));
             result_payment.innerHTML = number_format(my_returns);
 
 

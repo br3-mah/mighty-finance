@@ -18,7 +18,96 @@
     <link href="{{ asset('public/theme/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('public/theme/vendor/jquery-steps/css/jquery.steps.css') }}" rel="stylesheet">
 	@livewireStyles
-	
+	<style>
+        
+        .step {
+            /* display: none; */
+        }
+        /* Styles for the uploaded files list */
+        .file-list {
+            list-style: none;
+            padding: 3%;
+        }
+
+        /* Styles for each file item */
+        .file-list-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease; /* Add a smooth background color transition */
+        }
+
+        /* Hover effect for file items */
+        .file-list-item:hover {
+            background-color: #f7f7f7; /* Change the background color on hover */
+        }
+
+        /* Styles for file item text */
+        .file-list-item-text {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        /* Styles for the remove button */
+        .remove-button {
+            background-color: #ff4444;
+            color: #fff;
+            border: none;
+            border-radius: 100%;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        /* Hover effect for the remove button */
+        .remove-button:hover {
+            background-color: #ff0000;
+        }
+        
+        .hidden {
+                position: absolute;
+                left: -9999px;
+            } 
+
+            /* Hide the default file input */
+        .visually-hidden {
+            position: absolute !important;
+            clip: rect(1px, 1px, 1px, 1px);
+            padding: 0 !important;
+            border: 0 !important;
+            height: 1px !important;
+            width: 1px !important;
+            overflow: hidden;
+            white-space: nowrap !important;
+        }
+
+        /* Style the label with the icon */
+        .file-input-label {
+            display: inline-block;
+            padding: 10px;
+            background-color: #ffffff; /* Change to your desired background color */
+            color: #585558; /* Change to your desired text color */
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Style the icon using Font Awesome classes */
+        .file-input-label i {
+            margin-right: 3px; /* Adjust as needed for spacing */
+        }
+
+        .file-uploader{
+            background-color: rgb(255, 255, 255); 
+            color: #23c80d;
+            border-radius: 4px;
+            border: 1px solid #f0f0f0;
+        }
+    </style>
 </head>
 <body>
 
@@ -347,6 +436,10 @@
 
 
     </div>
+    @php
+        $status = App\Models\Application::currentApplication()->complete;
+    @endphp
+    @include('components.continue-application')
     <!--**********************************
         Main wrapper end
     ***********************************-->
@@ -373,6 +466,8 @@
     <script src="{{ asset('public/theme/vendor/waypoints/jquery.waypoints.min.js') }}"></script>
     <script src="{{ asset('public/theme/vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>	
 	<script src="{{ asset('public/theme/js/dashboard/my-wallet.js') }}"></script>
+
+
 
     <script>
 		function carouselReview(){
@@ -442,5 +537,283 @@
 			}, 1000); 
 		});
 	</script>
+    <script>
+        let status = '{{$status}}';
+        // alert(status === '0');
+        if(status === '0'){
+            // Open the modal when the page loads
+            $(document).ready(function () {
+                $('#continue-loan-modal').modal('show');
+            });
+        }
+
+    </script>
+    <script>
+        let currentStep = 1;
+        showStep(currentStep);
+
+        function showStep(step) {
+            const steps = document.querySelectorAll('.step');
+            steps.forEach((stepElem) => stepElem.style.display = 'none');
+            document.getElementById('step' + step).style.display = 'block';
+        }
+
+        function nextStep(step) {
+            currentStep += 1;
+            showStep(currentStep);
+        }
+
+        function prevStep(step) {
+            currentStep -= 1;
+            showStep(currentStep);
+        }
+
+// NRC
+// JavaScript to handle file selection and removal
+const fileInput = document.getElementById('fileInput');
+const fileList = document.getElementById('fileList');
+
+const uploadedFiles = [];
+// const uploadedFilesJson = [];
+
+// JavaScript to handle file selection and removal
+fileInput.addEventListener('change', function () {
+    const files = this.files; 
+    // Initialize an array to store uploaded file names
+
+    if (files.length > 0) {
+    
+        // Add the uploaded files to the uploadedFiles array
+        Array.from(files).forEach(file => {
+        
+            uploadedFiles.push(file);
+
+            const listItem = document.createElement('li');
+            listItem.className = 'file-item grid pb-1';
+            listItem.innerHTML = `
+                <span class="grid-file-item">${file.name}</span>
+                <button class="grid-file-item-btn" type="button" class="remove-button" data-name="${file.name}">x</button>
+            `;
+
+            fileList.appendChild(listItem);
+        });
+    }
+});
+fileList.addEventListener('click', function (e) {
+
+// console.log(e.target.classList.value);
+    if (e.target.classList.value == 'grid-file-item-btn') {
+        const fileName = e.target.getAttribute('data-name');
+        const fileItem = e.target.parentElement;
+        fileItem.remove();
+        // Remove the file name from the uploadedFiles array
+        const fileIndex = uploadedFiles.indexOf(fileName);
+        if (fileIndex !== -1) {
+            uploadedFiles.splice(fileIndex, 1);
+        }
+        // Update the hidden input with the updated uploaded files
+        myUploadedFilesInput.value = JSON.stringify(uploadedFiles);
+        // You can perform additional actions here (e.g., remove the file from the server).
+    }
+});
+
+
+//Payslip
+// JavaScript to handle file selection and removal
+const fileInput2 = document.getElementById('fileInput2');
+const fileList2 = document.getElementById('fileList-2');
+
+const uploadedFiles2 = [];
+// const uploadedFilesJson = [];
+
+// JavaScript to handle file selection and removal
+fileInput2.addEventListener('change', function () {
+    const files = this.files; 
+    // Initialize an array to store uploaded file names
+
+    if (files.length > 0) {
+    
+        // Add the uploaded files to the uploadedFiles array
+        Array.from(files).forEach(file => {
+        
+            uploadedFiles2.push(file);
+
+            const listItem = document.createElement('li');
+            listItem.className = 'file-item grid pb-1';
+            listItem.innerHTML = `
+                <span class="grid-file-item">${file.name}</span>
+                <button class="grid-file-item-btn" type="button" class="remove-button" data-name="${file.name}">x</button>
+            `;
+
+            fileList2.appendChild(listItem);
+        });
+    }
+});
+fileList2.addEventListener('click', function (e) {
+
+// console.log(e.target.classList.value);
+    if (e.target.classList.value == 'grid-file-item-btn') {
+        const fileName = e.target.getAttribute('data-name');
+        const fileItem = e.target.parentElement;
+        fileItem.remove();
+        // Remove the file name from the uploadedFiles array
+        const fileIndex = uploadedFiles.indexOf(fileName);
+        if (fileIndex !== -1) {
+            uploadedFiles2.splice(fileIndex, 1);
+        }
+        // Update the hidden input with the updated uploaded files
+        myUploadedFilesInput.value = JSON.stringify(uploadedFiles);
+        // You can perform additional actions here (e.g., remove the file from the server).
+    }
+});
+
+
+// 3 months bank statement
+// JavaScript to handle file selection and removal
+const fileInput3 = document.getElementById('fileInput3');
+const fileList3 = document.getElementById('fileList-3');
+
+const uploadedFiles3 = [];
+// const uploadedFilesJson = [];
+
+// JavaScript to handle file selection and removal
+fileInput3.addEventListener('change', function () {
+    const files = this.files; 
+    // Initialize an array to store uploaded file names
+
+    if (files.length > 0) {
+    
+        // Add the uploaded files to the uploadedFiles array
+        Array.from(files).forEach(file => {
+        
+            uploadedFiles3.push(file);
+
+            const listItem = document.createElement('li');
+            listItem.className = 'file-item grid pb-1';
+            listItem.innerHTML = `
+                <span class="grid-file-item">${file.name}</span>
+                <button class="grid-file-item-btn" type="button" class="remove-button" data-name="${file.name}">x</button>
+            `;
+
+            fileList3.appendChild(listItem);
+        });
+    }
+});
+fileList3.addEventListener('click', function (e) {
+    if (e.target.classList.value == 'grid-file-item-btn') {
+        const fileName = e.target.getAttribute('data-name');
+        const fileItem = e.target.parentElement;
+        fileItem.remove();
+        // Remove the file name from the uploadedFiles array
+        const fileIndex = uploadedFiles.indexOf(fileName);
+        if (fileIndex !== -1) {
+            uploadedFiles3.splice(fileIndex, 1);
+        }
+        // Update the hidden input with the updated uploaded files
+        myUploadedFilesInput.value = JSON.stringify(uploadedFiles);
+        // You can perform additional actions here (e.g., remove the file from the server).
+    }
+});
+
+
+// Passport
+// JavaScript to handle file selection and removal
+const fileInput4 = document.getElementById('fileInput4');
+const fileList4 = document.getElementById('fileList-4');
+
+const uploadedFiles4 = [];
+// const uploadedFilesJson = [];
+
+// JavaScript to handle file selection and removal
+fileInput4.addEventListener('change', function () {
+    const files = this.files; 
+    // Initialize an array to store uploaded file names
+
+    if (files.length > 0) {
+    
+        // Add the uploaded files to the uploadedFiles array
+        Array.from(files).forEach(file => {
+        
+            uploadedFiles4.push(file);
+
+            const listItem = document.createElement('li');
+            listItem.className = 'file-item grid pb-1';
+            listItem.innerHTML = `
+                <span class="grid-file-item">${file.name}</span>
+                <button class="grid-file-item-btn" type="button" class="remove-button" data-name="${file.name}">x</button>
+            `;
+
+            fileList4.appendChild(listItem);
+        });
+    }
+});
+fileList4.addEventListener('click', function (e) {
+    if (e.target.classList.value == 'grid-file-item-btn') {
+        const fileName = e.target.getAttribute('data-name');
+        const fileItem = e.target.parentElement;
+        fileItem.remove();
+        // Remove the file name from the uploadedFiles array
+        const fileIndex = uploadedFiles.indexOf(fileName);
+        if (fileIndex !== -1) {
+            uploadedFiles4.splice(fileIndex, 1);
+        }
+        // Update the hidden input with the updated uploaded files
+        myUploadedFilesInput.value = JSON.stringify(uploadedFiles);
+        // You can perform additional actions here (e.g., remove the file from the server).
+    }
+});
+    
+    
+
+
+
+// Preapproval
+// JavaScript to handle file selection and removal
+const fileInput5 = document.getElementById('fileInput5');
+const fileList5 = document.getElementById('fileList-5');
+
+const uploadedFiles5 = [];
+// const uploadedFilesJson = [];
+
+// JavaScript to handle file selection and removal
+fileInput5.addEventListener('change', function () {
+    const files = this.files; 
+    // Initialize an array to store uploaded file names
+
+    if (files.length > 0) {
+    
+        // Add the uploaded files to the uploadedFiles array
+        Array.from(files).forEach(file => {
+        
+            uploadedFiles5.push(file);
+
+            const listItem = document.createElement('li');
+            listItem.className = 'file-item grid pb-1';
+            listItem.innerHTML = `
+                <span class="grid-file-item">${file.name}</span>
+                <button class="grid-file-item-btn" type="button" class="remove-button" data-name="${file.name}">x</button>
+            `;
+
+            fileList5.appendChild(listItem);
+        });
+    }
+});
+fileList5.addEventListener('click', function (e) {
+    if (e.target.classList.value == 'grid-file-item-btn') {
+        const fileName = e.target.getAttribute('data-name');
+        const fileItem = e.target.parentElement;
+        fileItem.remove();
+        // Remove the file name from the uploadedFiles array
+        const fileIndex = uploadedFiles.indexOf(fileName);
+        if (fileIndex !== -1) {
+            uploadedFiles5.splice(fileIndex, 1);
+        }
+        // Update the hidden input with the updated uploaded files
+        myUploadedFilesInput.value = JSON.stringify(uploadedFiles);
+        // You can perform additional actions here (e.g., remove the file from the server).
+    }
+});
+</script>
+
 </body>
 </html>

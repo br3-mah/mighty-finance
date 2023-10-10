@@ -28,6 +28,11 @@ class Application extends Model
         'gphone',
         'g_gender',
         'g_relation',
+        'gnrc_no',
+        'gdob',
+        'gphone2',
+        'gphonesp3',
+        'gaddress',
 
         'g2lname',
         'g2fname',
@@ -133,11 +138,15 @@ class Application extends Model
     //     // }
     // }
 
+    public static function currentApplication(){
+        return Application::where('user_id', auth()->user()->id)
+        ->where('status', 0)->where('complete', 0)->first();
+    }
  
     public static function payback($principal, $duration){
         // 1 month
         if( $duration == 1){
-            $interest = ($principal * 0.2) + $principal;
+            $interest = (($principal * 0.21) * 1) + $principal;
             return number_format($interest, 2, '.', '');
         }
         
@@ -213,7 +222,7 @@ class Application extends Model
     public static function interest_amount($principal, $duration){
         // 1 month
         if( $duration == 1){
-            $interest = ($principal * 0.2);
+            $interest = ($principal * 0.21);
             return number_format($interest, 2, '.', '');
         }
         

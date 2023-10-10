@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Dashboard\Loans;
 
 use App\Models\Application;
+use App\Models\User;
 use App\Traits\EmailTrait;
 use App\Traits\LoanTrait;
 use App\Traits\WalletTrait;
@@ -27,6 +28,7 @@ class LoanDetailView extends Component
     public function render()
     {
         $this->loan = $this->get_loan_details($this->loan_id);
+        // dd($this->loan->user->uploads[0]->path);
         return view('livewire.dashboard.loans.loan-detail-view')
         ->layout('layouts.dashboard');
     } 

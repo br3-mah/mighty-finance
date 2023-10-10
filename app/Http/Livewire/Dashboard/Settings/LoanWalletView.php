@@ -25,34 +25,38 @@ class LoanWalletView extends Component
     }
 
     public function store(){
-        // New Wallet
-        if(!empty(LoanWallet::get()->toArray())){
-            $data = LoanWallet::first()->update([
-                'deposit'=> $this->account->deposit + $this->amount
-            ]);
-            LoanWalletHistory::create([
-                'desc' => 'Updated Funds',
-                'amount' => $this->amount,
-                'user_id' => auth()->user()->id,
-                'loan_wallet_id' => $this->account->id
+        try {
+            if(!empty(LoanWallet::get()->toArray())){
+                // Already Existing Wallet
+                $data = LoanWallet::first()->update([
+                    'deposit'=> $this->account->deposit + $this->amount
+                ]);
+                LoanWalletHistory::create([
+                    'desc' => 'Updated Funds',
+                    'amount' => $this->amount,
+                    'user_id' => auth()->user()->id,
+                    'loan_wallet_id' => $this->account->id
+                    ]);
+                    
+                    session()->flash('success', 'Successfully updated K'.$this->amount.' into the Account Funds');
+                $this->render();
+            }else{
+                // New Wallet
+                $data = LoanWallet::create([
+                    'deposit'=>$this->amount
+                ]);
+                LoanWalletHistory::create([
+                    'desc' => 'Updated Funds',
+                    'amount' => $this->amount,
+                    'user_id' => auth()->user()->id,
+                    'loan_wallet_id' => $this->account->id
                 ]);
                 
-                session()->flash('success', 'Successfully updated K'.$this->amount.' into the Account Funds');
-            $this->render();
-        }else{
-        // Already Existing Wallet
-            $data = LoanWallet::create([
-                'deposit'=>$this->amount
-            ]);
-            LoanWalletHistory::create([
-                'desc' => 'Updated Funds',
-                'amount' => $this->amount,
-                'user_id' => auth()->user()->id,
-                'loan_wallet_id' => $this->account->id
-            ]);
-            
-            session()->flash('success', 'Successfully deposited K'.$this->amount.' into the Account Funds');
-            $this->render();
+                session()->flash('success', 'Successfully deposited K'.$this->amount.' into the Account Funds');
+                $this->render();
+            }
+        } catch (\Throwable $th) {
+            dd($th);
         }
     }
 
