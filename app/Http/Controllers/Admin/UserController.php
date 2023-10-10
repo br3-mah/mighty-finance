@@ -80,7 +80,7 @@ class UserController extends Controller
                 DB::commit();
                 return back();
             } catch (\Throwable $th) {
-                Session::flash('error', "Failed. Check your internet connection and try again.".substr($th, 0, 40));
+                Session::flash('error', "Failed. Check your internet connection and try again.".substr($th, 0, 100));
                 DB::rollback();
                 return back();
             }
