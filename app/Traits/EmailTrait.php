@@ -7,7 +7,7 @@ use App\Mail\LoanApplication;
 use App\Mail\LoanEquiry;
 use App\Models\Application;
 use App\Models\User;
-use App\Notifications\BTFLoanRequest;
+use App\Notifications\MFSLoanRequest;
 use App\Notifications\LoanRemainder;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
@@ -31,7 +31,7 @@ trait EmailTrait{
     public function send_loan_email($data){
         $admin = User::first();
         try {
-            Notification::send($admin, new BTFLoanRequest($data));
+            Notification::send($admin, new MFSLoanRequest($data));
             return true;
         } catch (\Throwable $th) {
             return false;

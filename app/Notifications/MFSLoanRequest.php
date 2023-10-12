@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class BTFLoanRequest extends Notification
+class MFSLoanRequest extends Notification
 {
     use Queueable;
     public $data;

@@ -43,10 +43,10 @@ class UserAuthenticationController extends Controller
         $mail = [
             'name' => $user->fname.' '.$user->lname,
             'to' => $user->email,
-            'from' => 'admin@bridgetrustfinance.co.zm',
+            'from' => 'loans@mightyfinance.com',
             'phone' => $user->phone,
-            'subject' => 'Your Brigetrust Finance User Account',
-            'message' => 'Hello '.$user->fname.' '.$user->lname.' Your Bridgetrust Finance account is now ready, Click on login to goto your dashboard. Your password is 20230101bridge.@2you  -  feel free to change your password.',
+            'subject' => 'Your Mighty Finance User Account',
+            'message' => 'Hello '.$user->fname.' '.$user->lname.' Your Mighty Finance account is now ready, Click on login to goto your dashboard. Your password is Mighty4you  -  feel free to change your password.',
         ];
         $eMail = new BTFAccount($mail);
         Mail::to($user->email)->send($eMail);
