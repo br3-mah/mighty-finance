@@ -78,7 +78,7 @@
                                         <div class="d-flex">
                                             <a target="_blank" href="{{ route('client-account', ['key'=>$user->id]) }}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-eye-alt"></i></a>
                                             <a target="_blank" href="{{ route('edit-user', ['id'=>$user->id]) }}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                            @if($user->email != 'info@mightyfinance.co.zm' || $user->email != 'info@mightyfinance.co.zm')
+                                            @if($user->email != 'loans@mightyfinance.co.zm' || $user->email != 'loans@mightyfinance.co.zm')
                                             <a href="#" wire:click="destory({{ $user->id }})" onclick="confirm('Are you sure you want to permanently delete this account.') || event.stopImmediatePropagation();" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
                                             @endif
                                         </div>												

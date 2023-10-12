@@ -170,7 +170,7 @@
                                             <div class="bg-white bg-boxshadow pinside40 outline text-center mb30">
                                                 <div class="mb40"><i class="icon-letter icon-2x icon-default"></i></div>
                                                 <h2 class="capital-title">Email Address</h2>
-                                                <p><a href="mailto:info@mightyfinance.co.zm">info@mightyfinance.co.zm</a></p>
+                                                <p><a href="mailto:loans@mightyfinance.co.zm">loans@mightyfinance.co.zm</a></p>
                                                 <p><a href="mailto: admin@mightyfinance.co.zm">admin@mightyfinance.co.zm</a></p>
                                             </div>
                                         </div>
