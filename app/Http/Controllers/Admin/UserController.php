@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
-use App\Mail\BTFAccount;
+use App\Mail\MFSAccount;
 use App\Models\Wallet;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -61,7 +61,7 @@ class UserController extends Controller
             try {
                 // Send Email to User with Email only about their New Account Created
                 if($u->email != null){
-                    $eMail = new BTFAccount($mail);
+                    $eMail = new MFSAccount($mail);
                     Mail::to($u->email)->send($eMail);
                 }
                 if($request->assigned_role == 'user'){
