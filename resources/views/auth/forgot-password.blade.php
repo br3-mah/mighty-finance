@@ -1,34 +1,101 @@
-<x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+
+<!DOCTYPE html>
+<html lang="en">
+  
+<!-- Mirrored from tende.vercel.app/reset.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Nov 2023 16:22:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Mighty Finance Solution | Reset Password</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/mfs/images/logoi.png')}}" />
+    <!-- Custom Stylesheet -->
+     
+    <link rel="stylesheet" href="{{ asset('public/mfs/css/style.css')}}" />
+  </head>
+
+  <body class="@@dashboard">
+
+
+<div id="preloader"><i>.</i><i>.</i><i>.</i></div>
+
+
+<div id="main-wrapper">
+
+    <div class="authincation section-padding">
+        <div class="container">
+            @if (session('status'))
+                <div class="mb-4 font-medium text-sm text-green-600">
+                    {{ session('status') }}
+                </div>
+            @endif
+            
+            
+            <div class="row justify-content-center align-items-center">
+                <x-jet-validation-errors class="w-full" />
+                <div class="col-xl-4 col-md-5">
+                    <div class="mini-logo text-center my-3">
+                        <a href="{{ route('welcome') }}">
+                            <img width="100" src="{{ asset('public/web/images/logo.png')}}" alt="" />
+                        </a>
+                        <h4 class="card-title mt-5">Reset Password</h4>
+                    </div>
+                    <div class="auth-form card">
+                        <x-jet-validation-errors class="w-full" />
+                        <div class="card-body">
+                            <form class="row g-3" method="POST" action="{{ route('password.email') }}">
+                                @csrf
+                                <div class="col-12">
+                                    <label class="form-label">Email</label>
+
+                                    <input  type="email" name="email" class="form-control" placeholder="***********">
+                                </div>
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn btn-primary btn-block">Email Password Reset Link</button>
+                                </div>
+                            </form>
+                            <div class="new-account mt-3">
+                                <p>Didn't get code? <a class="text-primary" href="otp-1.html">Resend</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
+</div>
 
-        <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('password.email') }}">
-            @csrf
 
-            <div class="block">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
+<script src="{{ asset('public/mfs/vendor/jquery/jquery.min.js')}}"></script>
+<script src="{{ asset('public/mfs/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
-            <div class="flex items-center justify-end mt-4">
-                <x-jet-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
-</x-guest-layout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="{{ asset('public/mfs/js/scripts.js')}}"></script>
+
+
+</body>
+
+
+<!-- Mirrored from tende.vercel.app/reset.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Nov 2023 16:22:14 GMT -->
+</html>

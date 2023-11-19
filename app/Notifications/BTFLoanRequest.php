@@ -41,12 +41,10 @@ class BTFLoanRequest extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject($this->data['name'].' '.$this->data['loan_type'].' Loan Reguest')
+                    ->subject($this->data['name'].' '.$this->data['loan_type'].' Loan Request')
                     ->line($this->data['msg'])
                     ->line('Amount: '.$this->data['amount'])
-                    ->line('Repayment Plan: '.$this->data['duration'])
-                    ->action('Manage Loan Reguest', url('/'))
-                    ->line('Administrator');
+                    ->line('Return period: '.$this->data['duration'].' month(s)');
     }
 
     /**

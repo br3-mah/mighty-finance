@@ -74,10 +74,11 @@ class LoanApplicationController extends Controller
         try {
         DB::beginTransaction();
         $form = $request->toArray();
+        // dd($form);
         if ($form['package_personal'] == 'salary_advance') {
-            $loan_type = 'Civil Servant';
+            $loan_type = 'GRZ Loan';
         }else{
-            $loan_type = 'Civil Servant';
+            $loan_type = 'GRZ Loan';
         }
         
         if($request->file('tpin_file') !== null){               
@@ -121,14 +122,15 @@ class LoanApplicationController extends Controller
             
             // $this->apply_loan($data);
             $res = $this->apply_loan($data);
-
-            if($res == 1){
+            // dd($res);
+            if($res == 'exists'){
                 return response()->json([
                     "status" => 500, 
                     "success" => false, 
                     "message" => "Already have a Loan."
                 ]); 
             }
+
             $mail = [
                 'user_id' => $user->id,
                 'name' => $form['name'].' '.$form['lname'],
@@ -140,6 +142,7 @@ class LoanApplicationController extends Controller
                 'msg' => 'You have new a '.$form['type'].' loan application request, please visit the site to view more details'
             ];  
     
+            // Send information to the admin
             $this->send_loan_email($mail);
             
             DB::commit();

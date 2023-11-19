@@ -99,7 +99,7 @@
                             
                             <div id="loans_table_print_view">
                                 @if($view === 'table')
-                                    @include('livewire.dashboard.loans.__parts.defualt-loan-request-table')
+                                    @include('livewire.dashboard.loans.__parts.default-loan-request-table')
                                 @endif
                                 
                                 @if($view === 'grid')
@@ -109,6 +109,9 @@
                                 @if($view === 'assesment')
                                     @include('livewire.dashboard.loans.__parts.assesment-loan-request-table')
                                 @endif
+                            </div>
+                            <div class="flex items-center justify-center text-xs my-4 mx-4">
+                                {{ $requests->links() }}
                             </div>
                         </div>
                     </div>

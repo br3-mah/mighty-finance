@@ -25,29 +25,43 @@ class LoanRequestView extends Component
 
     public function render()
     {
-
         try {
+            // Retrieve users with the 'user' role, excluding their applications
             $this->users = User::role('user')->without('applications')->get();
+    
+            // Create a query builder for loan requests
             $loan_requests = Application::query();
             
+            // Check if the authenticated user has the permission to view all loan requests
             if(auth()->user()->can('view all loan requests')){
+                // Apply filters based on the provided $type and $status
                 if ($this->type) {
                     $loan_requests->whereIn('type', $this->type)->orderBy('id', 'desc');
                 }
-        
+    
                 if ($this->status) {
                     $loan_requests->whereIn('status', $this->status)->orderBy('id', 'desc');
                 }
+                
+                // Retrieve loan requests that are marked as complete and paginate the results (5 items per page)
                 $this->loan_requests = $loan_requests->where('complete', 1)->get();
-            }else{
+                $requests = $loan_requests->where('complete', 1)->paginate(5);
+            } else {
+                // Retrieve loan requests for the authenticated user and paginate the results (5 items per page)
                 $this->loan_requests = Application::with('loan')->where('user_id', auth()->user()->id)->orderBy('id', 'desc')->get();
+                $requests = Application::with('loan')->where('user_id', auth()->user()->id)->orderBy('id', 'desc')->paginate(5);
             }
-            return view('livewire.dashboard.loans.loan-request-view')
-            ->layout('layouts.dashboard');
+    
+            // Render the view with the loan requests data and use the 'dashboard' layout
+            return view('livewire.dashboard.loans.loan-request-view',[
+                'requests'=>$requests
+            ])->layout('layouts.dashboard');
         } catch (\Throwable $th) {
-            dd($th);
+            // If an exception occurs, set $loan_requests to an empty array
+            $this->loan_requests = [];
         }
     }
+    
 
     public function exportLoans(){
         switch ($this->status) {

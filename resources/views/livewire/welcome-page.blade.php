@@ -93,7 +93,7 @@
                                                     <radio>
                                                         <label class="radio-inline" style="padding-left: 4%">
                                                             <input type="radio" onclick="checker()" id="salary_advance" name="package_personal" value="salary_advance"><span class="design"></span>
-                                                            <span class="text">Civil Servant Loan</span>
+                                                            <span class="text">GRZ Loan</span>
                                                         </label>
                                                         {{-- <label class="radio-inline">
                                                             <input type="radio" onclick="checker()" id="collateral" value="collateral" name="package_personal"><span class="design"></span>

@@ -57,7 +57,7 @@ trait LoanTrait{
                 // that is not approved yet and not complete
                 $check = Application::where('status', 0)->where('complete', 0)
                                     ->where('user_id', $data['user_id'])->orderBy('created_at', 'desc')->get();
-                    
+                // dd(!empty($check->toArray()));
                 if($data['email'] != ''){
                     $mail = [
                         'name' => $data['fname'].' '.$data['lname'],
@@ -65,27 +65,34 @@ trait LoanTrait{
                         'from' => 'admin@mightyfinance.co.zm',
                         'phone' => $data['phone'],
                         'payback' => Application::payback($data['amount'], $data['repayment_plan']),
-                        'subject' => 'Mighty Finance Loan Application',
-                        'message' => 'Hi '.$data['fname'].' '.$data['lname'].', Thank you for choosing us as your lender and for your trust in our services. We appreciate your business and are committed to providing you with the best possible experience throughout your loan term Your loan request has been sent, please sign in to see the application status. Your username is '.$data['email'].' and Default Password is Mighty4you',
+                        'subject' => $data['type'].' Loan Application',
+                        'message' => 'Thank you for choosing us. Your loan request is submitted. Sign in with username '.$data['email'].' and password is Mighty4you to check the status. We value your trust and are committed to your satisfaction.',
+                        'message2'=>'Before proceeding, please fill out the attached Pre-approval form and submit it for the final processing of your '.$data['type'].' loan application.'
                     ];
                 }
-
-                if(!empty($check->toArray())){
-                    // redirect to you already have loan request
-                    return 1;
-                }else{
-                    // dd('here 3');
+                // dd(empty($check->toArray()));
+                if(empty($check->toArray())){
                     $item = Application::create($data);
                     if($data['email'] != ''){
-                        $contact_email = new LoanApplication($mail);
-                        Mail::to($data['email'])->send($contact_email);
+                        $loan_data = new LoanApplication($mail);
+                        Mail::to($data['email'])->send($loan_data);
+                    }
+                    return $item->id;
+                }else{
+                    // redirect to you already have loan request
+                    // return 'exists';
+                    
+                    $item = Application::create($data);
+                    if($data['email'] != ''){
+                        $loan_data = new LoanApplication($mail);
+                        Mail::to($data['email'])->send($loan_data);
                     }
                     return $item->id;
                 }
 
             } catch (\Throwable $th) {
                 dd($th);
-                return true;
+                // return false;
             }
     }
 

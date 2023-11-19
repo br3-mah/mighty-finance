@@ -1,101 +1,123 @@
+
+
 <!DOCTYPE html>
-<html lang="en" class="h-100">
-
+<html lang="en">
+  
+<!-- Mirrored from tende.vercel.app/signin.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Nov 2023 16:21:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Login - Mighty Finance Solution</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Mighty Finance Solution | Sign In</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/web/images/favicon.png') }}">
-    <link href="{{ asset('public/theme/css/style.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/mfs/images/logoi.png')}}" />
+    <!-- Custom Stylesheet -->
+     
+    <link rel="stylesheet" href="{{ asset('public/mfs/css/style.css')}}" />
+  </head>
 
-</head>
+  <body class="@@dashboard">
+ <div id="preloader"><i>.</i><i>.</i><i>.</i></div>
 
-<body style="background: url('https://extension.harvard.edu/wp-content/uploads/sites/8/2020/10/finance.jpg');
-            background-size:cover;
-            background-attachment:fixed;
-            backdrop-filter: blur(4.1px);
-            -webkit-backdrop-filter: blur(4.1px);" 
-            class="h-100">
-    <div class="authincation h-100">
-        <div class="container h-100">
-            <div class="row justify-content-center h-100 align-items-center">
-                <div class="col-md-6">
-                    <div class="authincation-content" style="
-                        background: rgba(255, 255, 255, 0.87);
-                        border-radius: 16px;
-                        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-                        backdrop-filter: blur(11.2px);
-                        -webkit-backdrop-filter: blur(11.2px);
-                        border: 1px solid rgba(255, 255, 255, 0.94);">
-                        <div class="row no-gutters">
-                            <div class="col-xl-12">
-                                <div class="auth-form">
-									<div class="logo justify-content-center justify-center items-center text-center"> 
-										<a href="{{ route('welcome') }}"> 
-											<img src="{{ asset('public/web/images/logo.png') }}" alt=""> 
-										</a> 
-									</div>
 
-                                    <h4 class="text-center mb-4">Sign in your account</h4>
-									<x-jet-validation-errors class="mb-4 text-danger" />
-
-									@if (session('status'))
-										<div class="mb-4 font-medium text-sm text-green-600">
-											{{ session('status') }}
-										</div>
-									@endif
-                                    <form class="mt-4" method="POST" action="{{ route('login') }}">
-										@csrf
-                                        <div class="form-group">
-                                            <label class="mb-1"><strong>Email</strong></label>
-                                            <input type="email" name="email" :value="old('email')" class="form-control" placeholder="Your Email">
-                                        </div>
-                                        <div class="form-group" >
-                                            <label class="mb-1"><strong>Password</strong></label>
-                                            <input type="password" name="password" required autocomplete="current-password" class="form-control">
-                                        </div>
-                                        <div class="form-row d-flex justify-content-between mt-4 mb-2">
-                                            <div class="form-group">
-                                               <div class="custom-control custom-checkbox ml-1">
-													<input type="checkbox" name="remember" class="custom-control-input" id="basic_checkbox_1">
-													<label class="custom-control-label" for="basic_checkbox_1">Remember my preference</label>
-												</div>
-                                            </div>
-											
-											@if (Route::has('password.request'))
-                                            <div class="form-group">
-                                                <a href="{{ route('password.request') }}">Forgot Password?</a>
-                                            </div>
-											@endif
-                                        </div>
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-primary btn-block">Sign Me In</button>
-                                        </div>
-                                    </form>
-                                    <div class="new-account mt-3">
-                                        <p>Don't have an account? <a class="text-primary" href="{{ route('register') }}">Sign up</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<div id="main-wrapper">
+  <div class="authincation section-padding">
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-xl-5 col-md-6">
+          <div class="mini-logo text-center my-4">
+            <a href="{{ route('welcome') }}">
+                <img width="100" src="{{ asset('public/web/images/logo.png')}}" alt="" />
+            </a>
+            <h4 class="card-title mt-5">Sign in to Account</h4>
+          </div>
+          <div class="auth-form card">
+            
+            <x-jet-validation-errors class="alert text-center alert-danger text-danger text-xs" />
+            <div class="card-body">
+              <form
+                name="myform"
+                class="signin_validate row g-3" method="POST" action="{{ route('login') }}">
+                @csrf
+                <div class="col-12">
+                    <input
+                        type="email" name="email" :value="old('email')"
+                        class="form-control"
+                        placeholder="hello@example.com"
+                        name="email"
+                    />
+                </div>
+                <div class="col-12">
+                    <input
+                        type="password" name="password" required
+                        class="form-control"
+                        placeholder="Password"
+                    />
+                </div>
+                <div class="col-6">
+                    <div class="form-check form-switch">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="flexSwitchCheckDefault"
+                        />
+                        <label class="form-check-label" for="flexSwitchCheckDefault"
+                        >Remember me</label
+                        >
                     </div>
                 </div>
+                <div class="col-6 text-right">
+                  <a href="{{ route('password.request') }}">Forgot Password?</a>
+                </div>
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-primary">Sign in</button>
+                </div>
+              </form>
+              <p class="mt-3 mb-0">
+                Don't have an account?
+                <a class="text-primary" href="{{ route('password.request') }}">Sign up</a>
+              </p>
             </div>
+          </div>
+          <div class="privacy-link">
+            {{-- <a href="#"
+              >Have an issue with 2-factor authentication?</a
+            >
+            <br /> --}}
+            <a href="signup.html">Privacy Policy</a>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+</div>
+
+<script src="{{ asset('public/mfs/vendor/jquery/jquery.min.js')}}"></script>
+<script src="{{ asset('public/mfs/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
 
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <!-- Required vendors -->
-    <script src="{{ asset('public/theme/vendor/global/global.min.js') }}"></script>
-	<script src="{{ asset('public/theme/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('public/theme/js/custom.min.js') }}"></script>
-    <script src="{{ asset('public/theme/js/deznav-init.js') }}"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="{{ asset('public/mfs/js/scripts.js')}}"></script>
+
 
 </body>
 
+
+<!-- Mirrored from tende.vercel.app/signin.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Nov 2023 16:21:44 GMT -->
 </html>
