@@ -15,7 +15,7 @@ class LoanWalletView extends Component
     public $amount, $current_funds, $gross_funds, $account, $history;
     public function render()
     {
-        $this->authorize('view accounting');
+        // $this->authorize('view accounting');
         $this->history = LoanWalletHistory::with('users')->orderBy('created_at', 'desc')->get();
         $this->account = LoanWallet::first();
         $this->current_funds = $this->getCompanyWallet();

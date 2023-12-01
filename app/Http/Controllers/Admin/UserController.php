@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Traits\EmailTrait;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
@@ -15,6 +16,7 @@ use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
+    use EmailTrait;
     // public function __construct()
     // {
     //     $this->middleware('can:admin.users.index')->only('index');
@@ -169,5 +171,16 @@ class UserController extends Controller
             return back();
         }
 
+    }
+
+
+    public function share_doc(Request $request){
+        $email = $request->toArray()['email'];
+        $res = $this->send_pre_approval_forms($email);
+        if($res){
+            return response()->json(['msg' => 'success']);
+        }else{
+            return response()->json(['msg' => 'error']);
+        }
     }
 }

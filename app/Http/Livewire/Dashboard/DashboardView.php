@@ -27,6 +27,7 @@ class DashboardView extends Component
         }
         $this->my_loan = $this->getCurrentLoan();
         $this->wallet = $this->getWalletBalance(auth()->user());
+        
         return view('livewire.dashboard.dashboard-view')
         ->layout('layouts.dashboard');
     }

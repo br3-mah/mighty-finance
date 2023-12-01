@@ -11201,7 +11201,8 @@ button,
   border-bottom-right-radius: 7px; }
 
 .welcome-profile {
-  background: #613de6 !important; }
+  background: linear-gradient(to right, #662d91, #912d73);
+}
   .welcome-profile .card-body img {
     border: 4px solid #fff;
     border-radius: 100px;

@@ -138,9 +138,16 @@ class Application extends Model
     //     // }
     // }
 
+    // Pending for approval
     public static function currentApplication(){
         return Application::where('user_id', auth()->user()->id)
         ->where('status', 0)->where('complete', 0)->first();
+    }
+
+    // Pending for payback
+    public static function activeApplication(){
+        return Application::where('user_id', auth()->user()->id)
+        ->where('status', 1)->where('complete', 1)->first();
     }
  
     public static function payback($principal, $duration){

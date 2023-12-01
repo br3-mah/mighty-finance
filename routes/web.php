@@ -10,6 +10,7 @@ use App\Http\Livewire\ContactPage;
 use App\Http\Livewire\Dashboard\Accounting\LoanStatementView;
 use App\Http\Livewire\Dashboard\Accounts\AccountView;
 use App\Http\Livewire\Dashboard\Accounts\MakePaymentView;
+use App\Http\Livewire\Dashboard\Accounts\MyProfile;
 use App\Http\Livewire\Dashboard\Borrowers\BorrowerView;
 use App\Http\Livewire\Dashboard\Borrowers\LoanStatementView as BorrowersLoanStatementView;
 use App\Http\Livewire\Dashboard\Borrowers\SendBorrowerMessageView;
@@ -80,6 +81,7 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/', WelcomePage::class)->name('welcome');
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::post('/share-docs', [UserController::class, 'share_doc'])->name('share.docs');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     
@@ -141,6 +143,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     // ------ KYC Profile
     Route::get('kyc-profile', KYCView::class)->name('kyc');
     Route::post('updating-file-uploads', [LoanApplicationController::class, 'updateFiles'])->name('update-file-uploads');
+    Route::get('my-profile', MyProfile::class)->name('my-profile');
 
     // ------- Loan Continue Completion
     

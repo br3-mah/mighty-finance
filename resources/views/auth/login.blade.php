@@ -28,7 +28,7 @@
         <div class="col-xl-5 col-md-6">
           <div class="mini-logo text-center my-4">
             <a href="{{ route('welcome') }}">
-                <img width="100" src="{{ asset('public/web/images/logo.png')}}" alt="" />
+                <img width="200" src="{{ asset('public/web/images/logo.png')}}" alt="" />
             </a>
             <h4 class="card-title mt-5">Sign in to Account</h4>
           </div>

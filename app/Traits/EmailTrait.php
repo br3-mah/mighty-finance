@@ -12,6 +12,7 @@ use App\Notifications\LoanRemainder;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use App\Mail\ContactEmail;
+use App\Mail\SharedForms;
 
 trait EmailTrait{
 
@@ -69,6 +70,18 @@ trait EmailTrait{
             return true;
         } catch (\Throwable $th) {
             return $th;
+        }
+    }
+    
+    // This email send a attachement of Preaproval Forms /////////////
+    public function send_pre_approval_forms($email){
+        try {
+            $data = Application::currentApplication();
+            $forms = new SharedForms($data);
+            Mail::to($email)->cc(auth()->user()->email)->send($forms);
+            return true;
+        } catch (\Throwable $th) {
+            dd($th);
         }
     }
 

@@ -176,7 +176,7 @@
                           <input
                             type="text"
                             class="form-control"
-                            value="https://www.tende.io/join/12345"
+                            value="https://mightyfinance.co.zm/"
                           />
                           <span class="input-group-text copy">Copy</span>
                         </div>

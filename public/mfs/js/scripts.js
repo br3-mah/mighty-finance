@@ -62,7 +62,7 @@ jQuery(window).on("load", function () {
   if (year) {
     year.innerHTML = new Date().getFullYear();
   }
-  const value = "https://www.Tende.io/join/12345";
+  const value = "https://mightyfinance.co.zm/register/?code=1994";
   const copy = document.querySelectorAll(".copy");
   copy.forEach((c) => {
     c.addEventListener("click", () => {

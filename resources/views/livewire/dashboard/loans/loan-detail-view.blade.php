@@ -1,8 +1,9 @@
-<div class="content-body">
-    <div class="container">
-        <div class="row">
+<div class="content-body ">
+    
+    <div class="container ">
+        <div class="row ">
             <div class="col-xxl-12 col-xl-12 col-lg-12">
-                <div class="card home-chart">
+                <div class="card home-chart fireworks">
                     <div class="card-header">
                         <h4 class="card-title home-chart">Loan Details</h4>
                         {{-- <select
@@ -219,3 +220,4 @@
         </div>
     </div>
 </div>
+
