@@ -305,6 +305,7 @@ function OldFunctionToSend() {
 
     xhr.onload = function() {
         if (this.readyState == 4 && this.status == 200) {
+            console.log('here');
             preloader.style.display = "none";
 
             if (this.responseText == 'order_success') {
@@ -315,8 +316,7 @@ function OldFunctionToSend() {
                 // }
                 let requestObject = null;
                 if (this.response == 'order_success') {
-                    console.warn(this.response);
-
+                    // console.warn(this.response);
                     Swal.fire({
                             title: '<strong>Hello ' + fname + '</strong>',
                             icon: 'success',
@@ -334,7 +334,7 @@ function OldFunctionToSend() {
                     my_form.reset();
                 } else {
 
-                    //alert(this.response);
+                    alert(this.response);
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
@@ -459,24 +459,40 @@ function send() {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
-    .then(data => {
+    .then(response => response.json()).then(data => {
         preloader.style.display = "none";
-        Swal.fire({
-            title: '<strong>Hello ' + fname + '</strong>',
-            icon: 'success',
-            html: '<b>Your Application has been successfully sent!</b> ' + 'we will get back to you soon.',
-            showCloseButton: true,
-            showCancelButton: true,
-            focusConfirm: false,
-            confirmButtonText: '<i class="fa fa-thumbs-up"></i> Great!',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
-            cancelButtonAriaLabel: 'Thumbs down'
-        })
+
+        // Check if 'loan_id' key exists in the 'data' object
+        if (data.hasOwnProperty('loan_id')) {
+            
+            console.log('Here: ' + data.amount);
+            // Access the 'loan_id' key in the 'data' object
+            const amount = data.amount;
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'You already have a loan of K'+amount,
+                footer: '<a href="faq.php">Why do I have this issue?</a>'
+            })
+        }else{
+            Swal.fire({
+                title: '<strong>Hello ' + fname + '</strong>',
+                icon: 'success',
+                html: '<b>Your Application has been successfully sent!</b> ' + 'we will get back to you soon.',
+                showCloseButton: true,
+                showCancelButton: true,
+                focusConfirm: false,
+                confirmButtonText: '<i class="fa fa-thumbs-up"></i> Great!',
+                confirmButtonAriaLabel: 'Thumbs up, great!',
+                cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
+                cancelButtonAriaLabel: 'Thumbs down'
+            })
+        }
     })
     .catch(error => {
         
+        console.log('Here: '+data);
         preloader.style.display = "none";
         Swal.fire({
             icon: 'error',

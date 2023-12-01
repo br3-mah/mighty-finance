@@ -57,7 +57,7 @@ trait LoanTrait{
                 // that is not approved yet and not complete
                 $check = Application::where('status', 0)->where('complete', 0)
                                     ->where('user_id', $data['user_id'])->orderBy('created_at', 'desc')->get();
-                // dd(!empty($check->toArray()));
+                // dd(empty($check->toArray()));
                 if($data['email'] != ''){
                     $mail = [
                         'name' => $data['fname'].' '.$data['lname'],
@@ -80,14 +80,14 @@ trait LoanTrait{
                     return $item->id;
                 }else{
                     // redirect to you already have loan request
-                    // return 'exists';
+                    return 'exists';
                     
-                    $item = Application::create($data);
-                    if($data['email'] != ''){
-                        $loan_data = new LoanApplication($mail);
-                        Mail::to($data['email'])->send($loan_data);
-                    }
-                    return $item->id;
+                    // $item = Application::create($data);
+                    // if($data['email'] != ''){
+                    //     $loan_data = new LoanApplication($mail);
+                    //     Mail::to($data['email'])->send($loan_data);
+                    // }
+                    // return $item->id;
                 }
 
             } catch (\Throwable $th) {

@@ -28,6 +28,12 @@ class LoanApplicationController extends Controller
         //
     }
 
+    public function alreadyLoaned($id){
+        $check = Application::where('status', 0)->where('complete', 0)
+        ->where('user_id', $id)->orderBy('created_at', 'desc')->get();
+        return view('livewire.already-have-loan');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -122,35 +128,39 @@ class LoanApplicationController extends Controller
             
             // $this->apply_loan($data);
             $res = $this->apply_loan($data);
-            // dd($res);
+            
             if($res == 'exists'){
+                $loan = Application::where('status', 0)->where('complete', 0)
+                                    ->where('user_id', $user->id)->orderBy('created_at', 'desc')->first();
                 return response()->json([
                     "status" => 500, 
                     "success" => false, 
-                    "message" => "Already have a Loan."
+                    "message" => "Already have a Loan.",
+                    "loan_id" => $loan->id
+                ]); 
+            }else{
+                $mail = [
+                    'user_id' => $user->id,
+                    'name' => $form['name'].' '.$form['lname'],
+                    'loan_type' => $form['type'].' '.$form['package_personal'],
+                    'phone' => $form['phone'],
+                    'duration' => $form['repayment_plan'],
+                    'amount' => $form['amount'],
+                    'type' => 'loan-application',
+                    'msg' => 'You have new a '.$form['type'].' loan application request, please visit the site to view more details'
+                ];  
+        
+                // Send information to the admin
+                $this->send_loan_email($mail);
+                
+                DB::commit();
+                return response()->json([
+                    "status" => 200, 
+                    "success" => true, 
+                    "message" => "Your loan has been sent."
                 ]); 
             }
-
-            $mail = [
-                'user_id' => $user->id,
-                'name' => $form['name'].' '.$form['lname'],
-                'loan_type' => $form['type'].' '.$form['package_personal'],
-                'phone' => $form['phone'],
-                'duration' => $form['repayment_plan'],
-                'amount' => $form['amount'],
-                'type' => 'loan-application',
-                'msg' => 'You have new a '.$form['type'].' loan application request, please visit the site to view more details'
-            ];  
     
-            // Send information to the admin
-            $this->send_loan_email($mail);
-            
-            DB::commit();
-            return response()->json([
-                "status" => 200, 
-                "success" => true, 
-                "message" => "Your loan has been sent."
-            ]);     
         }else{
             
             DB::rollback();

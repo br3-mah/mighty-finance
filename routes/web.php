@@ -191,3 +191,4 @@ Route::get('email-sent-successfully', SuccessEmailPage::class)->name('success-em
 
 // Errors
 Route::get('account-already-exists', AlreadyExistPage::class)->name('already-exists');
+Route::get('you-already-have-a-loan/{id}', [LoanApplicationController::class, 'alreadyLoaned'])->name('loan-exists');
