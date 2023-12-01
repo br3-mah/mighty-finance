@@ -5,6 +5,8 @@
         <div class="container p-6 modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-center ">Loan Application Form</h5>
+
+                <span style="cursor:pointer" onclick="closeModal()">x</span>
             </div>
             <div class="modal-body row">
                 <div class="col-xxl-3 col-xl-3 col-lg-3 container">

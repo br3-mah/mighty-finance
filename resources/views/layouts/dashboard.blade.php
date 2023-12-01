@@ -377,7 +377,6 @@
       function closeModal() {
           // Hide overlay and modal when the close button is clicked
           $("#overlay, #continue-loan-modal").hide();
-          location.reload();
       }
     }
     function openSendDocModal() {
