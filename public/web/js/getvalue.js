@@ -491,8 +491,6 @@ function send() {
         }
     })
     .catch(error => {
-        
-        console.log('Here: '+data);
         preloader.style.display = "none";
         Swal.fire({
             icon: 'error',
