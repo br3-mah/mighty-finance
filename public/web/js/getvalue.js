@@ -462,19 +462,21 @@ function send() {
     .then(response => response.json()).then(data => {
         preloader.style.display = "none";
 
-        // Check if 'loan_id' key exists in the 'data' object
-        if (data.hasOwnProperty('loan_id')) {
-            
-            console.log('Here: ' + data.amount);
-            // Access the 'loan_id' key in the 'data' object
-            const amount = data.amount;
-            
+        // Parse the 'data' JSON string
+        const parsedData = JSON.parse(data);
+
+        if (parsedData.hasOwnProperty('loan_id')) {
+            // 'loan_id' exists in the parsed data
+            const amount = parsedData.amount;
+
+            console.log('Here: ' + amount);
+
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'You already have a loan of K'+amount,
+                text: 'You already have a loan of K' + amount,
                 footer: '<a href="faq.php">Why do I have this issue?</a>'
-            })
+            });
         }else{
             Swal.fire({
                 title: '<strong>Hello ' + fname + '</strong>',
