@@ -461,13 +461,13 @@ function send() {
     })
     .then(response => response.json()).then(data => {
         preloader.style.display = "none";
-        const parsedData = JSON.parse(data);
+
         // Check if 'loan_id' key exists in the 'data' object
-        if (parsedData.hasOwnProperty('loan_id')) {
+        if (data.hasOwnProperty('loan_id')) {
             
-            console.log('Here: ' + parsedData.amount);
+            console.log('Here: ' + JSON.parse(data.amount));
             // Access the 'loan_id' key in the 'data' object
-            const amount = parsedData.amount;
+            const amount = data.amount;
             
             Swal.fire({
                 icon: 'error',

@@ -136,7 +136,8 @@ class LoanApplicationController extends Controller
                     "status" => 500, 
                     "success" => false, 
                     "message" => "Already have a Loan.",
-                    "loan_id" => $loan->id
+                    "loan_id" => $loan->id,
+                    "amount" => $loan->amount
                 ]); 
             }else{
                 $mail = [
