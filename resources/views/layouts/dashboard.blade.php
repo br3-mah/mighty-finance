@@ -85,7 +85,7 @@
 
   <body class="dashboard">
 
-    <div id="preloader"><i>.</i><i>.</i><i>.</i></div>
+    {{-- <div id="preloader"><i>.</i><i>.</i><i>.</i></div> --}}
 
 
     <div id="main-wrapper">
@@ -334,7 +334,7 @@
     {{$slot}}
 
 
-
+    
     @include('components.continue-application')
     @include('components.email-docs')
   </div>
@@ -367,7 +367,7 @@
     $('#sendDocResponseText').hide();
     $('#sendDocResponseText2').hide();
     
-    // alert(status === '0');
+    // alert(status);
     if(status === '0'){
       $(document).ready(function() {
           // Show overlay and modal when the page loads
