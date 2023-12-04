@@ -239,14 +239,14 @@
                                     <radio>
                                         <h4 class="text-white"></h4>
                                         <label class="input-group">First Name
-                                            <input required type="text" id="fname" name="name" placeholder="first name">
+                                            <input required type="text" id="fname" name="name" placeholder="Your first name">
                                         </label>
                                     </radio>
     
                                     <radio>
                                     <h4 class="text-white"></h4>
                                     <label class="input-group">Last Name
-                                        <input required  id="lname" name="lname" placeholder="last name">
+                                        <input required  id="lname" name="lname" placeholder="Your last name">
                                     </label>
                                     </radio>
                                 </div>
@@ -255,14 +255,14 @@
 
                                 <h4 class="text-white"></h4>
                                 <label class="input-group">Middle Name (optional)
-                                    <input id="lname" name="mname" placeholder="last name">
+                                    <input id="lname" name="mname" placeholder="Your middle name">
                                 </label>
                                 </radio>
 
                                 <radio>
                                 <h4 class="text-white"></h4>
                                 <label class="input-group">Email
-                                    <input required  id="email" name="email" placeholder="name@email.com">
+                                    <input required  id="email" name="email" placeholder="Your name@email.com">
                                 </label>
                                 </radio>
 
@@ -277,7 +277,7 @@
                                                 </option>
                                                 <!-- Add more options as needed -->
                                             </select>
-                                            <input required minlength="10" maxlength="10" id="phone" name="phone" placeholder="772 -- -- --">
+                                            <input required minlength="9" maxlength="9" id="phone" name="phone" placeholder="772 -- -- --">
                                         </div>
                                     </label>
                                 </radio>
@@ -289,7 +289,7 @@
                                                 <option value="+260">+260</option>
                                                 <!-- Add more options as needed -->
                                             </select>
-                                            <input required minlength="10" maxlength="10" id="phone" name="phone2" placeholder="975 -- -- --">
+                                            <input required minlength="9" maxlength="9" id="phone" name="phone2" placeholder="975 -- -- --">
                                         </div>
                                     </label>
                                 </radio>

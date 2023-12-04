@@ -346,9 +346,13 @@
                     <li>
                         <a class="tour-kyc-1" href="{{ route('profile.show') }}">
                           <span class="not-verified"
-                            ><i data-hint="Please continue to update and upload neccessary profile information, to allow quick loan processing and review" data-hint-position="top-left" class="icofont-close-line"></i
+                            ><i class="icofont-close-line"></i
                           ></span>
                           Update Profile (KYC)
+                          <div
+                          data-hint="Please continue to update and upload neccessary 
+                          profile information, to allow quick loan processing and review" 
+                          data-hint-position="top-left"></div>
                         </a>
                       </li> 
                     <li>

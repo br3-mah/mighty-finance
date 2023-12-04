@@ -76,7 +76,7 @@
               </form>
               <p class="mt-3 mb-0">
                 Don't have an account?
-                <a class="text-primary" href="{{ route('password.request') }}">Sign up</a>
+                <a class="text-primary" href="{{ route('register') }}">Sign up</a>
               </p>
             </div>
           </div>
