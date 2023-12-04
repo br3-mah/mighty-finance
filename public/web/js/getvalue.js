@@ -471,13 +471,13 @@ function send() {
             
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'Oh Sorry... ',
                 text: 'It seems that you already have an existing loan of K'+amount+'. ' +
                 'To proceed with a new loan application, please complete the current loan process. ' +
                 'You can check your dashboard for details on your existing loan and follow the instructions there. ' +
                 'If you have any questions, feel free to reach out to our customer support. Call: +260950082577 Or: +260950081545.',
             
-                footer: '<a href="/login">Payback Loan</a>'
+                // footer: '<a href="//login">Payback Loan</a>'
             })
         }else{
             Swal.fire({
@@ -494,7 +494,7 @@ function send() {
                 confirmButtonAriaLabel: 'Thumbs up, great!',
                 cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
                 cancelButtonAriaLabel: 'Thumbs down',
-                footer: '<a href="/login">Sign In</a>'
+                // footer: '<a href="/login">Sign In</a>'
             })
         }
     })
@@ -504,7 +504,7 @@ function send() {
             icon: 'error',
             title: 'Oops...',
             text: 'Something went wrong! Login to your account and check your current loan request or check your internet connectivity.',
-            footer: '<a href="/faq">Why do I have this issue?</a>'
+            // footer: '<a href="{{url("/faq")}}">Why do I have this issue?</a>'
         })
     });
 

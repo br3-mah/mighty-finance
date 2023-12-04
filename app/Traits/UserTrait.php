@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 trait UserTrait{
 
     public function registerUser($input){
-        $password = 'Mighty4you';
+        $password = 'mighty4you';
 
         if($input['email'] !== null){
             $check = User::where('email', $input['email'])->exists();

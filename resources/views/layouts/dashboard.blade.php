@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Mighty Finance Solution | App</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/mfs/images/logoi.png')}}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/web/images/favicon.png') }}" />
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="{{ asset('public/mfs/css/style.css')}}" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -716,7 +716,7 @@ var currentUrl = window.location.href;
 var route = currentUrl.split('/').pop();
 
 // Check if the route starts with "dashboard"
-if (route.startsWith('dashboard')) {
+if (route.startsWith('dashboard') && status === '') {
     // alert('Current route starts with "dashboard"');
     introJs().setOptions({
         steps: [{

@@ -113,7 +113,7 @@
             <tr>
               <td style="padding:30px 20px 20px 20px;text-align:center;font-size:1.5em;font-weight:bold; background-color: linear-gradient(to right, #662d91, #912d73);">
                 <a href="https://mightyfinance.co.zm" style=" text-decoration:none;">
-                  <img style="width:90px; height:60px" alt="Mighty Finance Solutions" src="{{ asset('public/web/images/01-ft-logo.png') }}">
+                  <img style="width:90px; height:60px" alt="Mighty Finance Solutions" src="https://mightyfinance.co.zm/public/web/images/logo.png">
                 </a>
               </td>
             </tr>
@@ -131,7 +131,7 @@
                     {{  $data['message2']  }}. 
                 </p>
                 <div style="width: 100%; text-align: center; display: flex; align-items: center; justify-content: center;">
-                    <a target="_blank" href="https://mightyfinance.co.zm/client-loan-requests" class="-btn -bg -txt">
+                    <a style="color: #fff; padding:10%;" target="_blank" href="https://mightyfinance.co.zm/dashboard" class="-btn -bg -txt">
                         Complete loan application
                     </a>
                 </div>
