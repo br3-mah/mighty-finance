@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('public/mfs/css/style.css')}}" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> --}}
-
+    <link rel="stylesheet" href="https://unpkg.com/intro.js/introjs.css">
     <!-- Include your modal library (e.g., Bootstrap) -->
     <!-- Add your modal CSS and JS here -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -85,7 +85,7 @@
 
   <body class="dashboard">
 
-    {{-- <div id="preloader"><i>.</i><i>.</i><i>.</i></div> --}}
+    <div id="preloader"><i>.</i><i>.</i><i>.</i></div>
 
 
     <div id="main-wrapper">
@@ -95,11 +95,11 @@
           <div class="col-xxl-12">
             <div class="header-content">
               <div class="header-left">
-                <!-- <div class="brand-logo">
+                {{-- <div class="brand-logo">
                                 <a href="index.html">
                                     <img src="./images/logo.png" alt="">
                                 </a>
-                            </div> -->
+                            </div>  --}}
                 <div class="search">
                   <form action="#">
                     <div class="input-group">
@@ -707,63 +707,29 @@
   });
   </script>
 
-<script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
-{{-- <script src="https://unpkg.com/fireworks-js@2.x/dist/index.umd.js"></script> --}}
-
-<!-- Usage -->
+<script src="https://unpkg.com/intro.js/intro.js"></script>
 <script>
-    const container = document.querySelector('.fireworks')
-    const fireworks = new Fireworks(container, {
-  autoresize: true,
-  opacity: 1,
-  acceleration: 1.05,
-  friction: 0.97,
-  gravity: 1.5,
-  particles: 50,
-  traceLength: 3,
-  traceSpeed: 10,
-  explosion: 5,
-  intensity: 30,
-  flickering: 50,
-  lineStyle: 'round',
-  hue: {
-    min: 0,
-    max: 360
-  },
-  delay: {
-    min: 30,
-    max: 60
-  },
-  rocketsPoint: {
-    min: 50,
-    max: 50
-  },
-  lineWidth: {
-    explosion: {
-      min: 1,
-      max: 3
-    },
-    trace: {
-      min: 1,
-      max: 2
-    }
-  },
-  brightness: {
-    min: 50,
-    max: 80
-  },
-  decay: {
-    min: 0.015,
-    max: 0.03
-  },
-  mouse: {
-    click: false,
-    move: false,
-    max: 1
-  }
-});
-    fireworks.start()
-  </script>
+// Get the current URL
+var currentUrl = window.location.href;
+
+// Extract the route name from the URL
+var route = currentUrl.split('/').pop();
+
+// Check if the route starts with "dashboard"
+if (route.startsWith('dashboard')) {
+    // alert('Current route starts with "dashboard"');
+    introJs().setOptions({
+        steps: [{
+            element: document.querySelector('.tour-kyc-1'),
+            intro: "Click here to complete your KYC profile information!",
+            position: 'left'
+        }]
+    }).start();
+    introJs().addHints();
+} else {
+    // alert('Current route does not start with "dashboard"');
+}
+</script>
 </body>
 
 

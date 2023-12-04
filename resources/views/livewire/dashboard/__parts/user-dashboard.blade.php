@@ -324,7 +324,7 @@
 
         <div class="col-xl-3">
           <div class="row">
-            {{-- <div class="col-xxl-12 col-xl-12 col-lg-6">
+            <div class="col-xxl-12 col-xl-12 col-lg-6">
               <div class="card welcome-profile" style="background-image: linear-gradient(to right, #662d91, #662d91); color:#fff">
                 <div class="card-body">
                   <img src="https://www.seekpng.com/png/detail/72-729756_how-to-add-a-new-user-to-your.png" alt="" />
@@ -344,9 +344,9 @@
                       </a>
                     </li>
                     <li>
-                        <a href="{{ route('profile.show') }}">
+                        <a class="tour-kyc-1" href="{{ route('profile.show') }}">
                           <span class="not-verified"
-                            ><i class="icofont-close-line"></i
+                            ><i data-hint="Please continue to update and upload neccessary profile information, to allow quick loan processing and review" data-hint-position="top-left" class="icofont-close-line"></i
                           ></span>
                           Update Profile (KYC)
                         </a>
@@ -370,7 +370,7 @@
                   </ul>
           </div>
         </div>
-      </div> --}}
+      </div>
       <div class="mb-4 justify-content-between" style="display: flex; gap:1%;">
         <div class="notify-bell">
           <span class="btn" style="background: #662d91"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-repeat" viewBox="0 0 16 16">

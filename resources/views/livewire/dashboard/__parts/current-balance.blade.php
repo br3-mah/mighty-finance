@@ -79,7 +79,7 @@
         <div class="row">
             <div class="col-xxl-6 col-xl-6 col-lg-6">
                 <div class="card"
-                    style="background-image: linear-gradient(to right, #662d91, rgb(139, 89, 177)); color:#fff">
+                    style="height:25vh; background-image: linear-gradient(to right, #662d91, rgb(139, 89, 177)); color:#fff">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-6 col-sm-6">
@@ -90,25 +90,25 @@
                                 </div>
                             </div>
                             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                <div class="my-2">
+                                <div class="pt-6">
                                     <img class="balance" src="{{ asset('public/images/mfs.png') }}" alt="">
                                 </div>
                             </div>
                             <style>
                                 @media (min-width: 577px) {
                                     .balance {
-                                        width: 90px;
+                                        width: 100px;
                                         position: absolute;
-                                        top: 1px;
+                                        top: 25px;
                                     }
                                 }
 
                                 @media (max-width: 577px) {
                                     .balance {
-                                        width: 90px;
+                                        width: 120px;
                                         position: absolute;
-                                        top: 8px;
-                                        left: 253px;
+                                        top: 25px;
+                                        left: 230px;
                                     }
                                 }
                             </style>
@@ -121,12 +121,13 @@
                     style="background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8UW4-kylyJg8bj33K3boAIvJ46HbT362BRwF06jStNxZLf2nkni-UDFofFkcvWrHhDqc&usqp=CAU'); 
                 background-position: center center; 
                 background-size: cover; 
-                height: 105px; 
-                position: relative;">
+                height:25vh; 
+                position: relative;
+                border-radius:4%;">
 
                     <!-- Purple Tint Overlay -->
                     <div
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(102, 45, 145, 0.772);">
+                        style="border-radius:2%;position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(102, 45, 145, 0.772);">
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -143,7 +144,7 @@
                                 </div>
                             </div>
                             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                <div class="mt-4">
+                                <div style="margin-top:14%;">
                                     <strong class="text-white" style="z-index:1; position:absolute">Refer a
                                         Friend</strong>
                                 </div>
