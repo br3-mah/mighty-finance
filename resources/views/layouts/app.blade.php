@@ -1095,8 +1095,8 @@ session_start();
             });
             Royal_Preloader.config({
                 mode: 'logo',
-                logo: '{{ asset("public/images/logo.png") }}',
-                logo_size: [160, 60],
+                logo: '{{ asset("public/mfs/images/j.png") }}',
+                logo_size: [90, 60],
                 showProgress: true,
                 showPercentage: true,
                 text_colour: '#111111',

@@ -65,6 +65,7 @@ function checker() {
     var check_package = document.querySelector('input[name = "package"]:checked');
     slider_amount.step = 10000;
 
+    console.log(check_package.value);
     if (check_package.value == "personal") {
         apply_btn.disabled = true;
         dvPassport.style.display = "block";
@@ -80,7 +81,7 @@ function checker() {
         update_side_amount.min = "0000";
         update_side_amount.value = slider_amount.value;
 */
-
+        console.log(checked_person.value);
         if (checked_person.value == "salary_advance") {
             var my_returns = (slider_amount.value * 0.21) * parseInt(time_duration.value) + parseInt(slider_amount.value);
             // var my_returns = (slider_amount.value * 0.07) * parseInt((time_duration.value)) + parseInt((slider_amount.value));
