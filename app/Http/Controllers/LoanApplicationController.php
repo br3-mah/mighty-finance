@@ -140,6 +140,7 @@ class LoanApplicationController extends Controller
                     "amount" => $loan->amount
                 ]); 
             }else{
+                
                 $mail = [
                     'user_id' => $user->id,
                     'name' => $form['name'].' '.$form['lname'],
