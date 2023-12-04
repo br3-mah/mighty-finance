@@ -222,7 +222,8 @@
                         <div class="items-center">
                             <h4>Apply for a Loan</h4>
                         </div>
-                    {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#applyForLoanNow" id="applyForLoanNow">Apply For a Loan</button> --}}
+                    {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#applyForLoanNow" id="applyForLoanNow">Apply For a Loan</button>
+                         --}}
                         @include('livewire.dashboard.__parts.loan-application-standalone')  
                     @endif
                 @endrole
