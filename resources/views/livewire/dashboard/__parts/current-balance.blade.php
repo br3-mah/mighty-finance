@@ -99,7 +99,7 @@
                                     .balance {
                                         width: 100px;
                                         position: absolute;
-                                        top: 25px;
+                                        top: 43px;
                                     }
                                 }
 
