@@ -16,8 +16,7 @@ function national() {
     var customer_type = document.querySelector('input[name = "customer_type"]:checked');
 
 
-    if (customer_type.value == "new_c") {
-        var c_type = "new_customer";
+ 
         if (nationality.value == "zambian") {
             var national = "zambian";
 
@@ -30,8 +29,7 @@ function national() {
         }
 
 
-    } else if (customer_type.value == "old_c") {
-        var c_type = "old_customer";
+
         if (nationality.value == "zambian") {
             var national = "zambian";
 
@@ -43,9 +41,6 @@ function national() {
             console.log('error_nationality')
         }
 
-    } else {
-        console.log('error_customer')
-    }
     //nationality
 
 }
@@ -122,17 +117,6 @@ function calculator() {
         var personal_check = "";
 
 
-    }
-
-    if (customer_type.value == "new_c") {
-        var c_type = "new_customer";
-
-
-    } else if (customer_type.value == "old_c") {
-        var c_type = "old_customer";
-
-    } else {
-        console.log('error_customer')
     }
 
     result_amount.innerHTML = amount_r;
