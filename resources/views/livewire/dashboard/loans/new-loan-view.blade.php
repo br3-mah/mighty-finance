@@ -264,7 +264,7 @@ input:focus {
                         <!-- cards -->
                         <div>
                             <div class="col-md-12">
-                                <input type="text" contentEditable='true' data-mask='K #,##0.00' name="amount"/>
+                                <input type="text" contentEditable='true' data-mask='K #,##0.00' id="amountInput" name="amount"/>
                             </div>
                         </div>
                         {{-- <div class="row row-cols-1 row-cols-lg-2 g-4 pb-5 border-bottom">
@@ -443,6 +443,9 @@ input:focus {
     {{-- <script src="{{ asset('public/js/zan/dist/zangdar.min.js')}}"></script> --}}
     <script type="text/javascript">
         $(document).ready(function () {
+            var principal = 0;
+            var rate = 21;
+            
             // hidden things
             $(".form-business").hide();
             $("#successMessage").hide();
@@ -499,10 +502,22 @@ input:focus {
                 }
             });
 
+            // Get the input element by its ID
+            const amountInput = document.getElementById('amountInput');
+
+            // Add a query listener to the input element
+            amountInput.addEventListener('input', function() {
+                // Get the current value of the input
+                const inputValue = amountInput.value;
+
+                // Log the value to the console (you can do any other processing with the value here)
+                console.log('Input Value:', inputValue);
+            });
+
 
             // Use input event to track changes in the range input value
             $('#slider_input').on('input', function () {
-                // cal
+                // calculate repayment
 
                 // Get the current value of the range input
                 var sliderValue = $(this).val();

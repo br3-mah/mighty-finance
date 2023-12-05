@@ -281,7 +281,7 @@
                                         </div>
                                     </label>
                                 </radio>
-                                <radio>
+                                {{-- <radio>
                                     <h4 class="text-white"></h4>
                                     <label class="input-group">
                                         <div class="mobile-input-group">
@@ -292,7 +292,7 @@
                                             <input required minlength="9" maxlength="9" id="phone" name="phone2" placeholder="975 -- -- --">
                                         </div>
                                     </label>
-                                </radio>
+                                </radio> --}}
                             </div>
 
 
