@@ -12,7 +12,7 @@
                   <div class="settings-menu">
                     <a href="#" onclick="profileTab()">Profile</a>
                     <a href="#" onclick="activityTab()">Security</a>
-                    <a href="#" onclick="securityTab()">Activity</a>
+                    {{-- <a href="#" onclick="securityTab()">Activity</a> --}}
                     <a href="#" onclick="docUplaodsTab()">Uploads</a>
                     {{--<a href="settings-privacy.html">Privacy</a>
                     <a href="settings-payment-method.html">Payment Method</a>
@@ -20,11 +20,24 @@
                     <a href="settings-fees.html">Fees</a> --}}
                   </div>
                 </div>
+                <div class="col-xxl-12 col-xl-12 col-lg-12 px-4">
+                  @if (session('success'))
+                      <div class="alert alert-success">
+                          {{ session('success') }}
+                      </div>
+                  @endif
+
+                  @if (session('error'))
+                      <div class="alert alert-danger">
+                          {{ session('error') }}
+                      </div>
+                  @endif
+                </div>
                 <div id="updateProfile" class="card-body">
                   <div class="row">
                     <div class="col-xxl-12 col-xl-12 col-lg-12">
                         @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                            @livewire('profile.update-profile-information-form')
+                            @include('profile.update-profile-information-form')
                         @endif
                     </div>
                   </div>
@@ -40,6 +53,11 @@
                 </div>
                 <div id="browserSession" class="card-body">
                   <div class="row">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12">
+                        {{-- @if (Laravel\Fortify\Features::canUpdateProfileInformation()) --}}
+                            @livewire('profile.update-password-form')
+                        {{-- @endif --}}
+                    </div>
                     <div class="col-xxl-12 col-xl-12 col-lg-12">
                         @if (Laravel\Fortify\Features::canUpdateProfileInformation())
                             @livewire('profile.logout-other-browser-sessions-form')

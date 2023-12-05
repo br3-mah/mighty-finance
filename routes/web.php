@@ -143,6 +143,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     // ------ KYC Profile
     Route::get('kyc-profile', KYCView::class)->name('kyc');
     Route::post('updating-file-uploads', [LoanApplicationController::class, 'updateFiles'])->name('update-file-uploads');
+    Route::post('update-prof-pic', [UserController::class, 'updatePic'])->name('update-prof-pic');
+    Route::post('update-profile', [UserController::class, 'updateProfile'])->name('update-profile');
+    
     Route::get('my-profile', MyProfile::class)->name('my-profile');
 
     // ------- Loan Continue Completion

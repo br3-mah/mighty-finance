@@ -1,14 +1,53 @@
 <x-jet-action-section class="card profile-card card-bx pt-4">
     <div class="card-header pt-3">
         <x-slot name="title">
-            {{ __('Browser Sessions') }}
+            {{ __('') }}
         </x-slot>
     
         <x-slot name="description">
-            {{ __('Manage and log out your active sessions on other browsers and devices.') }}
+            {{ __('') }}
         </x-slot>    
     <div>
     <x-slot name="content">
+        {{-- <div class="col-xxl-6 col-xl-6 col-lg-6">
+            <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Change Password</h4>
+            </div>
+            <div class="card-body">
+                <form action="#">
+                <div class="row g-3">
+                    <div class="col-xxl-12">
+                    <label class="form-label">New Email</label>
+                    <input
+                        type="email"
+                        class="form-control"
+                        placeholder="Email"
+                    />
+                    </div>
+                    <div class="col-xxl-12">
+                    <label class="form-label">New Password</label>
+                    <input
+                        type="password"
+                        class="form-control"
+                        placeholder="**********"
+                    />
+                    <small class="mt-2 mb-0 d-block"
+                        >Enable two factor authencation on the security
+                        page
+                    </small>
+                    </div>
+                    <div class="col-12">
+                    <button class="btn btn-success waves-effect">
+                        Save
+                    </button>
+                    </div>
+                </div>
+                </form>
+            </div>
+            </div>
+        </div> --}}
+
         <div class="max-w-xl text-sm text-gray-600">
             {{ __('If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.') }}
         </div>

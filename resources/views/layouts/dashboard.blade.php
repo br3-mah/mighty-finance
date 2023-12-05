@@ -22,6 +22,7 @@
     <!-- Include your modal library (e.g., Bootstrap) -->
     <!-- Add your modal CSS and JS here -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    @livewireStyles
     <style>
         .p-6{
           padding: 3%;
@@ -200,16 +201,22 @@
                 <div class="profile_log dropdown">
                   <div class="user" data-toggle="dropdown">
                     <span class="thumb"
-                      ><img src="https://www.seekpng.com/png/detail/72-729756_how-to-add-a-new-user-to-your.png" alt=""
+                      ><img width="100" style="border-radius:10%" src="{{ 'public/'.Storage::url(auth()->user()->profile_photo_path) }}" alt=""
                     /></span>
                     <span class="arrow"><i class="icofont-angle-down"></i></span>
                   </div>
                   <div class="dropdown-menu dropdown-menu-right">
                     <div class="user-email">
                       <div class="user">
-                        <span class="thumb"
-                          ><img src="https://www.seekpng.com/png/detail/72-729756_how-to-add-a-new-user-to-your.png" alt=""
-                        /></span>
+                        <span class="thumb">
+                          {{-- @dd(auth()->user()->profile_photo_path)
+                          @if (auth()->user()->profile_photo_path) --}}
+                            <img src="{{ 'public/'.Storage::url(auth()->user()->profile_photo_path) }}" alt=""/>
+                          {{-- @else
+                            <img src="https://www.seekpng.com/png/detail/72-729756_how-to-add-a-new-user-to-your.png" alt=""/>
+                          @endif --}}
+                          
+                        </span>
                         <div class="user-info">
                           <h5>{{ auth()->user()->fname.' '.auth()->user()->lname }}</h5>
                           <span>{{ auth()->user()->email }}</span>
@@ -338,7 +345,9 @@
     @include('components.continue-application')
     @include('components.email-docs')
   </div>
+  @stack('modals')
 
+  @livewireScripts
   <script src="{{ asset('public/mfs/vendor/jquery/jquery.min.js')}}"></script>
   <script src="{{ asset('public/mfs/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 

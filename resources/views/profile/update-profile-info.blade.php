@@ -1,14 +1,14 @@
-<x-jet-form-section class="card profile-card card-bx pt-4" submit="updateProfileInformation">
-    <div style="background-color: rgb(81, 10, 139)" class=" font-w500 card-header">
+<div class="card profile-card card-bx pt-4" submit="updateProfileInformation">
+    {{-- <div style="background-color: rgb(81, 10, 139)" class=" font-w500 card-header">
         <x-slot name="title">
             {{ __('Basic Info') }}
         </x-slot>
         <x-slot name="description">
             {{ __('Update your account\'s profile information and email address.') }}
         </x-slot>
-    </div>
+    </div> --}}
 
-    <x-slot name="form" >
+    <div>
         <!-- Profile Photo -->
         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
             <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
@@ -35,7 +35,7 @@
                 <!-- New Profile Photo Preview -->
                 <div class="mt-2" x-show="photoPreview" style="display: none;">
                     <span class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
-                          x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
+                        x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
                     </span>
                 </div>
 
@@ -139,9 +139,9 @@
             </div>
             
         </div>
-    </x-slot>
+    </div>
 
-    <x-slot name="actions">
+    {{-- <x-slot name="actions">
         <x-jet-action-message class="mr-3" on="saved">
             {{ __('Updating...') }}
         </x-jet-action-message>
@@ -149,5 +149,5 @@
         <x-jet-button wire:loading.attr="disabled" type="submit"  class="btn  btn-square btn-primary" wire:target="photo">
             {{ __('Save Changes') }}
         </x-jet-button>
-    </x-slot>
-</x-jet-form-section>
+    </x-slot> --}}
+</div>

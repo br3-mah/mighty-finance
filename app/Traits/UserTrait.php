@@ -73,6 +73,17 @@ trait UserTrait{
         
     }
 
+    public function isKYCComplete(){
+        $data = Application::where('status', 0)->where('complete', 0)
+        ->where('user_id', auth()->user()->id)->get();
+        if($data->first() !== null){
+            if($data->first()->tpin_file !== 'no file' && $data->first()->payslip_file !== 'no file' && $data->first()->nrc_file !== NULL){
+                $data->complete = 1;
+                $data->save();
+            }
+        }
+    }
+
     public function createNOK($data){
         NextOfKing::create([
             'email' => $data['nok_email'],

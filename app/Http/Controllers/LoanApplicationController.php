@@ -180,49 +180,36 @@ class LoanApplicationController extends Controller
 
     public function updateFiles(Request $request)
     {
-        DB::beginTransaction();
-        $i = auth()->user();   
+        // DB::beginTransaction();  
         try {
+            $user = Application::where('user_id',auth()->user()->id)->where('status', 0)->where('complete', 0)->first();
+
+            dd($user);
             if($request->file('nrc_file') !== null){
                 $nrc_file = $request->file('nrc_file')->store('nrc_file', 'public'); 
-                $user = Application::where('user_id',auth()->user()->id)->where('status', 0)->where('complete', 0)->first();
                 $user->nrc_file = $nrc_file;
                 $user->save();      
             }
     
             if($request->file('tpin_file') !== null){               
                 $tpin_file = $request->file('tpin_file')->store('tpin_file', 'public');   
-                $user = Application::where('user_id',auth()->user()->id)->where('status', 0)->where('complete', 0)->first();
                 $user->tpin_file = $tpin_file;
                 $user->save();           
             }
     
             if($request->file('payslip_file') !== null){               
                 $payslip_file = $request->file('payslip_file')->store('payslip_file', 'public');  
-                $user = Application::where('user_id',auth()->user()->id)->where('status', 0)->where('complete', 0)->first();
                 $user->payslip_file = $payslip_file;
                 $user->save();        
             }
 
-            if($i->id_type !== null && $i->net_pay !== null && $i->basic_pay !== null && $i->address !== null && $i->phone !== null && $i->occupation !== null && $i->gender !== null && $i->nrc_no !== null && $i->dob !== null){
-                $loan = Application::where('status', 0)->where('complete', 0)
-                            ->where('user_id', auth()->user()->id)->first();
-                            
-                if($loan !== null){
-                    if($loan->tpin_file !== 'no file' && $loan->payslip_file !== 'no file' && $loan->nrc_file !== null){
-                        // dd('here in loan');
-                        $loan->complete = 1;
-                        $loan->save();
-                        DB::commit();
-                        return redirect()->to('/dashboard');
-                    }
-                }
-            }
+            $this->isKYCComplete();
             
-            DB::commit();
+            // DB::commit();
             return redirect()->to('/user/profile');
         } catch (\Throwable $th) {
-            DB::rollback();
+            dd($th);
+            // DB::rollback();
             return redirect()->to('/user/profile');
         }
 
