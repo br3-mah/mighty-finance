@@ -354,7 +354,7 @@ input:focus {
                             </div>
                         </div>  
                         <div>
-                            <p>2 Months</p>
+                            <p id="slider_value">Current Value: 20</p>
                             <p>Interest Rate: 21%</p>
                             <p>Payback Amount of: K12000</p>
                         </div>
@@ -498,6 +498,18 @@ input:focus {
                     location.reload(true);
                 }
             });
+
+
+            // Use input event to track changes in the range input value
+            $('#slider_input').on('input', function () {
+                // cal
+
+                // Get the current value of the range input
+                var sliderValue = $(this).val();
+
+                // Update a display element with the current value
+                $('#slider_value').text( sliderValue + ' Months');
+            });
         }); 
 
 
@@ -518,6 +530,9 @@ input:focus {
         showSliderValue();
         window.addEventListener("resize",showSliderValue);
         slider_input.addEventListener('input', showSliderValue, false);
+
+
+
     </script>
     
 </div>
