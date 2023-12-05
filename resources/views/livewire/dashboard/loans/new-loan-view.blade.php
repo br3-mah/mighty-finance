@@ -65,7 +65,7 @@ transition: all 0.8s;
     box-shadow: none;
 }
 .bg-color-info{
-    background-color:#dc3545 !important;
+    background-color:rgb(181, 53, 220) !important;
 }
 .border-color{
     border-color: #ececec;
@@ -86,7 +86,7 @@ transition: all 0.8s;
 /* Input Field Style */
 /* General styling for all inputs */
 input {
-    margin-top: 15px;
+    
     padding: 10px;
     border: 2px solid #3498db; /* Border color */
     border-radius: 5px; /* Rounded corners */
@@ -95,7 +95,7 @@ input {
 }
 
 /* Styling for text-type inputs */
-input[type='text'] {
+input[name='amount'] {
     text-align: right;
 }
 
@@ -259,8 +259,8 @@ input:focus {
                     <div class="row justify-content-center" id="cardSection">
                     <!-- col -->
                     <div class="col-lg-7 col-md-8">
-                        <h3 class="fw-bold pt-3">Loan Details</h3>
-                        <p class="small pb-2">How much would you like to borrow?</p>
+                        <h3 class="fw-bold pt-2">Loan Details</h3>
+                        <p class="small pb-0">How much would you like to borrow?</p>
                         <!-- cards -->
                         <div>
                             <div class="col-md-12">
@@ -297,12 +297,12 @@ input:focus {
                     <div class="row justify-content-center form-business">
                     <!-- col -->
                     <div class="col-lg-7 col-md-8">
-                        <h3 class="fw-bold pt-5">Loan Detail</h3>
-                        <p class="small pb-5">What is your reason for a loan?</p>
+                        <h3 class="fw-bold pt-2">Loan Detail</h3>
+                        <p class="small pb-0">What is your reason for a loan?</p>
                         <!-- cards -->
-                        <div class="row row-cols-1 row-cols-lg-3 g-4 pb-5 border-bottom">
+                        <div class="row row-cols-1 row-cols-lg-3 g-4 pb-2 border-bottom">
                         <div class="col">
-                            <div class="card text-center h-100 py-5">
+                            <div class="card text-center h-70 py-2">
                             <i class="fas fa-users card-img-top mx-auto img-light fs-1"></i>
                             <div class="card-body px-0">
                                 <h5 class="card-title title-binding">GRZ Loan</h5>
@@ -311,16 +311,16 @@ input:focus {
                             </div>
                         </div>
                         <div class="col">
-                            <div class="card text-center h-100 py-5">
+                            <div class="card text-center h-70 py-2">
                             <i class="fas fa-briefcase card-img-top mx-auto img-light fs-1"></i>
                             <div class="card-body px-0">
                                 <h5 class="card-title title-binding">Business Loan</h5>
-                                <p class="card-text">For starting a business</p>
+                                <p class="card-text">For starting <br>a business</p>
                             </div>
                             </div>
                         </div>
                         <div class="col">
-                            <div class="card text-center h-100 py-5">
+                            <div class="card text-center h-70 py-2">
                             <i class="fas fa-store card-img-top mx-auto img-light fs-1"></i>
                             <div class="card-body px-0 pt-4">
                                 <h5 class="card-title title-binding">SME Loans</h5>
@@ -331,8 +331,8 @@ input:focus {
                         </div>
                         <!-- /cards -->
                         <!-- NEXT BUTTON-->
-                        <button type="button" class="btn btn-dark text-white float-start back mt-4 rounded-3">Go Back</button>
-                        <button type="button" class="btn text-white float-end next mt-4 rounded-3 bg-color-info">Next</button>
+                        <button type="button" class="btn btn-dark text-white float-start back mt-0 rounded-3">Go Back</button>
+                        <button type="button" class="btn text-white float-end next mt-0 rounded-3 bg-color-info">Next</button>
                         <!-- /NEXT BUTTON-->
                     </div>
                     <!-- /col -->
@@ -342,18 +342,21 @@ input:focus {
                     <div class="row justify-content-center form-business">
                     <!-- col -->
                         <div class="col-lg-7 col-md-8">
-                        <h3 class="fw-bold pt-5">Repayment Options</h3>
-                        <p class="small pb-5">How will you pay back</p>
+                        <h3 class="fw-bold pt-2">Repayment Options</h3>
+                        <p class="small pb-0">How will you pay back</p>
                         <div>
-                            <div class="container">
-                                <div class="range-slider">
-                                    <div id="slider_thumb" class="range-slider_thumb"></div>
-                                    <div class="range-slider_line">
-                                    <div id="slider_line" class="range-slider_line-fill"></div>
-                                    </div>
-                                    <input id="slider_input" class="range-slider_input" type="range" value="20" min="0" max="100">
+                            <div class="range-slider">
+                                <div id="slider_thumb" class="range-slider_thumb"></div>
+                                <div class="range-slider_line">
+                                <div id="slider_line" class="range-slider_line-fill"></div>
                                 </div>
+                                <input id="slider_input" class="range-slider_input" type="range" value="20" min="0" max="100">
                             </div>
+                        </div>  
+                        <div>
+                            <p>2 Months</p>
+                            <p>Interest Rate: 21%</p>
+                            <p>Payback Amount of: K12000</p>
                         </div>
                         <!-- cards -->
                         {{-- <div class="row row-cols-1 row-cols-lg-3 g-4 pb-5 border-bottom">
@@ -385,15 +388,15 @@ input:focus {
                         </div> --}}
                         <!-- /cards -->
                         <!-- NEXT BUTTON-->
-                        <button type="button" class="btn btn-dark text-white float-start back mt-4 rounded-3">Go Back</button>
-                        <button type="button" class="btn text-white float-end next mt-4 rounded-3 bg-color-info confirm">Continue</button>
+                        <button type="button" class="btn btn-dark text-white float-start back mt-0 rounded-3">Go Back</button>
+                        <button type="button" class="btn text-white float-end next mt-0 rounded-3 bg-color-info confirm">Continue</button>
                         <!-- /NEXT BUTTON-->
                         </div>
                         <!-- /col -->
                     </div>
                     <!-- /row -->
                     <!-- row -->
-                    <div class="row justify-content-center py-5 form-business">
+                    <div class="row justify-content-center py-3 form-business">
                     <!-- col -->
                     <div class="col-lg-7 col-md-8" id="successMessage">
                         <!-- success message -->
@@ -406,22 +409,22 @@ input:focus {
                     <!-- /col -->
                     <!-- col -->
                     <div class="col-lg-7 col-md-8" id="successForm">
-                        <div class="mb-5 pb-5">
+                        <div class="mb-5 pb-2">
                         <!-- Final step -->
-                        <div class="alert alert-primary text-center" role="alert">
-                            <h5 class="p-4">Encontraras tu grabacion en iheart radio app.</h5>
+                        <div class="alert alert-sm alert-primary text-center" role="alert">
+                            <h5 class="p-4">Please make sure to sign and upload the following documents.</h5>
                         </div>
-                        <div class="form-check mt-4">
+                        {{-- <div class="form-check mt-3">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
                             Gracias por participar
                             </label>
-                        </div>
+                        </div> --}}
                         <!-- /Final step -->
                         </div>
                         <!-- NEXT BUTTON-->
                         <button type="button" class="btn btn-dark text-white float-start back rounded-3">Go Back</button>
-                        <button type="submit" class="btn text-white float-end submit-button rounded-3 bg-color-info">Finalizar</button>
+                        <button type="submit" class="btn text-white float-end submit-button rounded-3 bg-color-info">Finalize</button>
                         <!-- /NEXT BUTTON-->
                     </div>
                     <!-- /col -->
