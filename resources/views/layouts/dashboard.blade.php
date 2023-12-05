@@ -90,6 +90,8 @@
           }
         }
     </style>
+    
+    <script src="https://jsuites.net/v4/jsuites.js"></script>
   </head>
 
   <body class="dashboard">
@@ -154,6 +156,8 @@
                   <div class="dropdown-menu dropdown-menu-right notification-list">
                     <h4>Announcements</h4>
                     <div class="lists">
+                      
+                      @forelse (auth()->user()->unreadNotifications as $item)
                       <a href="#" class="">
                         <div class="d-flex align-items-center">
                           <span class="me-3 icon success"
@@ -165,41 +169,9 @@
                           </div>
                         </div>
                       </a>
-                      <a href="#" class="">
-                        <div class="d-flex align-items-center">
-                          <span class="me-3 icon fail"
-                            ><i class="bi bi-x"></i
-                          ></span>
-                          <div>
-                            <p>2FA verification failed</p>
-                            <span>2020-11-04 12:00:23</span>
-                          </div>
-                        </div>
-                      </a>
-                      <a href="#" class="">
-                        <div class="d-flex align-items-center">
-                          <span class="me-3 icon success"
-                            ><i class="bi bi-check"></i
-                          ></span>
-                          <div>
-                            <p>Device confirmation completed</p>
-                            <span>2020-11-04 12:00:23</span>
-                          </div>
-                        </div>
-                      </a>
-                      <a href="#" class="">
-                        <div class="d-flex align-items-center">
-                          <span class="me-3 icon pending"
-                            ><i class="bi bi-exclamation-triangle"></i
-                          ></span>
-                          <div>
-                            <p>Phone verification pending</p>
-                            <span>2020-11-04 12:00:23</span>
-                          </div>
-                        </div>
-                      </a>
-
-                      <a href="settings-activity.html"
+                      @empty
+                      @endforelse
+                      <a href="{{ route('notifications') }}"
                         >More <i class="icofont-simple-right"></i
                       ></a>
                     </div>

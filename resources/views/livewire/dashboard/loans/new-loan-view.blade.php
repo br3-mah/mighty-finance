@@ -197,7 +197,6 @@ input:focus {
 	background-color: #662d91;
 }
 </style>
-<script src="https://jsuites.net/v4/jsuites.js"></script>
 <div class="content-body">
         <div class="">
             {{-- <h2 class="mx-4">Get a Loan</h2> --}}
@@ -343,20 +342,21 @@ input:focus {
                     <!-- col -->
                         <div class="col-lg-7 col-md-8">
                         <h3 class="fw-bold pt-2">Repayment Options</h3>
-                        <p class="small pb-0">How will you pay back</p>
+                        <p class="small pb-0">How will you pay back?</p>
                         <div>
                             <div class="range-slider">
                                 <div id="slider_thumb" class="range-slider_thumb"></div>
                                 <div class="range-slider_line">
                                 <div id="slider_line" class="range-slider_line-fill"></div>
                                 </div>
-                                <input id="slider_input" class="range-slider_input" type="range" value="20" min="0" max="100">
+                                <input id="slider_input" class="range-slider_input" type="range" value="2" min="0" max="100">
                             </div>
                         </div>  
                         <div>
-                            <p id="slider_value">Current Value: 20</p>
-                            <p>Interest Rate: 21%</p>
-                            <p>Payback Amount of: K12000</p>
+                            <p id="slider_value">2 Months</p>
+                            <p id="interest_value">Interest Rate: 21%</p>
+                            <p id="principal_value"></p>
+                            <p style="padding: 2%; background-color:#662d91" class="bg-[#662d91] text-white" id="payback_value">Calculator</p>
                         </div>
                         <!-- cards -->
                         {{-- <div class="row row-cols-1 row-cols-lg-3 g-4 pb-5 border-bottom">
@@ -508,10 +508,10 @@ input:focus {
             // Add a query listener to the input element
             amountInput.addEventListener('input', function() {
                 // Get the current value of the input
-                const inputValue = amountInput.value;
+                principal = amountInput.value;
 
                 // Log the value to the console (you can do any other processing with the value here)
-                console.log('Input Value:', inputValue);
+                console.log('Input Value:', principal);
             });
 
 
@@ -522,8 +522,12 @@ input:focus {
                 // Get the current value of the range input
                 var sliderValue = $(this).val();
 
+                var my_returns = (parseFloat(principal) * 0.21) * parseInt(sliderValue) + parseFloat(principal);
+
+                $('#payback_value').text( 'Payback amount of: K'+my_returns);
+                $('#principal_value').text( 'Borrowing: K'+principal);
                 // Update a display element with the current value
-                $('#slider_value').text( sliderValue + ' Months');
+                $('#slider_value').text( 'Payback in '+sliderValue + ' Months');
             });
         }); 
 
