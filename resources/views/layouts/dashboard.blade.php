@@ -81,9 +81,7 @@
         }
 
         /* Default styles for the "hideInMobile" div */
-        #hideInMobile {
-          display: block;
-        }
+  
 
         /* Media query to hide the "hideInMobile" div on screens smaller than 768 pixels */
         @media (max-width: 768px) {

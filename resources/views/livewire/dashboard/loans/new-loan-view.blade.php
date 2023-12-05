@@ -9,7 +9,7 @@ display: block;
 width: 30px;
 height: 30px;
 margin: 9px auto;
-box-shadow: 1px 1px 3px #606060;
+box-shadow: 1px 1px 3px #662d91;
 transition:all;
 }
 .main-content .wizard-form .progressbar-list::after{
@@ -26,7 +26,7 @@ z-index: -1;
 transition: all 0.8s;
 }
 .main-content .wizard-form .progressbar-list.active::after{
-    background-color: #a435dc;
+    background-color: #662d91;
 }
 .main-content .wizard-form .progressbar-list:first-child::after{
     content: none;
@@ -38,12 +38,12 @@ transition: all 0.8s;
     font-weight: 600;
     color: #fff;
     padding: 6px;
-    background-color: #b535dc;
-    border: 1px solid #9935dc;
+    background-color: #662d91;
+    border: 1px solid #662d91;
     box-shadow: 0 0 0 7.5px rgb(176 60 70 / 11%);
 }
 .progressbar-list{
-    color:#6f787d;
+    color:#662d91;
 }
 .active{
     color:#000;
@@ -57,18 +57,18 @@ transition: all 0.8s;
     cursor: pointer;
 }
 .active-card{
-    color:#a235dc;
+    color:#662d91;
     font-weight: bold;
-    border: 3px solid #aa35dc;
+    border: 3px solid #662d91;
 }
 .form-check-input:focus {
     box-shadow: none;
 }
 .bg-color-info{
-    background-color:rgb(181, 53, 220) !important;
+    background-color:#662d91 !important;
 }
 .border-color{
-    border-color: #ececec;
+    border-color: #662d91;
 }
 .btn{
     padding:16px 30px;
@@ -88,7 +88,7 @@ transition: all 0.8s;
 input {
     
     padding: 10px;
-    border: 2px solid #3498db; /* Border color */
+    border: 2px solid #662d91; /* Border color */
     border-radius: 5px; /* Rounded corners */
     font-size: 24px; /* Increased font size */
     font-family: 'Arial', sans-serif;
@@ -101,13 +101,13 @@ input[name='amount'] {
 
 /* Hover effect */
 input:hover {
-    border-color: #2980b9; /* Border color on hover */
+    border-color: #662d91; /* Border color on hover */
 }
 
 /* Focus effect */
 input:focus {
     outline: none;
-    border-color: #ab3ce7; /* Border color when focused */
+    border-color: #662d91; /* Border color when focused */
     box-shadow: 0 0 10px rgba(185, 60, 231, 0.8); /* Box shadow when focused */
 }
 
@@ -163,7 +163,7 @@ input:focus {
 .range-slider_thumb {
 	width: 14vmin;
 	height: 14vmin;
-	border: 0.6vmin solid #303030;
+	border: 0.6vmin solid #662d91;
 	border-radius: 50%;
 	position: absolute;
 	left: 0;
@@ -175,7 +175,7 @@ input:focus {
 	align-items: center;
 	font-weight: 700;
 	font-size: 4vmin;
-	color: #303030;
+	color: #662d91;
 	z-index: 2;
 }
 
@@ -194,7 +194,7 @@ input:focus {
 	position: absolute;
 	height: 0.5vmin;
 	width: 0;
-	background-color: #303030;
+	background-color: #662d91;
 }
 </style>
 <script src="https://jsuites.net/v4/jsuites.js"></script>
@@ -300,7 +300,7 @@ input:focus {
                         <h3 class="fw-bold pt-2">Loan Detail</h3>
                         <p class="small pb-0">What is your reason for a loan?</p>
                         <!-- cards -->
-                        <div class="row row-cols-1 row-cols-lg-3 g-4 pb-2 border-bottom">
+                        <div class="row row-cols-2 row-cols-lg-3 g-4 pb-2 border-bottom">
                         <div class="col">
                             <div class="card text-center h-70 py-2">
                             <i class="fas fa-users card-img-top mx-auto img-light fs-1"></i>
