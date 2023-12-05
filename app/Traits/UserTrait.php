@@ -25,7 +25,7 @@ trait UserTrait{
                         'fname' => $input['fname'],
                         'lname' => $input['lname'],
                         'mname' => $input['mname'],
-                        'phone2' => $input['phone2'],
+                        'phone' => $input['phone'],
                         'email' => $input['email'],
                         'password' => Hash::make($password),
                         'terms' => 'accepted'
