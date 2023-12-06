@@ -24,6 +24,8 @@
     <!-- Include your modal library (e.g., Bootstrap) -->
     <!-- Add your modal CSS and JS here -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet">
+    
     @livewireStyles
     <style>
         .p-6{
@@ -371,7 +373,7 @@
     AOS.init();
     let status = '{{$status}}';
     let router = '{{ $route }}';
-    alert(router);
+    
     let kyc = '{{$kyc}}';
     $('#sendDocModal').hide();
     $('#sendDocResponseText').hide();
@@ -739,6 +741,16 @@ if (route.startsWith('dashboard') && kyc === '0' ) {
 } else {
     // alert('Current route does not start with "dashboard"');
 }
+</script>
+
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script>
+  // let table = new DataTable('#default_loan_list', {
+  //     responsive: true
+  // });
+  $(document).ready( function () {
+      $('#default_loan_list').DataTable();
+  });
 </script>
 </body>
 

@@ -1,4 +1,4 @@
-<table wire:ignore.self class="table table-striped responsive-table">
+<table id="default_loan_list" wire:ignore.self class="table table-striped responsive-table">
   <thead>
     <tr>
       {{-- <th>Loan #.</th>
@@ -13,7 +13,7 @@
       {{-- <th>Due Date</th> --}}
       <th>Status</th>
       {{-- <th>DOA</th> --}}
-      {{-- <th class="actions-btns">Action</th> --}}
+      <th class="actions-btns">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -137,11 +137,7 @@
       </th>
     </tr>
     @empty
-    <div class="intro-y col-span-12 md:col-span-6">
-        <div class="box text-center">
-            <p>Nothing Found.</p>
-        </div>
-    </div>
+    
     @endforelse
   </tbody>
 </table>
