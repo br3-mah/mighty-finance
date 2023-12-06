@@ -4,7 +4,9 @@
 <html lang="en">
   @php
     $activeLoan = App\Models\Application::currentApplication();
-    $status = App\Models\Application::currentApplication()->complete;
+    $status = App\Models\Application::currentApplication()->continue;
+    $kyc = App\Models\Application::currentApplication()->complete;
+    $route = request()->route()->getName();
   @endphp
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <head>
@@ -130,7 +132,7 @@
 
               </div>
 
-              <div id="hideInMobile" class="header-right">
+              {{-- <div id="hideInMobile" class="header-right">
                 <div class="notify-bell">
                   <span class="btn" style="background: #662d91"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-repeat" viewBox="0 0 16 16">
                     <path d="M11 5.466V4H5a4 4 0 0 0-3.584 5.777.5.5 0 1 1-.896.446A5 5 0 0 1 5 3h6V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192Zm3.81.086a.5.5 0 0 1 .67.225A5 5 0 0 1 11 13H5v1.466a.25.25 0 0 1-.41.192l-2.36-1.966a.25.25 0 0 1 0-.384l2.36-1.966a.25.25 0 0 1 .41.192V12h6a4 4 0 0 0 3.585-5.777.5.5 0 0 1 .225-.67Z"/>
@@ -143,7 +145,7 @@
                     <path d="M13.5 6a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5M4.828 4.464a.5.5 0 0 1 .708 0l1.09 1.09a3.003 3.003 0 0 1 3.476 0l1.09-1.09a.5.5 0 1 1 .707.708l-1.09 1.09c.74 1.037.74 2.44 0 3.476l1.09 1.09a.5.5 0 1 1-.707.708l-1.09-1.09a3.002 3.002 0 0 1-3.476 0l-1.09 1.09a.5.5 0 1 1-.708-.708l1.09-1.09a3.003 3.003 0 0 1 0-3.476l-1.09-1.09a.5.5 0 0 1 0-.708zM6.95 6.586a2 2 0 1 0 2.828 2.828A2 2 0 0 0 6.95 6.586"/>
                   </svg> Fund Account</span>
                 </div>
-              </div>
+              </div> --}}
               <div class="header-right">
                 <div class="dark-light-toggle" onclick="themeToggle()">
                   <span class="dark"><i class="bi bi-moon"></i></span>
@@ -164,8 +166,9 @@
                             ><i class="bi bi-check"></i
                           ></span>
                           <div>
-                            <p>Account created successfully</p>
-                            <span>2020-11-04 12:00:23</span>
+                            <p>{{ $item->data['name'] }}</p>
+                            <span>{{ $item->data['msg'] }}</span>
+                            {{-- <span>2020-11-04 12:00:23</span> --}}
                           </div>
                         </div>
                       </a>
@@ -181,20 +184,35 @@
                 <div class="profile_log dropdown">
                   <div class="user" data-toggle="dropdown">
                     <span class="thumb"
-                      ><img width="100" style="border-radius:10%" src="{{ 'public/'.Storage::url(auth()->user()->profile_photo_path) }}" alt=""
-                    /></span>
+                      >
+                    @if (auth()->user()->profile_photo_path)
+                      @if ($route == 'profile.show' || $route == 'loan-details' || $route == 'loan-statement')
+                        <img width="100" style="border-radius:50%" src="{{ '../public/'.Storage::url(auth()->user()->profile_photo_path) }}" alt="">
+                      @else
+                        <img width="100" style="border-radius:50%" src="{{ 'public/'.Storage::url(auth()->user()->profile_photo_path) }}" alt="">
+                      @endif
+                    @else
+                      <img width="100" style="border-radius:50%" src="https://www.seekpng.com/png/detail/72-729756_how-to-add-a-new-user-to-your.png" alt=""
+                    @endif
+                    />
+                  
+                  </span>
                     <span class="arrow"><i class="icofont-angle-down"></i></span>
                   </div>
                   <div class="dropdown-menu dropdown-menu-right">
                     <div class="user-email">
                       <div class="user">
                         <span class="thumb">
-                          {{-- @dd(auth()->user()->profile_photo_path)
-                          @if (auth()->user()->profile_photo_path) --}}
-                            <img src="{{ 'public/'.Storage::url(auth()->user()->profile_photo_path) }}" alt=""/>
-                          {{-- @else
+                          
+                          @if (auth()->user()->profile_photo_path)
+                            @if ($route == 'profile.show' || $route == 'loan-details' || $route == 'loan-statement')
+                            <img style="border-radius:50%" src="{{ '../public/'.Storage::url(auth()->user()->profile_photo_path) }}" alt=""/>
+                            @else
+                            <img style="border-radius:50%" src="{{ 'public/'.Storage::url(auth()->user()->profile_photo_path) }}" alt=""/>
+                            @endif
+                          @else
                             <img src="https://www.seekpng.com/png/detail/72-729756_how-to-add-a-new-user-to-your.png" alt=""/>
-                          @endif --}}
+                          @endif
                           
                         </span>
                         <div class="user-info">
@@ -352,12 +370,15 @@
   <script>
     AOS.init();
     let status = '{{$status}}';
+    let router = '{{ $route }}';
+    alert(router);
+    let kyc = '{{$kyc}}';
     $('#sendDocModal').hide();
     $('#sendDocResponseText').hide();
     $('#sendDocResponseText2').hide();
     
     // alert(status);
-    if(status === '0'){
+    if(status === '1'){
       $(document).ready(function() {
           // Show overlay and modal when the page loads
           $("#overlay, #continue-loan-modal").show();
@@ -705,7 +726,7 @@ var currentUrl = window.location.href;
 var route = currentUrl.split('/').pop();
 
 // Check if the route starts with "dashboard"
-if (route.startsWith('dashboard') && status === '') {
+if (route.startsWith('dashboard') && kyc === '0' ) {
     // alert('Current route starts with "dashboard"');
     introJs().setOptions({
         steps: [{

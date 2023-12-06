@@ -71,8 +71,8 @@ class Application extends Model
         'personal_loan_type',
         'age',
         'is_zambian',
-        'nationality'
-
+        'nationality',
+        'continue'
     ];
     protected $appends = [
         'done_by',

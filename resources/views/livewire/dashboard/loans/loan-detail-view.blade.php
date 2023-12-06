@@ -182,7 +182,7 @@
                             Your loan request is unverified. Please hold on while we process your request
                         @endif
                     </p>
-                    <a href="#" class="btn btn-warning"> Update Profile</a>
+                    <a href="{{ route('profile.show') }}" class="btn btn-warning"> Update Profile</a>
                     @endif
                     @if ($loan->status == 1)
                     <p>
@@ -213,7 +213,7 @@
                     </div>
                     <div class="card-body">
                     <p>Refer your friends and earn 30% of their trading fees.</p>
-                    <a href="#" class="btn btn-primary"> Referral Program</a>
+                    <a @disabled(true) href="#" class="btn btn-primary"> Referral Program</a>
                     </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@
           <div class="row">
             <div class="col-xxl-12 col-xl-12">
               <div class="page-title">
-                <h4>Profile</h4>
+                <h4>Settings</h4>
               </div>
               <div class="card">
                 <div class="card-header">

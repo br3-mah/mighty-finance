@@ -74,12 +74,46 @@ trait UserTrait{
     }
 
     public function isKYCComplete(){
-        $data = Application::where('status', 0)->where('complete', 0)
-        ->where('user_id', auth()->user()->id)->get();
-        if($data->first() !== null){
-            if($data->first()->tpin_file !== 'no file' && $data->first()->payslip_file !== 'no file' && $data->first()->nrc_file !== NULL){
-                $data->complete = 1;
-                $data->save();
+        $loan = Application::where('status', 0)
+        ->where('complete', 0)
+        ->where('user_id', auth()->user()->id)
+        ->orderBy('created_at', 'desc')
+        ->get();
+        $user = User::where('id', auth()->user()->id)->with('uploads')->get()->toArray(); 
+        if($loan->first() !== null && !empty($user)){
+            if(!empty($user['phone']) && !empty($user['nrc_no']) && !empty($user['dob'])){
+                if(
+                    isset($user[0]['uploads'][0]) &&
+                    isset($user[0]['uploads'][1]) &&
+                    isset($user[0]['uploads'][2]) &&
+                    isset($user[0]['uploads'][3]) &&
+                    isset($user[0]['uploads'][4]) 
+                ){
+                    $loan->complete = 1;
+                    $loan->save();
+                }
+            }
+        }
+    }
+    public function isUserKYCComplete($id){
+        $loan = Application::where('status', 0)
+        ->where('complete', 0)
+        ->where('user_id', $id)
+        ->orderBy('created_at', 'desc')
+        ->get();
+        $user = User::where('id', $id)->with('uploads')->get()->toArray(); 
+        if($loan->first() !== null && !empty($user)){
+            if(!empty($user['phone']) && !empty($user['nrc_no']) && !empty($user['dob'])){
+                if(
+                    isset($user[0]['uploads'][0]) &&
+                    isset($user[0]['uploads'][1]) &&
+                    isset($user[0]['uploads'][2]) &&
+                    isset($user[0]['uploads'][3]) &&
+                    isset($user[0]['uploads'][4]) 
+                ){
+                    $loan->complete = 1;
+                    $loan->save();
+                }
             }
         }
     }

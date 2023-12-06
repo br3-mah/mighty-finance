@@ -83,6 +83,11 @@ transition: all 0.8s;
     box-shadow: 0 0 0 0.25rem rgb(55 197 20 / 25%);
 }
 
+.selected-card {
+    background-color: #ffd500; /* Light red background color */
+    border: 1px solid #ffd900; /* Red border color */
+}
+
 /* Input Field Style */
 /* General styling for all inputs */
 input {
@@ -206,7 +211,10 @@ input:focus {
                 <!-- container -->
                 <div class="container">
                 <!-- main content -->
-                <div class="main-content">
+                <form  action="{{ route("apply-loan") }}" method="POST" enctype="multipart/form-data" class="main-content">
+                    
+                    @csrf
+                    
                     <!-- alert box -->
                     <div class="row justify-content-center">
                     <div class="col-lg-7 col-md-8">
@@ -300,33 +308,36 @@ input:focus {
                         <p class="small pb-0">What is your reason for a loan?</p>
                         <!-- cards -->
                         <div class="row row-cols-2 row-cols-lg-3 g-4 pb-2 border-bottom">
-                        <div class="col">
-                            <div class="card text-center h-70 py-2">
-                            <i class="fas fa-users card-img-top mx-auto img-light fs-1"></i>
-                            <div class="card-body px-0">
-                                <h5 class="card-title title-binding">GRZ Loan</h5>
-                                <p class="card-text">Civil servant<br>based loan</p>
+                            <div class="col">
+                                <label onclick="selectCard(this)" class="card text-center h-70 py-2">
+                                    <input type="radio" name="loan_type" value="GRZ" class="d-none">
+                                    <i class="fas fa-users card-img-top mx-auto img-light fs-1"></i>
+                                    <div class="card-body px-0">
+                                        <h5 class="card-title title-binding">GRZ Loan</h5>
+                                        <p class="card-text">Civil servant<br>based loan</p>
+                                    </div>
+                                </label>
                             </div>
+                            <div class="col">
+                                <label onclick="selectCard(this)" class="card text-center h-70 py-2">
+                                    <input type="radio" name="loan_type" value="Business" class="d-none">
+                                    <i class="fas fa-briefcase card-img-top mx-auto img-light fs-1"></i>
+                                    <div class="card-body px-0">
+                                        <h5 class="card-title title-binding">Business Loan</h5>
+                                        <p class="card-text">For starting <br>a business</p>
+                                    </div>
+                                </label>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="card text-center h-70 py-2">
-                            <i class="fas fa-briefcase card-img-top mx-auto img-light fs-1"></i>
-                            <div class="card-body px-0">
-                                <h5 class="card-title title-binding">Business Loan</h5>
-                                <p class="card-text">For starting <br>a business</p>
+                            <div class="col">
+                                <label onclick="selectCard(this)" class="card text-center h-70 py-2">
+                                    <input type="radio" name="loan_type" value="SME" class="d-none">
+                                    <i class="fas fa-store card-img-top mx-auto img-light fs-1"></i>
+                                    <div class="card-body px-0 pt-4">
+                                        <h5 class="card-title title-binding">SME Loans</h5>
+                                        <p class="card-text">Small / Medium / Enterprise Loan</p>
+                                    </div>
+                                </label>
                             </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card text-center h-70 py-2">
-                            <i class="fas fa-store card-img-top mx-auto img-light fs-1"></i>
-                            <div class="card-body px-0 pt-4">
-                                <h5 class="card-title title-binding">SME Loans</h5>
-                                <p class="card-text">Small / Medium / Enterprise Loan</p>
-                            </div>
-                            </div>
-                        </div>
                         </div>
                         <!-- /cards -->
                         <!-- NEXT BUTTON-->
@@ -349,7 +360,7 @@ input:focus {
                                 <div class="range-slider_line">
                                 <div id="slider_line" class="range-slider_line-fill"></div>
                                 </div>
-                                <input id="slider_input" class="range-slider_input" type="range" value="2" min="0" max="100">
+                                <input id="slider_input" name="duration" class="range-slider_input" type="range" value="2" min="0" max="100">
                             </div>
                         </div>  
                         <div>
@@ -412,7 +423,7 @@ input:focus {
                         <div class="mb-5 pb-2">
                         <!-- Final step -->
                         <div class="alert alert-sm alert-primary text-center" role="alert">
-                            <h5 class="p-4">Please make sure to sign and upload the following documents.</h5>
+                            <h5 class="p-4">Please make sure to upload neccessary documents and complete the KYC.</h5>
                         </div>
                         {{-- <div class="form-check mt-3">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -424,12 +435,12 @@ input:focus {
                         </div>
                         <!-- NEXT BUTTON-->
                         <button type="button" class="btn btn-dark text-white float-start back rounded-3">Go Back</button>
-                        <button type="submit" class="btn text-white float-end submit-button rounded-3 bg-color-info">Finalize</button>
+                        <button type="submit" class="btn text-white float-end submit-button rounded-3 bg-color-info">Finish</button>
                         <!-- /NEXT BUTTON-->
                     </div>
                     <!-- /col -->
                     </div>
-                </div>
+                </form>
                 <!-- /main content -->
                 </div>
                 <!-- /container -->
@@ -454,6 +465,7 @@ input:focus {
                 click: function () {
                     // select any card
                     var getValue = $(this).parents(".row").find(".card").hasClass("active-card");
+                    // alert(getValue);
                     if (getValue) {
                         $("#progressBar").find(".active").next().addClass("active");
                         $("#alertBox").addClass("d-none");
@@ -505,26 +517,35 @@ input:focus {
             // Get the input element by its ID
             const amountInput = document.getElementById('amountInput');
 
-            // Add a query listener to the input element
+            // Add an input event listener to the input element
             amountInput.addEventListener('input', function() {
                 // Get the current value of the input
-                principal = amountInput.value;
+                var inputValue = amountInput.value;
 
-                // Log the value to the console (you can do any other processing with the value here)
-                console.log('Input Value:', principal);
+                // Remove non-numeric characters (letters, symbols, commas)
+                var numericValue = inputValue.replace(/[^0-9.]/g, '');
+
+                // Convert the numeric value to a float
+                principal = parseInt(numericValue);
+
+                // Log the cleaned and converted value to the console
+                console.log('Borrowing: ', principal);
+                $('#payback_value').text('Calculator');
+                $('#principal_value').text('Return 21% of your loan');
+                // Update a display element with the current value
+                $('#slider_value').text('');
             });
 
 
             // Use input event to track changes in the range input value
             $('#slider_input').on('input', function () {
-                // calculate repayment
 
                 // Get the current value of the range input
                 var sliderValue = $(this).val();
 
-                var my_returns = (parseFloat(principal) * 0.21) * parseInt(sliderValue) + parseFloat(principal);
+                var my_returns = (parseInt(principal) * 0.21) * parseInt(sliderValue) + parseInt(principal);
 
-                $('#payback_value').text( 'Payback amount of: K'+my_returns);
+                $('#payback_value').text( 'Payback amount of: K'+my_returns.toFixed(2));
                 $('#principal_value').text( 'Borrowing: K'+principal);
                 // Update a display element with the current value
                 $('#slider_value').text( 'Payback in '+sliderValue + ' Months');
@@ -550,8 +571,16 @@ input:focus {
         window.addEventListener("resize",showSliderValue);
         slider_input.addEventListener('input', showSliderValue, false);
 
+        function selectCard(selectedLabel) {
+            // Remove the 'selected-card' class from all labels
+            var labels = document.querySelectorAll('.card');
+            labels.forEach(function (label) {
+                label.classList.remove('selected-card');
+            });
 
-
+            // Add the 'selected-card' class to the clicked label
+            selectedLabel.classList.add('selected-card');
+        }
     </script>
     
 </div>
