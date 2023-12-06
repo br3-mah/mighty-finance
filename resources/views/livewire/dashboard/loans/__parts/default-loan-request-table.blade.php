@@ -1,15 +1,17 @@
+
+<script src="https://jsuites.net/v4/jsuites.js"></script>
 <table id="default_loan_list" wire:ignore.self class="table table-striped responsive-table">
   <thead>
     <tr>
       {{-- <th>Loan #.</th>
       <th>Borrower</th> --}}
       <th>Loan Type</th>
-      <th>Principal (K)</th>
+      <th>Principal</th>
       <th>Duration</th>
-      <th>Interest (K)</th>
-      <th>Due (K)</th>
-      <th>Paid (K)</th>
-      <th>Balance (K)</th>
+      <th>Interest</th>
+      <th>Due</th>
+      <th>Paid</th>
+      <th>Balance</th>
       {{-- <th>Due Date</th> --}}
       <th>Status</th>
       {{-- <th>DOA</th> --}}
@@ -20,18 +22,28 @@
     @forelse($requests as $loan)
     <tr>
       <td>{{ $loan->type }}</td>
-      <td>{{ $loan->amount }}</td>
+      <td class="money-format">
+        {{ number_format($loan->amount, 2, '.', ',') }}
+      </td>
       <td>
         {{ $loan->repayment_plan }} Months
       </td>
       <td class="coin-name">
-         {{ App\Models\Application::interest_amount($loan->amount, $loan->repayment_plan)}}
+        K {{ 
+            number_format(App\Models\Application::interest_amount($loan->amount, $loan->repayment_plan), 2, '.', ',')
+        }}
       </td>
       <td class="text-danger">
-        {{ App\Models\Application::payback($loan->amount, $loan->repayment_plan)}}
+        K {{ 
+            number_format(App\Models\Application::payback($loan->amount, $loan->repayment_plan), 2, '.', ',')
+        }}
       </td>
       <td>{{ App\Models\Loans::loan_settled($loan->id) ?? 0 }}</td>
-      <td><strong>{{ App\Models\Loans::loan_balance($loan->id) }}</strong></td>
+      <td>
+        <strong>K {{ 
+            number_format(App\Models\Loans::loan_balance($loan->id), 2, '.', ',')
+        }}</strong>
+      </td>
       {{-- <th>
         @if($loan->status == 1)
             @php 
