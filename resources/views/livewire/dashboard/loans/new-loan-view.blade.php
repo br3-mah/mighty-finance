@@ -228,7 +228,7 @@ input:focus {
                         <div class="alert alert-danger d-flex align-items-center mt-3 d-none mb-0" id="alertBox" role="alert">
                             <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                             <div>
-                                Por favor selecciona una accion!
+                                Please fill up all the neccessary fields
                             </div>
                         </div>
                     </div>

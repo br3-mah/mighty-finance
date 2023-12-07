@@ -14,6 +14,93 @@
   #checkNowBtn[disabled]:hover #disabledIcon {
     display: inline; /* Show the icon on hover when the button is disabled */
   }
+
+    /* ranger */
+  @import url("https://fonts.googleapis.com/css2?family=Creepster&family=Roboto:wght@700&display=swap");
+
+  /* .container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } */
+
+  .range-slider {
+    position: relative;
+    width: 80vmin;
+    height: 20vmin;
+  }
+
+  .range-slider_input {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    transform: translateY(-50%);
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    opacity: 0;
+    margin: 0;
+  }
+
+  .range-slider_input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    border-radius: 50%;
+    opacity: 0;
+  }
+
+  .range-slider_input::-moz-range-thumb {
+    width: 14vmin;
+    height: 14vmin;
+    cursor: pointer;
+    border-radius: 50%;
+    opacity: 0;
+  }
+
+  .range-slider_thumb {
+    width: 14vmin;
+    height: 14vmin;
+    border: 0.6vmin solid #662d91;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 4vmin;
+    color: #662d91;
+    z-index: 2;
+  }
+
+  .range-slider_line {
+    height: 0.5vmin;
+    width: 100%;
+    background-color: #e1e1e1;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    position: absolute;
+    z-index: 1;
+  }
+
+  .range-slider_line-fill {
+    position: absolute;
+    height: 0.5vmin;
+    width: 0;
+    background-color: #662d91;
+  }
+
+  
 </style>
 <div class="content-body">
     <div class="container-fluid">
@@ -401,22 +488,23 @@
                     name="myform"
                     class="currency_validate trade-form row g-3"
                   >
-                    <div class="col-12">
+                     <div class="col-12">
                       <label class="form-label">Principal</label>
                       <div class="input-group">
                         <select class="form-select" name="method">
                           <option value="ZMW">ZMW</option>
-                          {{-- <option value="master">Euro</option> --}}
+                          <option value="master">Euro</option>
                         </select>
                         <input
                           type="text"
                           name="currency_amount"
                           class="form-control"
                           placeholder="0.00"
+                          id="amountInput"
                         />
                       </div>
                     </div>
-
+                    {{--
                     <div class="col-12">
                       <label class="form-label">Duration</label>
                       <div class="input-group">
@@ -431,14 +519,14 @@
                           placeholder="2"
                         />
                       </div>
-                    </div>
+                    </div> --}}
 
                     {{-- <p class="mb-0">
                       1 USD ~ 0.000088 BTC
                       <a href="#">Expected rate <br />No extra fees</a>
                     </p> --}}
 
-                    <button
+                    {{-- <button
                       type="submit"
                       name="submit"
                       class="btn btn-block"
@@ -447,7 +535,23 @@
                     >
                     <span>Check Now</span>
                     <span class="icon" id="disabledIcon">&#128683;</span>
-                    </button>
+                    </button> --}}
+
+                    <div>
+                        <div class="range-slider">
+                            <div id="slider_thumb" class="range-slider_thumb"></div>
+                            <div class="range-slider_line">
+                            <div id="slider_line" class="range-slider_line-fill"></div>
+                            </div>
+                            <input id="slider_input" name="duration" class="range-slider_input" type="range" value="2" min="0" max="100">
+                        </div>
+                    </div>  
+                    <div>
+                        <p id="slider_value2">2 Months</p>
+                        <p id="interest_value2">Interest Rate: 21%</p>
+                        <p id="principal_value2"></p>
+                        <p style="padding: 2%; background-color:#662d91" class="bg-[#662d91] text-white" id="payback_value">Calculator</p>
+                    </div>
                   </form>
                 </div>
               </div>
@@ -535,7 +639,7 @@
                   </div>
                 </div>
               </div>
-            <!-- <div class="col-xxl-12 col-xl-6 col-lg-12">
+              <!-- <div class="col-xxl-12 col-xl-6 col-lg-12">
                   <div class="card">
                       <div class="card-body">
                           <div class="invite-content">
@@ -556,6 +660,67 @@
       </div>
     </div>
   </div>
+
+  <script>
+    
+    $(document).ready(function () {
+
+      // Get the input element by its ID
+      const amountInput = document.getElementById('amountInput');
+
+      // Add an input event listener to the input element
+      amountInput.addEventListener('input', function() {
+          // Get the current value of the input
+          var inputValue = amountInput.value;
+
+          // Remove non-numeric characters (letters, symbols, commas)
+          var numericValue = inputValue.replace(/[^0-9.]/g, '');
+
+          // Convert the numeric value to a float
+          principal = parseInt(numericValue);
+
+          // Log the cleaned and converted value to the console
+          console.log('Borrowing: ', principal);
+          $('#payback_value').text('Calculator');
+          $('#principal_value').text('Return 21% of your loan');
+          // Update a display element with the current value
+          $('#slider_value').text('');
+      });
+
+
+      // Use input event to track changes in the range input value
+      $('#slider_input').on('input', function () {
+
+          // Get the current value of the range input
+          var sliderValue = $(this).val();
+
+          var my_returns = (parseInt(principal) * 0.21) * parseInt(sliderValue) + parseInt(principal);
+
+          $('#payback_value').text( 'Payback amount of: K'+my_returns.toFixed(2));
+          $('#principal_value').text( 'Borrowing: K'+principal);
+          // Update a display element with the current value
+          $('#slider_value').text( 'Payback in '+sliderValue + ' Months');
+      });
+    }); 
+
+    const slider_input = document.getElementById('slider_input'),
+        slider_thumb = document.getElementById('slider_thumb'),
+        slider_line = document.getElementById('slider_line');
+
+    function showSliderValue() {
+        slider_thumb.innerHTML = slider_input.value;
+        const bulletPosition = (slider_input.value /slider_input.max),
+                space = slider_input.offsetWidth - slider_thumb.offsetWidth;
+
+        slider_thumb.style.left = (bulletPosition * space) + 'px';
+        slider_line.style.width = slider_input.value + '%';
+    }
+
+    showSliderValue();
+    window.addEventListener("resize",showSliderValue);
+    slider_input.addEventListener('input', showSliderValue, false);
+
+  </script>
 
 
 
