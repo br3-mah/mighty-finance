@@ -489,18 +489,19 @@
                     class="currency_validate trade-form row g-3"
                   >
                      <div class="col-12">
-                      <label class="form-label">Principal</label>
+                      <label class="form-label">Principal (ZMW)</label>
                       <div class="input-group">
-                        <select class="form-select" name="method">
+                        {{-- <select class="form-select" name="method">
                           <option value="ZMW">ZMW</option>
                           <option value="master">Euro</option>
-                        </select>
+                        </select> --}}
                         <input
                           type="text"
                           name="currency_amount"
                           class="form-control"
                           placeholder="0.00"
                           id="amountInput"
+                          contentEditable='true' data-mask='K #,##0.00'
                         />
                       </div>
                     </div>
