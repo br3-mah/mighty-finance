@@ -1,11 +1,11 @@
 <div style="width: 100%" class="w-full">
 
 
-    <div name="form" >
+    <div>
         <!-- Profile Photo -->
         <div class="row">
             <div class="col-xxl-6 col-xl-6 col-lg-6">
-                <div class="card">
+                <div class="">
                     <form action="{{ route('update-prof-pic') }}" method="POST" class="row g-3" enctype="multipart/form-data">
                         @csrf
                        
@@ -71,13 +71,15 @@
             </div>
             
         </div>
-  
+
+        <div class="mt-4">
+            <h4 class="card-title">Personal Information</h4>
+        </div>
+        <hr>
         <div class="col-xxl-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Personal Information</h4>
-                </div>
-                <div class="card-body">
+            <div class="">
+               
+                <div class="">
                  
                     <form action="{{ route('update-profile') }}" method="POST" class="row g-4">
                         @csrf
