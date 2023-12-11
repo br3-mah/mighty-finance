@@ -68,9 +68,9 @@
                 <div id="twoFactor" class="">
                   <div class="row">
                     <div class="col-xxl-12 col-xl-12 col-lg-12">
-                      {{-- @if (Laravel\Fortify\Features::canUpdateProfileInformation()) --}}
+                      @if (Laravel\Fortify\Features::canUpdateProfileInformation())
                           @livewire('profile.update-password-form')
-                        {{-- @endif --}}
+                        @endif
                     </div>
                     <div class="col-xxl-12 col-xl-12 col-lg-12">
                         @if (Laravel\Fortify\Features::canUpdateProfileInformation())

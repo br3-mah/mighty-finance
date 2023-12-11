@@ -1,5 +1,5 @@
-<x-jet-form-section class="card profile-card card-bx pt-4" submit="updatePassword">
-    <div class="card-header">
+<x-jet-form-section class="profile-card card-bx pt-4" submit="updatePassword">
+    <div class="">
         <x-slot name="title">
             {{ __('Update Password') }}
         </x-slot>
