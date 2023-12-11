@@ -36,6 +36,7 @@ use App\Http\Livewire\Dashboard\Loans\UpdateLoanView;
 use App\Http\Livewire\Dashboard\NotificationView;
 use App\Http\Livewire\Dashboard\SearchEngineView;
 use App\Http\Livewire\Dashboard\Settings\LoanWalletView;
+use App\Http\Livewire\Dashboard\Settings\SettingsLanding;
 use App\Http\Livewire\Dashboard\Settings\UserRolesView;
 use App\Http\Livewire\Dashboard\Settings\UserView;
 use App\Http\Livewire\Dashboard\Settings\CareerSettings;
@@ -139,6 +140,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('/update-user', [UserController::class, 'update'])->name('update-user');
     Route::get('notifications', NotificationView::class)->name('notifications');
     Route::get('user-roles-and-permissions', UserRolesView::class)->name('roles');
+    Route::get('settings', SettingsLanding::class)->name('settings');
 
     // ------ KYC Profile
     Route::get('kyc-profile', KYCView::class)->name('kyc');

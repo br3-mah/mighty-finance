@@ -240,7 +240,7 @@
                     {{-- <a href="{{ route('loan-wallet') }}" class="dropdown-item">
                       <i class="bi bi-wallet"></i>Wallet
                     </a> --}}
-                    <a href="{{ route('profile.show') }}" class="dropdown-item">
+                    <a href="{{ route('settings') }}" class="dropdown-item">
                       <i class="bi bi-gear"></i> Setting
                     </a>
                     {{-- <a href="settings-activity.html" class="dropdown-item">
@@ -314,7 +314,7 @@
             <li>
                 <a
                 class="setting_"
-                href="{{ route('profile.show') }}"
+                href="{{ route('settings') }}"
                 data-toggle="tooltip"
                 data-placement="right"
                 title="Settings"
