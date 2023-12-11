@@ -9,7 +9,8 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/web/images/favicon.png') }}">
     <link href="{{ asset('public/theme/css/style.css') }}" rel="stylesheet">
-
+    <script src="https://jsuites.net/v4/jsuites.js"></script>
+    <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
     <style>
         body {
             margin: 0;
@@ -55,16 +56,32 @@
             margin-bottom: 5px;
         }
 
+        
         @media (max-width: 767px) {
             .authincation-content {
                 margin: 0px;
                 width: 100%;
             }
         }
+        .float-alert-bar {
+            position: absolute;
+            padding: 15px;
+            width: 100%;
+            background-color: #dc3545; /* Choose a background color that suits your design */
+            color: #fff; /* Text color */
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 99999; /* Ensure it appears above other elements */
+            display: block; /* Hide it by default */
+        }
+
+
+
     </style>
 </head>
 
 <body class="h-100">
+    <x-jet-validation-errors class="mb-4 text-xs float-alert-bar" style="color:rgb(255, 255, 255)" />
     <div id="background-container"></div>
     <div class="authincation h-100">
         <div class="container h-100">
@@ -80,7 +97,8 @@
                                         </a>
                                     </div>
                                     <h4 class="text-center text-white mb-4">Create your account</h4>
-                                    <x-jet-validation-errors class="mb-4" style="color:red" />
+                                    
+                               
 
                                     <form method="POST" class="text-white" action="{{ route('register') }}">
                                         @csrf
@@ -124,7 +142,6 @@
 										</div>
                                         <p>Already have an account? <a class="text-warning" href="{{ route('login') }}">Sign in</a></p>
 										@endif
-
                                     </form>
                                 </div>
                             </div>
@@ -143,5 +160,6 @@
     <script src="{{ asset('public/theme/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('public/theme/js/custom.min.js') }}"></script>
     <script src="{{ asset('public/theme/js/deznav-init.js') }}"></script>
+
 </body>
 </html>
