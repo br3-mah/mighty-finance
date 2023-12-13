@@ -7,6 +7,13 @@
     
           // Use the $view variable as needed
           $view = htmlspecialchars($param);
+      }
+      if (isset($_GET['loan'])) {
+          // Retrieve the value of the 'view' parameter
+          $param2 = $_GET['loan'];
+    
+          // Use the $view variable as needed
+          $loan_id = htmlspecialchars($param2);
       } 
       @endphp
         <div class="content-body">
@@ -86,11 +93,17 @@
                     </div>
     
                     <div id="docUploads" class="">
-                      <div class="row">
-                        @include('livewire.dashboard.__parts.p-invest')
+                        <div class="row">
+                          @include('livewire.dashboard.__parts.p-invest')
+                          </div>
                         </div>
                       </div>
-                    </div>
+                      <div id="payback" class="">
+                        <div class="row">
+                          @include('livewire.dashboard.__parts.p-repay-loan')
+                          </div>
+                        </div>
+                      </div>
     
     
                   </div>
@@ -105,48 +118,61 @@
               var view = '{{$view}}';
               switch (view) {
                 case 'bills':
-                  profileTab();
-                  break;
+                    profileTab();
+                    break;
                 case 'invest':
-                  docUplaodsTab()
-                  break;
+                    docUplaodsTab()
+                    break;
                 case 'deposit':
-                  
-                  securityTab();
-                  break;
+                    securityTab();
+                    break;
                 case 'withdraw':
-                  activityTab();
-                  break;
-              
+                    activityTab();
+                    break;
+                case 'payback':
+                    paybackTab();
+                    break;
+                
                 default:
-                  profileTab();
-                  break;
-              }
-    
-              function profileTab() {
-                document.getElementById('updateProfile').style.display = "block";
-                document.getElementById('twoFactor').style.display = "none";
-                document.getElementById('browserSession').style.display = "none";
-                document.getElementById('docUploads').style.display = "none";
-              }
-              function activityTab() {
-                document.getElementById('updateProfile').style.display = "none";
-                document.getElementById('twoFactor').style.display = "none";
-                document.getElementById('browserSession').style.display = "block";
-                document.getElementById('docUploads').style.display = "none";
-              }
-              function securityTab() {
-                document.getElementById('updateProfile').style.display = "none";
-                document.getElementById('twoFactor').style.display = "block";
-                document.getElementById('browserSession').style.display = "none";
-                document.getElementById('docUploads').style.display = "none";
-              }
-              function docUplaodsTab() {
-                document.getElementById('updateProfile').style.display = "none";
-                document.getElementById('twoFactor').style.display = "none";
-                document.getElementById('browserSession').style.display = "none";
-                document.getElementById('docUploads').style.display = "block";
-              }
+                    profileTab();
+                    break;
+            }
+
+            function profileTab() {
+            document.getElementById('updateProfile').style.display = "block";
+            document.getElementById('twoFactor').style.display = "none";
+            document.getElementById('browserSession').style.display = "none";
+            document.getElementById('docUploads').style.display = "none";
+            document.getElementById('payback').style.display = "none";
+            }
+            function activityTab() {
+            document.getElementById('updateProfile').style.display = "none";
+            document.getElementById('twoFactor').style.display = "none";
+            document.getElementById('browserSession').style.display = "block";
+            document.getElementById('docUploads').style.display = "none";
+            document.getElementById('payback').style.display = "none";
+            }
+            function securityTab() {
+            document.getElementById('updateProfile').style.display = "none";
+            document.getElementById('twoFactor').style.display = "block";
+            document.getElementById('browserSession').style.display = "none";
+            document.getElementById('docUploads').style.display = "none";
+            document.getElementById('payback').style.display = "none";
+            }
+            function docUplaodsTab() {
+            document.getElementById('updateProfile').style.display = "none";
+            document.getElementById('twoFactor').style.display = "none";
+            document.getElementById('browserSession').style.display = "none";
+            document.getElementById('docUploads').style.display = "block";
+            document.getElementById('payback').style.display = "none";
+            }
+            function paybackTab() {
+            document.getElementById('updateProfile').style.display = "none";
+            document.getElementById('twoFactor').style.display = "none";
+            document.getElementById('browserSession').style.display = "none";
+            document.getElementById('docUploads').style.display = "none";
+            document.getElementById('payback').style.display = "block";
+            }
           </script>
           <script src="{{ asset('public/mfs/vendor/jquery/jquery.min.js')}}"></script>
           <script src="{{ asset('public/mfs/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>

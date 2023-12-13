@@ -1,7 +1,7 @@
 @if ($my_loan !== null)
     <h5><b style="color: rgb(90, 80, 99)">Current Loan</b></h5>
     <div class="col-xxl-4 col-xl-12 ">
-        <a title="See more details" href="{{ route('loan-details', ['id' => $my_loan->id]) }}">
+        <a title="Payback loan" href="{{ route('payment.gate', ['view' => 'payback', 'loan'=>$my_loan->id]) }}">
             <div class="card" style="background-color: rgb(255, 208, 0)">
                 <div class="card-body">
                     <div class="row">
@@ -53,6 +53,7 @@
                             </small>
                         </div>
                         <div class="col-xl-3 col-lg-3">
+                            
                             <div class="card">
                                 <button class="btn btn-light text-primary p-4"
                                     style="box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;">
