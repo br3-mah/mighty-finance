@@ -266,7 +266,7 @@
       </div>
     </div>
 
-    <div class="sidebar" style="background-image: linear-gradient(to right, #662d91, #662d91); color:#fff">
+    <div class="sidebar" style="background-image: linear-gradient(to right, #662d91, #662d91); color:#fff; width:8%" >
         <div class="brand-logo">
             <a href="{{ route('dashboard') }}">
                 <img src="{{ asset('public/web/images/01-ft-logo.png')}}" alt="" width="80" /> 
