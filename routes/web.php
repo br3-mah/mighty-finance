@@ -132,7 +132,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     // ---- Accounts
     Route::get('client-account', AccountView::class)->name('client-account');
     Route::get('loan-statements', LoanStatementView::class)->name('loan-statements');
-    Route::get('loan-wallet-account', LoanWalletView::class)->name('loan-wallet');
+    Route::get('my-wallet-account', LoanWalletView::class)->name('loan-wallet');
     Route::get('transactions', MakePaymentView::class)->name('make-payment');
 
     // ----- Reports

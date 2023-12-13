@@ -31,12 +31,12 @@
                         <img width="20" class="inline-flex -mt-9 w-[72px] h-[72px] fill-current rounded-full border-4 border-white box-content shadow mb-3" src="{{ asset('public/mfs/images/j.png') }}">
                         
                         <!-- Card name -->
-                        <h3 class="text-xl font-bold text-gray-900 mb-1">Invoice from Acme Inc.</h3>
-                        <div class="text-sm font-medium text-gray-500">Invoice #00224</div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-1">Withdraw Funds.</h3>
+                        <div class="text-sm font-medium text-gray-500">WFN #00224</div>
                     </header>
                     <!-- Card body -->
                     <div class="bg-gray-100 text-center px-5 py-6">
-                        <div class="text-sm mb-6"><strong class="font-semibold">$2.700</strong> due Jan 27, 2022</div>
+                        <div class="text-sm mb-6"><strong class="font-semibold">K2,000.00</strong></div>
                         <form class="space-y-3">
                             <div class="flex shadow-sm rounded">
                                 <div class="flex-grow">

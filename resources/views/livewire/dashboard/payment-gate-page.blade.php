@@ -31,9 +31,12 @@
                         @case('invest')
                             <h4>Invest Funds</h4>
                             @break
-                        @case('issue')
-                            <h4>Support (Report Issue)</h4>
-                            @break
+                            @case('issue')
+                                <h4>Support (Report Issue)</h4>
+                                @break
+                                @case('withdraw')
+                                    <h4>Withdraw Funds</h4>
+                                    @break
                         @default
                           <h4>Profile</h4>
                           @break
@@ -58,9 +61,7 @@
                     <div id="updateProfile" class="">
                       <div class="row">
                         <div class="col-xxl-12 col-xl-12 col-lg-12">
-                            @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                                @include('livewire.dashboard.__parts.ppaybills')
-                            @endif
+                            @include('livewire.dashboard.__parts.ppaybills')
                         </div>
                       </div>
                     </div>
@@ -79,14 +80,7 @@
                     <div id="browserSession" class="">
                       <div class="row">
                         <div class="col-xxl-12 col-xl-12 col-lg-12">
-                            @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                                @livewire('profile.update-password-form')
-                            @endif
-                        </div>
-                        <div class="col-xxl-12 col-xl-12 col-lg-12">
-                            @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                                @livewire('profile.logout-other-browser-sessions-form')
-                            @endif
+                            @include('livewire.dashboard.__parts.pwithdraw')
                         </div>
                       </div>
                     </div>
