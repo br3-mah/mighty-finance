@@ -194,7 +194,7 @@
                         <img width="100" style="border-radius:50%" src="{{ 'public/'.Storage::url(auth()->user()->profile_photo_path) }}" alt="">
                       @endif
                     @else
-                      <img width="100" style="border-radius:50%" src="https://www.seekpng.com/png/detail/72-729756_how-to-add-a-new-user-to-your.png" alt=""
+                      <img width="100" style="border-radius:50%" src="https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg" alt=""
                     @endif
                     />
                   
@@ -213,7 +213,7 @@
                             <img style="border-radius:50%" src="{{ 'public/'.Storage::url(auth()->user()->profile_photo_path) }}" alt=""/>
                             @endif
                           @else
-                            <img src="https://www.seekpng.com/png/detail/72-729756_how-to-add-a-new-user-to-your.png" alt=""/>
+                            <img src="https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg" alt=""/>
                           @endif
                           
                         </span>
@@ -732,19 +732,19 @@ var currentUrl = window.location.href;
 var route = currentUrl.split('/').pop();
 
 // Check if the route starts with "dashboard"
-if (route.startsWith('dashboard') && kyc === '0' ) {
-    // alert('Current route starts with "dashboard"');
-    introJs().setOptions({
-        steps: [{
-            element: document.querySelector('.tour-kyc-1'),
-            intro: "Click here to complete your KYC profile information!",
-            position: 'left'
-        }]
-    }).start();
-    introJs().addHints();
-} else {
-    // alert('Current route does not start with "dashboard"');
-}
+// if (route.startsWith('dashboard') && kyc === '0' ) {
+//     // alert('Current route starts with "dashboard"');
+//     introJs().setOptions({
+//         steps: [{
+//             element: document.querySelector('.tour-kyc-1'),
+//             intro: "Click here to complete your KYC profile information!",
+//             position: 'left'
+//         }]
+//     }).start();
+//     introJs().addHints();
+// } else {
+//     // alert('Current route does not start with "dashboard"');
+// }
 </script>
 
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>

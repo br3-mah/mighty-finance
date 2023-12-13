@@ -6,7 +6,7 @@
             <div class="modal-header">
                 <h5 class="modal-title text-center ">Loan Application Form</h5>
 
-                <span style="cursor:pointer" onclick="closeModal()">x</span>
+                {{-- <span style="cursor:pointer" onclick="closeModal()">x</span> --}}
             </div>
             <div class="modal-body row">
                 <div class="col-xxl-3 col-xl-3 col-lg-3 container">
@@ -29,11 +29,11 @@
                             <div class="row mb-4">
                                 <div class="col-md-6">
                                     <label for="dob">D.O.B</label>
-                                    <input type="date" class="form-control" id="dob" name="dob">
+                                    <input value="{{auth()->user()->dob}}" type="date" class="form-control" id="dob" name="dob">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="nrc">NRC NUMBER</label>
-                                    <input type="text" class="form-control" id="nrc" name="nrc">
+                                    <input value="{{auth()->user()->nrc_no ?? auth()->user()->nrc}}" type="text" class="form-control" id="nrc" name="nrc">
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -61,7 +61,7 @@
                             <div class="row mb-4">
                                 <div class="form-group col-md-6">
                                     <label for="jobTitle">JOB TITLE</label>
-                                    <input type="text" class="form-control" id="jobTitle" name="jobTitle">
+                                    <input  type="text" class="form-control" id="jobTitle" name="jobTitle">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="ministry">MINISTRY</label>

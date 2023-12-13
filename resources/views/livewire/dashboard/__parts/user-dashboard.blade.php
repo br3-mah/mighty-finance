@@ -141,10 +141,21 @@
         <div class="row" style="">
             <div class="col-xl-12">
                 <div class="page-title-content">
-                    <p>
-                    Welcome Back,
-                    <strong class="text-primary"> {{ auth()->user()->fname.' '.auth()->user()->lname }}!</strong>
-                    </p>
+
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @elseif(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                    @else
+                      <p>
+                        Welcome Back,
+                        <strong class="text-primary"> {{ auth()->user()->fname.' '.auth()->user()->lname }}!</strong>
+                      </p>
+                    @endif
                 </div>
             </div>
         </div>

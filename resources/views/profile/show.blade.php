@@ -7,10 +7,7 @@
 
       // Use the $view variable as needed
       $view = htmlspecialchars($param);
-  } else {
-      // If 'view' parameter is not set in the URL
-      echo "The 'view' parameter is not set.";
-  }
+  } 
   @endphp
     <div class="content-body">
         <div class="container">
@@ -38,6 +35,8 @@
                         <h4>Support (Report Issue)</h4>
                         @break
                     @default
+                      <h4>Profile</h4>
+                      @break
                         
                 @endswitch
               </div>
@@ -70,7 +69,7 @@
                     <div class="col-xxl-12 col-xl-12 col-lg-12">
                       @if (Laravel\Fortify\Features::canUpdateProfileInformation())
                           @livewire('profile.update-password-form')
-                        @endif
+                      @endif
                     </div>
                     <div class="col-xxl-12 col-xl-12 col-lg-12">
                         @if (Laravel\Fortify\Features::canUpdateProfileInformation())
@@ -96,59 +95,7 @@
 
                 <div id="docUploads" class="">
                   <div class="row">
-                    <div class="col-xxl-12 col-xl-12 col-lg-12">
-                      <div id="fileUploadSection" class="profile-card card-bx m-b30 p-4">
-                        <form action="{{ route("update-file-uploads") }}" method="POST" enctype="multipart/form-data">
-                            @csrf 
-                            <div class="row pt-4">
-                                <div class="col-xl-6">
-                                    <div class="form-group">
-                                        <div class="input-box">
-                                            <div class="mb-3">
-                                                <label for="formFile" class="form-label">Copy of NRC</label>
-                                                <input class="form-control" name="nrc_file" type="file" id="formFile">
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6">
-                                    <div class="form-group">
-                                        <div class="input-box">
-                                            <div class="mb-3">
-                                                <label for="formFile" class="form-label">Business Profile</label>
-                                                <input class="form-control" name="business_file" type="file" id="formFile">
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6">
-                                    <div class="form-group">
-                                        <div class="input-box">
-                                            <div class="mb-3">
-                                                <label for="payslip_file" class="form-label">Payslip</label>
-                                                <input class="form-control" name="payslip_file" type="file" id="payslip_file">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6">
-                                    <div class="form-group">
-                                        <div class="input-box">
-                                            <div class="mb-3">
-                                                <label for="tpin_file" class="form-label">Tpin</label>
-                                                <input class="form-control" name="tpin_file" type="file" id="tpin_file">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <button class="btn btn-primary">Upload</button>
-                            </div>
-                        </form>
-                    </div>
+                    @include('profile.kyc-update')
                     </div>
                   </div>
                 </div>
@@ -160,6 +107,9 @@
         </div>
       </div>
       <script>
+        
+          document.getElementById('twoFactor').style.display = "none";
+          document.getElementById('browserSession').style.display = "none";
           var view = '{{$view}}';
           switch (view) {
             case 'profile':
@@ -169,6 +119,7 @@
               docUplaodsTab()
               break;
             case 'privacy-security':
+              
               securityTab();
               break;
             case 'issue':
@@ -180,8 +131,6 @@
               break;
           }
 
-          document.getElementById('twoFactor').style.display = "none";
-          document.getElementById('browserSession').style.display = "none";
           function profileTab() {
             document.getElementById('updateProfile').style.display = "block";
             document.getElementById('twoFactor').style.display = "none";

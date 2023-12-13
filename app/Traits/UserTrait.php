@@ -9,6 +9,7 @@ use App\Models\References;
 use App\Models\User;
 use App\Models\Wallet;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Collection;
 
 
 trait UserTrait{
@@ -81,16 +82,16 @@ trait UserTrait{
         ->get();
         $user = User::where('id', auth()->user()->id)->with('uploads')->get()->toArray(); 
         if($loan->first() !== null && !empty($user)){
-            if(!empty($user['phone']) && !empty($user['nrc_no']) && !empty($user['dob'])){
+            if(!empty($user[0]['phone']) && !empty($user[0]['nrc_no']) && !empty($user[0]['dob'])){
+                $files = collect($user[0]['uploads']);
                 if(
-                    isset($user[0]['uploads'][0]) &&
-                    isset($user[0]['uploads'][1]) &&
-                    isset($user[0]['uploads'][2]) &&
-                    isset($user[0]['uploads'][3]) &&
-                    isset($user[0]['uploads'][4]) 
+                    $files->contains('name', 'nrc_file') &&
+                    $files->contains('name', 'tpin_file')
                 ){
-                    $loan->complete = 1;
-                    $loan->save();
+                    Application::where('status', 0)
+                    ->where('complete', 0)
+                    ->where('user_id',auth()->user()->id)
+                    ->update(['complete' => 1]);
                 }
             }
         }

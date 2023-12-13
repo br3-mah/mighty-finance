@@ -20,7 +20,7 @@ class LoanRequestView extends Component
     public $loan_requests, $loan_request, $new_loan_user, $user_basic_pay, $user_net_pay;
     public $type = [];
     public $status = [];
-    public $view = 'table';
+    public $view = 'list';
     public $users, $due_date;
 
     public function render()

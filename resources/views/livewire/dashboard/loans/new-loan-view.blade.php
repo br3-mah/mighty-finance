@@ -237,7 +237,7 @@ input:focus {
                     <!-- row -->
                     <div class="row justify-content-center pt-0 p-4" id="wizardRow">
                     <!-- col -->
-                    <div class="col-md-10 text-center">
+                    <div class="col-md-12 text-center">
                         <!-- wizard -->
                         <div class="wizard-form py-4 my-2">
                         <!-- ul -->

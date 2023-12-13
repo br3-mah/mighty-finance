@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class="card">
+                <div class="">
                     <div class="card-header">
                         <h4 class="card-title">View All Loans</h4>
                         
@@ -98,6 +98,9 @@
                             @include('livewire.dashboard.__parts.dash-alerts')
                             
                             <div id="loans_table_print_view">
+                                @if($view === 'list')
+                                    @include('livewire.dashboard.loans.__parts.list-loan-request')
+                                @endif
                                 @if($view === 'table')
                                     @include('livewire.dashboard.loans.__parts.default-loan-request-table')
                                 @endif

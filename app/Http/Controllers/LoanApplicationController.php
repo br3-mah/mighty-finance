@@ -183,7 +183,6 @@ class LoanApplicationController extends Controller
         try {
             $user = Application::where('user_id',auth()->user()->id)->where('status', 0)->where('complete', 0)->first();
 
-            dd($user);
             if($request->file('nrc_file') !== null){
                 $nrc_file = $request->file('nrc_file')->store('nrc_file', 'public'); 
                 $user->nrc_file = $nrc_file;
@@ -212,6 +211,34 @@ class LoanApplicationController extends Controller
             return redirect()->to('/user/profile');
         }
 
+    }
+
+    public function updateKYCFiles(Request $request){
+        try {
+            // First Upload the files
+            $this->uploadCommonFiles($request);
+
+            // Personal Info
+            $input = $request->toArray();
+            $user = auth()->user();
+            $user->fname = $input['fname'];
+            $user->lname = $input['lname'];
+            $user->phone = $input['phone'];
+            // $user->email = $input['email'];
+            $user->address = $input['address'];
+            $user->occupation = $input['occupation'];
+            $user->id_type = $input['id_type'];
+            $user->nrc_no = $input['nrc_no'];
+            $user->nrc = $input['nrc_no'];
+            $user->dob = $input['dob'];
+            $user->gender = $input['gender'];
+            $user->save();
+
+            $this->isKYCComplete();
+            return redirect()->route('dashboard')->with('success', 'KYC Updated successfully');
+        } catch (\Throwable $th) {
+            return redirect()->route('dashboard')->with('success', 'KYC Update failed');
+        }
     }
 
     /**
