@@ -237,9 +237,9 @@
                     <a href="{{ route('my-profile', ['view' => 'profile']) }}" class="dropdown-item">
                       <i class="bi bi-person"></i>Profile
                     </a>
-                    {{-- <a href="{{ route('loan-wallet') }}" class="dropdown-item">
-                      <i class="bi bi-wallet"></i>Wallet
-                    </a> --}}
+                    <a href="{{ route('payments') }}" class="dropdown-item">
+                      <i class="bi bi-wallet"></i>Payments
+                    </a>
                     <a href="{{ route('settings') }}" class="dropdown-item">
                       <i class="bi bi-gear"></i> Setting
                     </a>

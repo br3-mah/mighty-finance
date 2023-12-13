@@ -34,6 +34,7 @@ use App\Http\Livewire\Dashboard\Loans\NewLoanView;
 use App\Http\Livewire\Dashboard\Loans\PastMaturityDateView;
 use App\Http\Livewire\Dashboard\Loans\UpdateLoanView;
 use App\Http\Livewire\Dashboard\NotificationView;
+use App\Http\Livewire\Dashboard\PaymentPage;
 use App\Http\Livewire\Dashboard\SearchEngineView;
 use App\Http\Livewire\Dashboard\Settings\LoanWalletView;
 use App\Http\Livewire\Dashboard\Settings\SettingsLanding;
@@ -118,6 +119,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('apply-proxy-loan', [LoanApplicationController::class, 'new_proxy_loan'])->name('proxy-apply-loan');
     Route::post('update-loan', [LoanApplicationController::class, 'updateLoanDetails'])->name('update-loan-details');
     
+    // ---- Payments
+    Route::get('make-payments', PaymentPage::class)->name('payments');    
+
+
     // ---- Employees
     Route::get('view-employees', EmployeesView::class)->name('employees');
 
