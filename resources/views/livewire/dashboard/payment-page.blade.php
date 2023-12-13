@@ -8,7 +8,7 @@
             <div class="col-12">
                 <div class="">
                     <div class="card-header">
-                        <h4 class="card-title">Settings </h4>                
+                        <h4 class="card-title">Make Payments </h4>                
                         {{-- <button/ data-toggle="modal" data-target="#newloanpackage" class="btn btn-square btn-primary">New Loan Package</button> --}}
                     </div>
                     <div class="card-body">
