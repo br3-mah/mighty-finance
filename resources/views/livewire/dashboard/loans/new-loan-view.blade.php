@@ -201,6 +201,12 @@ input:focus {
 	width: 0;
 	background-color: #662d91;
 }
+
+.disabled-card {
+    opacity: 0.5; /* Adjust the opacity as needed */
+    pointer-events: none; /* Disable pointer events */
+    cursor: not-allowed; /* Set the cursor to "not-allowed" */
+}
 </style>
 <div class="content-body">
         <div class="">
@@ -235,7 +241,7 @@ input:focus {
                     </div>
                     <!-- alert box -->
                     <!-- row -->
-                    <div class="row justify-content-center pt-0 p-4" id="wizardRow">
+                    <div class="row justify-content-center pt-0 p-2" id="wizardRow">
                     <!-- col -->
                     <div class="col-md-12 text-center">
                         <!-- wizard -->
@@ -265,7 +271,7 @@ input:focus {
                     <!-- row -->
                     <div class="row justify-content-center" id="cardSection">
                     <!-- col -->
-                    <div class="col-lg-7 col-md-8">
+                    <div class="col-lg-9 col-md-9" style="padding: 3%">
                         <h3 class="fw-bold pt-2">Loan Details</h3>
                         <p class="small pb-0">How much would you like to borrow?</p>
                         <!-- cards -->
@@ -303,7 +309,7 @@ input:focus {
                     <!-- row -->
                     <div class="row justify-content-center form-business">
                     <!-- col -->
-                    <div class="col-lg-7 col-md-8">
+                    <div class="col-lg-9 col-md-9" style="padding: 3%">
                         <h3 class="fw-bold pt-2">Loan Detail</h3>
                         <p class="small pb-0">What is your reason for a loan?</p>
                         <!-- cards -->
@@ -318,9 +324,13 @@ input:focus {
                                     </div>
                                 </label>
                             </div>
+                        
+                            {{-- Make this col disabled --}}
+
                             <div class="col">
-                                <label onclick="selectCard(this)" class="card text-center h-70 py-2">
-                                    <input type="radio" name="loan_type" value="Business" class="d-none">
+                                {{-- onclick="selectCard(this)" --}}
+                                <label class="card text-center h-70 py-2 disabled-card">
+                                    <input type="radio" name="loan_type" value="Business" class="d-none" disabled>
                                     <i class="fas fa-briefcase card-img-top mx-auto img-light fs-1"></i>
                                     <div class="card-body px-0">
                                         <h5 class="card-title title-binding">Business Loan</h5>
@@ -328,9 +338,12 @@ input:focus {
                                     </div>
                                 </label>
                             </div>
+                        
+                            {{-- Make this col disabled --}}
                             <div class="col">
-                                <label onclick="selectCard(this)" class="card text-center h-70 py-2">
-                                    <input type="radio" name="loan_type" value="SME" class="d-none">
+                                {{-- onclick="selectCard(this)" --}}
+                                <label  class="card text-center h-70 py-2 disabled-card">
+                                    <input type="radio" name="loan_type" value="SME" class="d-none" disabled>
                                     <i class="fas fa-store card-img-top mx-auto img-light fs-1"></i>
                                     <div class="card-body px-0 pt-4">
                                         <h5 class="card-title title-binding">SME Loans</h5>
@@ -339,6 +352,7 @@ input:focus {
                                 </label>
                             </div>
                         </div>
+                        
                         <!-- /cards -->
                         <!-- NEXT BUTTON-->
                         <button type="button" class="btn btn-dark text-white float-start back mt-0 rounded-3">Go Back</button>
@@ -351,7 +365,7 @@ input:focus {
                     <!-- row -->
                     <div class="row justify-content-center form-business">
                     <!-- col -->
-                        <div class="col-lg-7 col-md-8">
+                        <div class="col-lg-9 col-md-9" style="padding: 3%">
                         <h3 class="fw-bold pt-2">Repayment Options</h3>
                         <p class="small pb-0">How will you pay back?</p>
                         <div>
@@ -363,11 +377,22 @@ input:focus {
                                 <input id="slider_input" name="duration" class="range-slider_input" type="range" value="2" min="0" max="100">
                             </div>
                         </div>  
-                        <div>
-                            <p id="slider_value">2 Months</p>
-                            <p id="interest_value">Interest Rate: 21%</p>
-                            <p id="principal_value"></p>
-                            <p style="padding: 2%; background-color:#662d91" class="bg-[#662d91] text-white" id="payback_value">Calculator</p>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <p id="interest_value">Interest Rate: 21%</p>
+                                        <p id="principal_value"></p>
+                                    </div> 
+                                    <div class="col-lg-6">
+                                        <p id="slider_value">2 Months</p>
+                                        <p id="interest_value">Interest Rate: 21%</p>
+                                        <p id="interest_value">Service Charge: K3.50</p>
+                                    </div>
+                                </div>
+                                {{-- <p id="principal_value"></p> --}}
+                                <p style="padding: 2%; background-color:#662d91" class="bg-[#662d91] text-white" id="payback_value">Calculator</p>
+                            </div>
                         </div>
                         <!-- cards -->
                         {{-- <div class="row row-cols-1 row-cols-lg-3 g-4 pb-5 border-bottom">
@@ -423,7 +448,15 @@ input:focus {
                         <div class="mb-5 pb-2">
                         <!-- Final step -->
                         <div class="alert alert-sm alert-primary text-center" role="alert">
-                            <h5 class="p-4">Please make sure to upload neccessary documents and complete the KYC.</h5>
+                            <h5 class="p-4">
+                                You're almost there! 🚀 Continue to do the following easy steps.
+                            </h5>
+                            <ol>
+                                <li>1. Fill up the final <b>Submission Form</b>.</li>
+                                <li>2. Upload Loan Documents (<b>Preapproval Form</b> & <b>Letter of Introduction</b> ).</li>
+                                <li>3. Complete KYC (Upload Copy of <b>National ID</b> & <b>TPIN</b> ).</li>
+                            </ol>
+
                         </div>
                         {{-- <div class="form-check mt-3">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -435,7 +468,7 @@ input:focus {
                         </div>
                         <!-- NEXT BUTTON-->
                         <button type="button" class="btn btn-dark text-white float-start back rounded-3">Go Back</button>
-                        <button type="submit" class="btn text-white float-end submit-button rounded-3 bg-color-info">Finish</button>
+                        <button type="submit" class="btn text-white float-end submit-button rounded-3 bg-color-info">Continue</button>
                         <!-- /NEXT BUTTON-->
                     </div>
                     <!-- /col -->
@@ -528,12 +561,13 @@ input:focus {
                 // Convert the numeric value to a float
                 principal = parseInt(numericValue);
 
+                var my_returns = (parseInt(principal) * 0.21) * parseInt(2) + parseInt(principal);
                 // Log the cleaned and converted value to the console
                 console.log('Borrowing: ', principal);
-                $('#payback_value').text('Calculator');
-                $('#principal_value').text('Return 21% of your loan');
+                $('#payback_value').text( 'Payback amount of: K'+my_returns.toFixed(2));
+                $('#principal_value').text( 'Borrowing: K'+principal);
                 // Update a display element with the current value
-                $('#slider_value').text('');
+                $('#slider_value').text( 'Payback in 2 Months');
             });
 
 

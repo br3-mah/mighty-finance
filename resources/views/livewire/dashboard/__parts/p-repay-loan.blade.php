@@ -12,7 +12,7 @@
                         <!-- Card name -->
                         <h3 class="text-xl font-bold text-gray-900 mb-1">Repayback Loan.</h3>
                         <div class="text-sm font-medium text-gray-500">LOAN #00124</div>
-                        <a href="{{ route('loan-details', ['id' => $loan_id]) }}">Loan Details</a>
+                        {{-- <a href="{{ route('loan-details', ['id' => $loan_id]) }}">Loan Details</a> --}}
                     </header>
                     <!-- Card body -->
                     <div class="bg-gray-100 text-center px-5 py-6">

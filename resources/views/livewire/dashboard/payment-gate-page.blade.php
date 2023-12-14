@@ -8,13 +8,13 @@
           // Use the $view variable as needed
           $view = htmlspecialchars($param);
       }
-      if (isset($_GET['loan'])) {
-          // Retrieve the value of the 'view' parameter
-          $param2 = $_GET['loan'];
+    //   if (isset($_GET['loan'])) {
+    //       // Retrieve the value of the 'view' parameter
+    //       $param2 = $_GET['loan'];
     
-          // Use the $view variable as needed
-          $loan_id = htmlspecialchars($param2);
-      } 
+    //       // Use the $view variable as needed
+    //       $loan_id = htmlspecialchars($param2);
+    //   } 
       @endphp
         <div class="content-body">
             <div class="container">
