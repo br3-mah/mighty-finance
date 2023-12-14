@@ -49,6 +49,14 @@ trait FileTrait{
                 ['path' => $tpin_file]
             );
         }
+        if ($request->hasFile('letterofintro')) {
+            $loi_file = $request->file('letterofintro')->store('letterofintro', 'public');
+            UserFile::updateOrCreate(
+                ['name' => 'letterofintro', 'user_id' => auth()->user()->id],
+                ['path' => $loi_file]
+            );
+        }
+        
         // if($request->file('passport') !== null){               
         //     $passport = $request->file('passport')->store('passport', 'public');
         //     UserFile::create([

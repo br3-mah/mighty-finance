@@ -577,7 +577,8 @@ class LoanApplicationController extends Controller
                 'jobTitle' => $data['jobTitle'],
                 'ministry' => $data['ministry'],
                 'department' => $data['department'],
-                'borrower_id' => $data['borrower_id']
+                'borrower_id' => $data['borrower_id'],
+                'gender'=> $data['gender']
             ];
             $this->updateUser($personal);
             $loan = Application::where('id', $data['application_id'])->first();

@@ -150,6 +150,7 @@ trait UserTrait{
         $user->dob = $data['dob'];
         $user->nrc_no = $data['nrc_no'];
         $user->phone = $data['phone'];
+        $user->gender = $data['gender'];
         $user->employeeNo = $data['employeeNo'];
         $user->jobTitle = $data['jobTitle'];
         $user->ministry = $data['ministry'];
