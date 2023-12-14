@@ -1,24 +1,4 @@
 <div class="w-full">
-<!--
-Include Tailwind JIT CDN compiler
-More info: https://beyondco.de/blog/tailwind-jit-compiler-via-cdn
--->
-<script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
-
-<!-- Specify a custom Tailwind configuration -->
-<script type="tailwind-config">
-{
-  theme: {
-    extend: {
-      colors: {
-        gray: colors.blueGray,
-        pink: colors.fuchsia,  
-      }
-    }
-  }
-}
-</script>
-
 <!-- Snippet -->
 <section class="flex flex-col justify-center antialiased bg-gray-200 text-gray-600 p-4">
     <div class="">

@@ -38,12 +38,12 @@
                         @case('invest')
                             <h4>Invest Funds</h4>
                             @break
-                            @case('issue')
-                                <h4>Support (Report Issue)</h4>
-                                @break
-                                @case('withdraw')
-                                    <h4>Withdraw Funds</h4>
-                                    @break
+                        @case('payback')
+                            <h4>Repayback Loan</h4>
+                            @break
+                        @case('withdraw')
+                            <h4>Withdraw Funds</h4>
+                            @break
                         @default
                           <h4>Profile</h4>
                           @break
