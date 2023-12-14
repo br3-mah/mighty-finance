@@ -444,27 +444,27 @@ input:focus {
                     </div>
                     <!-- /col -->
                     <!-- col -->
-                    <div class="col-lg-7 col-md-8" id="successForm">
-                        <div class="mb-5 pb-2">
-                        <!-- Final step -->
-                        <div class="alert alert-sm alert-primary text-center" role="alert">
-                            <h5 class="p-4">
-                                You're almost there! 🚀 Continue to do the following easy steps.
-                            </h5>
-                            <ol>
-                                <li>1. Fill up the final <b>Submission Form</b>.</li>
-                                <li>2. Upload Loan Documents (<b>Preapproval Form</b> & <b>Letter of Introduction</b> ).</li>
-                                <li>3. Complete KYC (Upload Copy of <b>National ID</b> & <b>TPIN</b> ).</li>
-                            </ol>
+                    <div class="col-lg-9 col-md-9" style="padding: 3%" id="successForm">
+                        <div class="mb-5 pb-2 col-lg-12">
+                            <!-- Final step -->
+                            <div class="alert alert-sm alert-primary text-center" role="alert">
+                                <h5 class="p-4">
+                                    You're almost there! 🚀 Continue to do the following easy steps.
+                                </h5>
+                                <ol>
+                                    <li>1. Fill up the final <b>Submission Form</b>.</li>
+                                    <li>2. Upload Loan Documents (<b>Preapproval Form</b> & <b>Letter of Introduction</b> ).</li>
+                                    <li>3. Complete KYC (Upload Copy of <b>National ID</b> & <b>TPIN</b> ).</li>
+                                </ol>
 
-                        </div>
-                        {{-- <div class="form-check mt-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                            Gracias por participar
-                            </label>
-                        </div> --}}
-                        <!-- /Final step -->
+                            </div>
+                            {{-- <div class="form-check mt-3">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                Gracias por participar
+                                </label>
+                            </div> --}}
+                            <!-- /Final step -->
                         </div>
                         <!-- NEXT BUTTON-->
                         <button type="button" class="btn btn-dark text-white float-start back rounded-3">Go Back</button>
