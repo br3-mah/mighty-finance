@@ -39,9 +39,9 @@
                                     <label for="dob">D.O.B</label>
                                     <input value="{{auth()->user()->dob}}" type="date" class="form-control" id="dob" name="dob">
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="nrc">NRC NUMBER</label>
-                                    <input value="{{auth()->user()->nrc_no ?? auth()->user()->nrc}}" type="text" class="form-control" id="nrc" name="nrc">
+                                <div class="form-group col-md-6">
+                                    <label for="jobTitle">JOB TITLE</label>
+                                    <input value="{{ auth()->user()->occupation ?? auth()->user()->jobTitle }}" type="text" class="form-control" id="jobTitle" name="jobTitle">
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -68,9 +68,9 @@
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <div class="form-group col-md-6">
-                                    <label for="jobTitle">JOB TITLE</label>
-                                    <input value="{{ auth()->user()->occupation ?? auth()->user()->jobTitle }}" type="text" class="form-control" id="jobTitle" name="jobTitle">
+                                <div class="col-md-6">
+                                    <label for="nrc">NRC NUMBER</label>
+                                    <input value="{{auth()->user()->nrc_no ?? auth()->user()->nrc}}" type="text" class="form-control" id="nrc" name="nrc">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="ministry">MINISTRY</label>
