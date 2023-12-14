@@ -150,7 +150,7 @@ class Application extends Model
         return Application::where('user_id', auth()->user()->id)
         ->where('status', 1)->where('complete', 1)->first();
     }
- 
+
     public static function payback($principal, $duration){
         // 1 month
         if( $duration == 1){
