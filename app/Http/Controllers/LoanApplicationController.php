@@ -270,7 +270,7 @@ class LoanApplicationController extends Controller
                 'repayment_plan'=> $form['duration'],
                 'personal_loan_type'=> $form['loan_type'],
                 'status' => 0,
-                'continue' => 0
+                'continue' => 1
             ];
             $application = $this->apply_loan($data);
             $this->isKYCComplete();

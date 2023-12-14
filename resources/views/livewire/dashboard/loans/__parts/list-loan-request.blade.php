@@ -11,8 +11,8 @@
     }
 
     .animate-slide-fade {
-    opacity: 0;
-    animation: slide-fade-up 0.5s ease-out forwards;
+        opacity: 0;
+        animation: slide-fade-up 0.5s ease-out forwards;
     }
 
 </style>
