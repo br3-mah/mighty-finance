@@ -141,8 +141,8 @@ class Application extends Model
     // Pending for approval
     public static function currentApplication(){
         return Application::where('user_id', auth()->user()->id)
-        ->orderBy('created_at', 'desc')
-        ->where('status', 0)->where('complete', 0)->first();
+        ->orderBy('created_at', 'desc')->first();
+        // ->where('status', 0)->where('complete', 0)->first();
     }
 
     // Pending for payback

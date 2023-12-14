@@ -4,7 +4,9 @@
     
         <div class="container p-6 modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-center ">Loan Application Form</h5>
+                <h3 class="modal-title text-center ">
+                    
+                    Submission Form</h3>
 
                 {{-- <span style="cursor:pointer" onclick="closeModal()">x</span> --}}
             </div>
@@ -40,12 +42,13 @@
                                 <div class="form-group col-md-6">
                                     <label for="phone">PHONE NUMBER</label>
                                     <div class="input-group">
-                                        <select class="form-control" name="pcode">
+                                        {{-- <select class="form-control" name="pcode">
                                             <option value="260">+260</option>
-                                            {{-- <option value="master">Euro</option> --}}
-                                        </select>
+                                            <option value="master">Euro</option>
+                                        </select> --}}
                                         <input
                                             id="phone"
+                                            value="{{ auth()->user()->phone ?? auth()->user()->phone2 }}"
                                             type="text"
                                             name="phone"
                                             class="form-control"
@@ -55,22 +58,22 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="employeeNo">EMPLOYEE NO</label>
-                                    <input type="text" class="form-control" id="employeeNo" name="employeeNo">
+                                    <input value="{{ auth()->user()->employeeNo }}" type="text" class="form-control" id="employeeNo" name="employeeNo">
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <div class="form-group col-md-6">
                                     <label for="jobTitle">JOB TITLE</label>
-                                    <input  type="text" class="form-control" id="jobTitle" name="jobTitle">
+                                    <input value="{{ auth()->user()->occupation ?? auth()->user()->jobTitle }}" type="text" class="form-control" id="jobTitle" name="jobTitle">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="ministry">MINISTRY</label>
-                                    <input type="text" class="form-control" id="ministry" name="ministry">
+                                    <input value="{{ auth()->user()->ministry ?? 'ex. Ministry of Health' }}" type="text" class="form-control" id="ministry" name="ministry">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="department">DEPARTMENT</label>
-                                <input type="text" class="form-control" id="department" name="department">
+                                <input value="{{ auth()->user()->department }}" type="text" class="form-control" id="department" name="department">
                             </div>
                             <button type="button" style="float: right;" class="mt-3 btn btn-primary" onclick="nextStep(1)">
                                 Next 
@@ -133,7 +136,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="step" id="step3">
+                        {{-- <div class="step" id="step3">
                             <h4>Guarantor's Information</h4>
                             
                             <div class="row mb-4">
@@ -191,9 +194,9 @@
                                     </svg>
                                 </button>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- References -->
-                        <div class="step" id="step4">
+                        <div class="step" id="step3">
                             <h4>References</h4>
                             <p>Human Resource Details:</p>
                             <div class="row mb-4">
@@ -243,7 +246,7 @@
                         </div>
     
                         <!-- Bank Details -->
-                        <div class="step" id="step5">
+                        <div class="step" id="step4">
                             <h4>Bank Details</h4>
                             <div class="row mb-4">
                                 <div class="form-group col-md-6">
@@ -282,7 +285,7 @@
                         </div>
     
                         <!-- Bank Details -->
-                        <div class="step" id="step6">
+                        <div class="step" id="step5">
                             <div style="width: 90%" class="d-flex justify-content-between mb-2">
                                 <h4>Attachments</h4>
                                 <button title="Send the preapproval form to employer, manager, or supervisor" type="button" class="btn btn-sm btn-info" onclick="openSendDocModal()">Send Preapproval</button>
@@ -393,26 +396,20 @@
     
     
                         <!-- Loan Details -->
-                        <div class="step" id="step7">
+                        <div class="step" id="step6">
                             <h4>Loan Summary Details</h4>
-                            <div class="form-row">
+                            <div class="col-lg-12 row">
                                 <div class="form-group col-md-6">
-                                    <label for="loanAmount">LOAN AMOUNT</label>
-                                    <input type="text" class="form-control" id="loanAmount">
+                                    <p>Loan Amount: <b>K{{ $activeLoan->amount }}</b> </p>
+                                    <p>Loan Type: <b>{{ $activeLoan->type }} Loan</b> </p>
+                                    <p>Interest rate: <b>21%</b> </p>
+                                    <p>Service Charge:  <b>K3.5</b> </p>
+                                    <p>Repayment Period: <b>{{ $activeLoan->repayment_plan }} Months</b> </p>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="tenure">TENURE (Duration to Return)</label>
-                                    <input type="text" class="form-control" id="tenure">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="serviceCharge">SERVICE CHARGE</label>
-                                    <input type="text" class="form-control" id="serviceCharge">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="amountToBeDisbursed">AMOUNT TO BE DISBURSED</label>
-                                    <input type="text" class="form-control" id="amountToBeDisbursed">
+                                    <p>Payback Amount: <b>K{{ App\Models\Application::payback($activeLoan->amount, $activeLoan->repayment_plan)}}</b> </p>
+                                    <p>Phone Number: <b>{{ auth()->user()->phone }}</b> </p>
+                                    <p>Email: <b>{{ auth()->user()->email }}</b> </p>
                                 </div>
                             </div>
                             <div style="float: right;">

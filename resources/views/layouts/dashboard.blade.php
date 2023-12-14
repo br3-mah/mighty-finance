@@ -371,15 +371,14 @@
 
   <script>
     AOS.init();
-    let status = '{{$status}}';
+    let status = '{{ $status }}';
     let router = '{{ $route }}';
-    
     let kyc = '{{$kyc}}';
+
     $('#sendDocModal').hide();
     $('#sendDocResponseText').hide();
     $('#sendDocResponseText2').hide();
     
-    // alert(status);
     if(status === '1'){
       $(document).ready(function() {
           // Show overlay and modal when the page loads
@@ -391,6 +390,7 @@
           $("#overlay, #continue-loan-modal").hide();
       }
     }
+
     function openSendDocModal() {
         $('#sendDocModal').show();
     }
@@ -436,6 +436,8 @@
         });
     }
   </script>
+
+
   <script>
     let currentStep = 1;
     showStep(currentStep);
@@ -666,10 +668,6 @@
       // You can perform additional actions here (e.g., remove the file from the server).
   }
   });
-
-
-
-
 
   // Preapproval
   // JavaScript to handle file selection and removal
