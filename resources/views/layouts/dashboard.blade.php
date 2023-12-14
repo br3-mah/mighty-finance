@@ -265,76 +265,75 @@
       </div>
     </div>
 
-    <div class="sidebar" style="background-image: linear-gradient(to right, #662d91, #662d91); color:#fff; width:8%" >
+    <div class="sidebar" style="background-image: linear-gradient(to right, #662d91, #662d91); color:#fff;" >
         <div class="brand-logo">
-            <a href="{{ route('dashboard') }}" style="padding:6%;">
+            <a href="{{ route('dashboard') }}" style="margin:4%;">
                 <img src="{{ asset('public/web/images/01-ft-logo.png')}}" alt="" width="80" /> 
             </a>
         </div>
         <div class="menu">
             <ul>
-            <li>
-                <a
-                href="{{ route('dashboard') }}"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="Dashboard"
-                >
-                <span><i class="bi bi-house text-white"></i></span>
-                </a>
-            </li>
-            <li>
-                <a
-                href="{{ route('view-loan-requests') }}"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="My Loans"
-                >
-                <span class="text-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cash-stack" viewBox="0 0 16 16">
-                    <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
-                    <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z"/>
-                  </svg>
-                </span>
-                </a>
-            </li>
-            <li>
-                <a
-                href="{{ route('loan-wallet') }}"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="My Wallet"
-                >
-                <span><i class="bi bi-wallet2 text-white"></i></span>
-                </a>
-            </li>
-            <li>
-                <a
-                class="setting_"
-                href="{{ route('settings') }}"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="Settings"
-                >
-                <span><i class="bi bi-gear text-white"></i></span>
-                </a>
-            </li>
-            <li class="logout">
-                <a
-                href="signin.html"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="Signout"
-                >
-                <form method="POST" action="{{ route('logout') }}" x-data>
-                    @csrf
-                    <button type="submit" class="dropdown-item ai-icon">
-                        <span><i class="bi bi-power text-white"></i></span>
-                    </button>
-                </form>
-                
-                </a>
-            </li>
+              <li>
+                  <a
+                  href="{{ route('dashboard') }}"
+                  data-toggle="tooltip"
+                  data-placement="right"
+                  title="Dashboard"
+                  >
+                  <span><i class="bi bi-house text-white"></i></span>
+                  </a>
+              </li>
+              <li>
+                  <a
+                  href="{{ route('view-loan-requests') }}"
+                  data-toggle="tooltip"
+                  data-placement="right"
+                  title="My Loans"
+                  >
+                  <span class="text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cash-stack" viewBox="0 0 16 16">
+                      <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+                      <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z"/>
+                    </svg>
+                  </span>
+                  </a>
+              </li>
+              <li>
+                  <a
+                  href="{{ route('loan-wallet') }}"
+                  data-toggle="tooltip"
+                  data-placement="right"
+                  title="My Wallet"
+                  >
+                  <span><i class="bi bi-wallet2 text-white"></i></span>
+                  </a>
+              </li>
+              <li>
+                  <a
+                  class="setting_"
+                  href="{{ route('settings') }}"
+                  data-toggle="tooltip"
+                  data-placement="right"
+                  title="Settings"
+                  >
+                  <span><i class="bi bi-gear text-white"></i></span>
+                  </a>
+              </li>
+              <li class="logout">
+                  <a
+                  data-toggle="tooltip"
+                  data-placement="right"
+                  title="Signout"
+                  >
+                  <form method="POST" action="{{ route('logout') }}" x-data>
+                      @csrf
+                      <button type="submit" class="dropdown-item ai-icon">
+                          <span><i class="bi bi-power text-white"></i></span>
+                      </button>
+                  </form>
+                  
+                  </a>
+              </li>
             </ul>
 
             {{-- <p class="copyright">&#169; <a href="#">greenwebbtech</a></p> --}}
