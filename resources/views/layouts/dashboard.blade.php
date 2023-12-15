@@ -551,13 +551,13 @@
           phoneError.textContent = 'Phone is required';
       }
       if (!nrcInput.value) {
-          nrcError.textContent = 'National ID is required';
+          nrcError.textContent = 'Identification ID is required';
       }
       if (!genderInput.value) {
           genderError.textContent = 'Gender is required';
       } 
       if (!nrc_idInput.value) {
-        nrcIDError.textContent = 'National ID Type is required';
+        nrcIDError.textContent = 'Identification Type is required';
       } 
       
       if (!jobTitleInput.value || !dobInput.value || !phoneInput.value || !nrcInput.value || !genderInput.value || !nrc_idInput.value) {
