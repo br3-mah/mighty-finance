@@ -60,7 +60,7 @@
                                             type="text"
                                             name="phone"
                                             class="form-control"
-                                            placeholder="77 214 77 55"
+                                            placeholder="PHONE NUMBER"
                                         />
                                     </div>
                                     <small id="phoneError" class="text-danger"></small>
@@ -106,9 +106,8 @@
                                         {{-- wire:model.defer="state.gender" --}}
                                         >  
                                         <option> -- GENDER --</option>
-                                        <option value="{{ auth()->user()->gender}}">{{ auth()->user()->gender}}</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                            <option {{ auth()->user()->gender == 'Male' ? 'selected' : ''}} value="Passport">Male</option>
+                                            <option {{ auth()->user()->gender == 'Female' ? 'selected' : ''}} value="Driver Liecense">Female</option>
                                     </select>
                                     <small id="genderError" class="text-danger"></small>
                                 </div>
