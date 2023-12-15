@@ -490,8 +490,28 @@
             showStep(currentStep);
           }
           break;
+        case 4:
+          if (_validate_step4()) {
+            currentStep += 1;
+            showStep(currentStep);
+          }
+          break;
+        case 5:
+          if (_validate_step5()) {
+            currentStep += 1;
+            showStep(currentStep);
+          }
+          break;
+        case 6:
+          if (_validate_step6()) {
+            currentStep += 1;
+            showStep(currentStep);
+          }
+          break;
       
         default:
+          currentStep += 1;
+          showStep(currentStep);
           break;
       }
     }
@@ -598,7 +618,116 @@
       }
 
     } 
+    
+    function _validate_step4(){
+      var hrFirstName = document.getElementById('hrFirstName');
+      var fnHRError = document.getElementById('fnHRError');
+      var hrLastName = document.getElementById('hrLastName');
+      var lnHRError = document.getElementById('lnHRError');
+      var hrContactNumber = document.getElementById('hrContactNumber');
+      var contactHRError = document.getElementById('contactHRError');
+      var supervisorFirstName = document.getElementById('supervisorFirstName');
+      var supLNError = document.getElementById('supLNError');
+      var supervisorLastName = document.getElementById('supervisorLastName');
+      var supFNError = document.getElementById('supFNError');
+      var supervisorContactNumber = document.getElementById('supervisorContactNumber');
+      var supContactError = document.getElementById('supContactError');
+      
 
+      // In this example, we'll check if the input is not empty
+      if (!hrFirstName.value) {
+        fnHRError.textContent = 'HR First Name required';
+      }
+      if (!hrLastName.value) {
+        lnHRError.textContent = 'HR Last Name required';
+      }
+      if (!hrContactNumber.value) {
+        contactHRError.textContent = 'HR contact is required';
+      }
+      if (!supervisorLastName.value) {
+        supLNError.textContent = 'Supervisor First Name';
+      }
+      if (!supervisorFirstName.value) {
+        supFNError.textContent = 'Supervisor Last Name';
+      }
+      if (!supervisorContactNumber.value) {
+        supContactError.textContent = 'Supervisor Conact Number';
+      }
+      
+      if (!hrFirstName.value || !hrLastName.value || !hrContactNumber.value || !supervisorLastName.value || !supervisorFirstName.value || !supervisorContactNumber.value  ) {
+          return false;
+      } else {
+          return true;
+      }
+    }
+
+    function _validate_step5(){
+      var bankName = document.getElementById('bankName');
+      var bankNameError = document.getElementById('bankNameError');
+      var branchName = document.getElementById('branchName');
+      var bankBranchError = document.getElementById('bankBranchError');
+      var accountNumber = document.getElementById('accountNumber');
+      var bankAccError = document.getElementById('bankAccError');
+      var accountNames = document.getElementById('accountNames');
+      var bankAccNameError = document.getElementById('bankAccNameError');      
+
+      // In this example, we'll check if the input is not empty
+      if (!bankName.value) {
+        bankNameError.textContent = 'Bank Name required';
+      }
+      if (!branchName.value) {
+        bankBranchError.textContent = 'Branch Name required';
+      }
+      if (!accountNumber.value) {
+        bankAccError.textContent = 'Account Number is required';
+      }
+      if (!accountNames.value) {
+        bankAccNameError.textContent = 'Account Name required';
+      }
+
+      if (!bankName.value || !branchName.value || !accountNumber.value || !accountNames.value ) {
+          return false;
+      } else {
+          return true;
+      }
+    }
+    
+    function _validate_step6(){
+      var fileInput3 = document.getElementById('fileInput3');
+      var payslipError = document.getElementById('payslipError');
+      var fileInput4 = document.getElementById('fileInput4');
+      var bankstatementError = document.getElementById('bankstatementError');
+      var fileInput5 = document.getElementById('fileInput5');
+      var passportError = document.getElementById('passportError');
+      var fileInput6 = document.getElementById('fileInput6');
+      var preapprovalError = document.getElementById('preapprovalError');
+      var fileInput7 = document.getElementById('fileInput7');
+      var letterError = document.getElementById('letterError');
+
+      // In this example, we'll check if the input is not empty
+      if (!fileInput3.value) {
+        payslipError.textContent = 'Please upload copy of Latest Payslip';
+      }
+      if (!fileInput4.value) {
+        bankstatementError.textContent = 'Please upload copy of Bank Statement';
+      }
+      if (!fileInput5.value) {
+        passportError.textContent = 'Please upload a Passport size photo';
+      }
+      if (!fileInput6.value) {
+        preapprovalError.textContent = 'Please upload signed Preapproval form';
+      }
+      if (!fileInput7.value) {
+        letterError.textContent = 'Please upload Letter of Introduction';
+      }
+      
+      if (!fileInput3.value || !fileInput4.value || !fileInput5.value || !fileInput6.value || !fileInput7.value ) {
+          return false;
+      } else {
+          return true;
+      }
+
+    } 
     // NRC
     // JavaScript to handle file selection and removal
     const fileInput = document.getElementById('fileInput');
