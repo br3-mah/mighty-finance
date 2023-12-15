@@ -522,7 +522,7 @@
     }
 
     function _validate_step1(){
-      var jobTitleInput = document.getElementById('employeeNo');
+      var jobTitleInput = document.getElementById('jobTitleInput');
       var jobTitleError = document.getElementById('jobTitleError');
       var employeeNo = document.getElementById('employeeNo');
       var employeeNoError = document.getElementById('employeeNoError');

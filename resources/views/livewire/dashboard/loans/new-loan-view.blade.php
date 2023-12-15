@@ -348,7 +348,7 @@ input:focus {
                                         <p class="card-text">Small / Medium / Enterprise Loan</p>
                                     </div>
                                 </label>
-                            </div> --}}
+                            </div> 
                         </div>
                         
                         <!-- /cards -->
