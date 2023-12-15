@@ -733,6 +733,9 @@
       }
 
     } 
+
+
+
     // NRC
     // JavaScript to handle file selection and removal
     const fileInput = document.getElementById('fileInput');
@@ -781,7 +784,7 @@
   });
 
 
-  //Payslip
+  //Tpin File Upload
   // JavaScript to handle file selection and removal
   const fileInput2 = document.getElementById('fileInput2');
   const fileList2 = document.getElementById('fileList-2');
@@ -936,41 +939,137 @@
 
   // JavaScript to handle file selection and removal
   fileInput5.addEventListener('change', function () {
-  const files = this.files; 
-  // Initialize an array to store uploaded file names
+    const files = this.files; 
+    // Initialize an array to store uploaded file names
 
-  if (files.length > 0) {
+    if (files.length > 0) {
 
-      // Add the uploaded files to the uploadedFiles array
-      Array.from(files).forEach(file => {
-      
-          uploadedFiles5.push(file);
+        // Add the uploaded files to the uploadedFiles array
+        Array.from(files).forEach(file => {
+        
+            uploadedFiles5.push(file);
 
-          const listItem = document.createElement('li');
-          listItem.className = 'file-item grid pb-1';
-          listItem.innerHTML = `
-              <span class="grid-file-item">${file.name}</span>
-              <button class="grid-file-item-btn" type="button" class="remove-button" data-name="${file.name}">x</button>
-          `;
+            const listItem = document.createElement('li');
+            listItem.className = 'file-item grid pb-1';
+            listItem.innerHTML = `
+                <span class="grid-file-item">${file.name}</span>
+                <button class="grid-file-item-btn" type="button" class="remove-button" data-name="${file.name}">x</button>
+            `;
 
-          fileList5.appendChild(listItem);
-      });
-  }
+            fileList5.appendChild(listItem);
+        });
+    }
   });
   fileList5.addEventListener('click', function (e) {
-  if (e.target.classList.value == 'grid-file-item-btn') {
-      const fileName = e.target.getAttribute('data-name');
-      const fileItem = e.target.parentElement;
-      fileItem.remove();
-      // Remove the file name from the uploadedFiles array
-      const fileIndex = uploadedFiles.indexOf(fileName);
-      if (fileIndex !== -1) {
-          uploadedFiles5.splice(fileIndex, 1);
-      }
-      // Update the hidden input with the updated uploaded files
-      myUploadedFilesInput.value = JSON.stringify(uploadedFiles);
-      // You can perform additional actions here (e.g., remove the file from the server).
-  }
+    if (e.target.classList.value == 'grid-file-item-btn') {
+        const fileName = e.target.getAttribute('data-name');
+        const fileItem = e.target.parentElement;
+        fileItem.remove();
+        // Remove the file name from the uploadedFiles array
+        const fileIndex = uploadedFiles.indexOf(fileName);
+        if (fileIndex !== -1) {
+            uploadedFiles5.splice(fileIndex, 1);
+        }
+        // Update the hidden input with the updated uploaded files
+        myUploadedFilesInput.value = JSON.stringify(uploadedFiles);
+        // You can perform additional actions here (e.g., remove the file from the server).
+    }
+  });
+
+
+  // Preapproval
+  // JavaScript to handle file selection and removal
+  const fileInput6 = document.getElementById('fileInput6');
+  const fileList6 = document.getElementById('fileList-6');
+
+  const uploadedFiles6 = [];
+  // const uploadedFilesJson = [];
+
+  // JavaScript to handle file selection and removal
+  fileInput6.addEventListener('change', function () {
+    const files = this.files; 
+    // Initialize an array to store uploaded file names
+
+    if (files.length > 0) {
+
+        // Add the uploaded files to the uploadedFiles array
+        Array.from(files).forEach(file => {
+        
+            uploadedFiles6.push(file);
+
+            const listItem = document.createElement('li');
+            listItem.className = 'file-item grid pb-1';
+            listItem.innerHTML = `
+                <span class="grid-file-item">${file.name}</span>
+                <button class="grid-file-item-btn" type="button" class="remove-button" data-name="${file.name}">x</button>
+            `;
+
+            fileList6.appendChild(listItem);
+        });
+    }
+  });
+  fileList6.addEventListener('click', function (e) {
+    if (e.target.classList.value == 'grid-file-item-btn') {
+        const fileName = e.target.getAttribute('data-name');
+        const fileItem = e.target.parentElement;
+        fileItem.remove();
+        // Remove the file name from the uploadedFiles array
+        const fileIndex = uploadedFiles.indexOf(fileName);
+        if (fileIndex !== -1) {
+            uploadedFiles6.splice(fileIndex, 1);
+        }
+        // Update the hidden input with the updated uploaded files
+        myUploadedFilesInput.value = JSON.stringify(uploadedFiles);
+        // You can perform additional actions here (e.g., remove the file from the server).
+    }
+  });
+
+
+  // Preapproval
+  // JavaScript to handle file selection and removal
+  const fileInput7 = document.getElementById('fileInput7');
+  const fileList7 = document.getElementById('fileList-7');
+
+  const uploadedFiles7 = [];
+  // const uploadedFilesJson = [];
+
+  // JavaScript to handle file selection and removal
+  fileInput7.addEventListener('change', function () {
+    const files = this.files; 
+    // Initialize an array to store uploaded file names
+
+    if (files.length > 0) {
+
+        // Add the uploaded files to the uploadedFiles array
+        Array.from(files).forEach(file => {
+        
+            uploadedFiles7.push(file);
+
+            const listItem = document.createElement('li');
+            listItem.className = 'file-item grid pb-1';
+            listItem.innerHTML = `
+                <span class="grid-file-item">${file.name}</span>
+                <button class="grid-file-item-btn" type="button" class="remove-button" data-name="${file.name}">x</button>
+            `;
+
+            fileList7.appendChild(listItem);
+        });
+    }
+  });
+  fileList6.addEventListener('click', function (e) {
+    if (e.target.classList.value == 'grid-file-item-btn') {
+        const fileName = e.target.getAttribute('data-name');
+        const fileItem = e.target.parentElement;
+        fileItem.remove();
+        // Remove the file name from the uploadedFiles array
+        const fileIndex = uploadedFiles.indexOf(fileName);
+        if (fileIndex !== -1) {
+            uploadedFiles6.splice(fileIndex, 1);
+        }
+        // Update the hidden input with the updated uploaded files
+        myUploadedFilesInput.value = JSON.stringify(uploadedFiles);
+        // You can perform additional actions here (e.g., remove the file from the server).
+    }
   });
   </script>
 

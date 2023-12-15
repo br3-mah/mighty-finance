@@ -4,9 +4,9 @@
     
         <div class="p-6 modal-content">
             <div class="modal-header">
-                <h3 class="modal-title text-center ">
-                    
-                    Loan Completion Form</h3>
+                <h4 class="modal-title text-center ">
+                <b>Loan Completion Form</b>
+                </h4>
 
                 {{-- <span style="cursor:pointer" onclick="closeModal()">x</span> --}}
             </div>
@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="jobTitle">JOB TITLE</label>
-                                    <input value="{{ auth()->user()->occupation ?? auth()->user()->jobTitle }}"  type="text" class="form-control" id="jobTitleInput" placeholder="Teacher" name="jobTitle">
+                                    <input value="{{ auth()->user()->occupation ?? auth()->user()->jobTitle }}"  type="text" class="form-control" id="jobTitleInput" placeholder="eg. Teacher" name="jobTitle">
                                     <small id="jobTitleError" class="text-danger"></small>
                                 </div>
                             </div>
@@ -50,14 +50,14 @@
                                 <div class="form-group col-md-6">
                                     <label for="phone">PHONE NUMBER</label>
                                     <div class="input-group">
-                                        {{-- <select class="form-control" name="pcode">
+                                        <select class="form-control" name="pcode">
                                             <option value="260">+260</option>
-                                            <option value="master">Euro</option>
-                                        </select> --}}
+                                        </select>
                                         <input
                                             id="phone"
                                             value="{{ auth()->user()->phone ?? auth()->user()->phone2 }}"
                                             type="text"
+                                            data-mask='000 000 000'
                                             name="phone"
                                             class="form-control"
                                             placeholder="PHONE NUMBER"
@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="ministry">MINISTRY</label>
-                                    <input value="{{ auth()->user()->ministry }}" placeholder="ex. Ministry of Health" type="text" class="form-control" id="ministry" name="ministry">
+                                    <input value="{{ auth()->user()->ministry }}" placeholder="eg. Ministry of Health" type="text" class="form-control" id="ministry" name="ministry">
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -206,14 +206,14 @@
                                     <div class="input-group">
                                         <select class="form-control" name="kpcode">
                                             <option value="260">+260</option>
-                                            {{-- <option value="master">Euro</option> --}}
                                         </select>
                                         <input
                                             id="nextOfKinPhone"
                                             type="text"
                                             name="nextOfKinPhone"
                                             class="form-control"
-                                            placeholder="77 214 77 55"
+                                            data-mask='000 000 000'
+                                            placeholder=""
                                         />
                                     </div>
                                     <small id="nextOfKinPhoneError" class="text-danger"></small>
@@ -320,7 +320,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="hrContactNumber">CONTACT NUMBER (HR)</label>
-                                    <input type="text" class="form-control" id="hrContactNumber" name="hrContactNumber">
+                                    <input type="text" data-mask='000 0000 000' class="form-control" id="hrContactNumber" name="hrContactNumber">
                                     <small id="contactHRError" class="text-danger"></small>
                                 </div>
                             </div>
@@ -339,7 +339,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="supervisorContactNumber">CONTACT NUMBER (Supervisor)</label>
-                                    <input type="text" class="form-control" id="supervisorContactNumber" name="supervisorContactNumber">
+                                    <input type="text" data-mask='000 0000 000' class="form-control" id="supervisorContactNumber" name="supervisorContactNumber">
                                     <small id="supContactError" class="text-danger"></small>
                                 </div>
                             </div>
@@ -430,7 +430,7 @@
                                     
                                     <!-- Uploaded file list -->
                                     <div class="pt-2">
-                                        <ul class="file-list-2" id="fileList-2"></ul>
+                                        <ul class="file-list-2" id="fileList-3"></ul>
                                     </div>
                                     <small id="payslipError" class="text-danger"></small>
                                 </div>
@@ -447,7 +447,7 @@
                                     
                                     <!-- Uploaded file list -->
                                     <div class="pt-2">
-                                        <ul class="file-list-3" id="fileList-3"></ul>
+                                        <ul class="file-list-3" id="fileList-4"></ul>
                                     </div>
                                     <small id="bankstatementError" class="text-danger"></small>
                                 </div>
@@ -464,7 +464,7 @@
                                     
                                     <!-- Uploaded file list -->
                                     <div class="pt-2">
-                                        <ul class="file-list-4" id="fileList-4"></ul>
+                                        <ul class="file-list-4" id="fileList-5"></ul>
                                     </div>
                                     <small id="passportError" class="text-danger"></small>
                                 </div>
@@ -481,7 +481,7 @@
                                     
                                     <!-- Uploaded file list -->
                                     <div class="pt-2">
-                                        <ul class="file-list-5" id="fileList-5"></ul>
+                                        <ul class="file-list-5" id="fileList-6"></ul>
                                     </div>
                                     <small id="preapprovalError" class="text-danger"></small>
                                 </div>
@@ -498,7 +498,7 @@
                                     
                                     <!-- Uploaded file list -->
                                     <div class="pt-2">
-                                        <ul class="file-list-5" id="fileList-5"></ul>
+                                        <ul class="file-list-5" id="fileList-7"></ul>
                                     </div>
                                     <small id="letterError" class="text-danger"></small>
                                 </div>
