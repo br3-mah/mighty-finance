@@ -17,6 +17,7 @@ class NextOfKing extends Model
         'occupation',
         'nrc_no',
         'gender',
+        'relation',
         'user_id'
     ];
 

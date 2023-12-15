@@ -568,74 +568,78 @@ class LoanApplicationController extends Controller
             // First Upload the files
             $this->uploadCommonFiles($request);
 
-            // Update Personal Info & KYC status
-            $personal = [
-                'dob' => $data['dob'],
-                'nrc_no' => $data['nrc'],
-                'phone' => $data['phone'],
-                'employeeNo' => $data['employeeNo'],
-                'jobTitle' => $data['jobTitle'],
-                'ministry' => $data['ministry'],
-                'department' => $data['department'],
-                'borrower_id' => $data['borrower_id'],
-                'gender'=> $data['gender']
-            ];
-            $nok = [
-                'nok_fname' => $data['nextOfKinFirstName'],
-                'nok_lname' => $data['nextOfKinLastName'],
-                'nok_phone' => $data['nextOfKinPhone'],
-                'nok_relation' => $data['relationship'],
-                'nok_address' => $data['physicalAddress'],
-                'user_id' => $data['borrower_id']
-            ];
-            $guarants = [
-                'gfname'=> $data['guarantorName'],
-                'gnrc_no'=> $data['guarantorNRC'],
-                'gdob'=> $data['guarantorDOB'],
-                'gphone'=> $data['guarantorContactNumber'],
-                'gphone2'=> $data['alternativeNumber'],
-                'gphonesp3'=> $data['spouseContactNumber'],
-                'gaddress'=> $data['guarantorAddress'],
-                'g_relation'=> $data['relationshipToBorrower'],
-                'application_id' => $data['application_id']
-            ];
-            $refs = [
-                'hrFname'=> $data['hrFirstName'],
-                'hrLname'=> $data['hrLastName'],
-                'hrContactNumber'=> $data['hrContactNumber'],
-                'supervisorFirstName'=> $data['supervisorFirstName'],
-                'supervisorLastName'=> $data['supervisorLastName'],
-                'supervisorContactNumber'=> $data['supervisorContactNumber'],
-                'user_id' => $data['borrower_id'],
-                'application_id' => $data['application_id']
-            ];
-            $bank = [
-                'bankName'=> $data['bankName'],
-                'branchName'=> $data['branchName'],
-                'accountNames'=> $data['accountNames'],
-                'accountNumber'=> $data['accountNumber'],
-                'user_id' => $data['borrower_id'],
-            ];
+            // Data Segmentation
+            if(isset($data['dob'])){
+                $personal = [
+                    'dob' => $data['dob'],
+                    'nrc_no' => $data['nrc'],
+                    'phone' => $data['phone'],
+                    'employeeNo' => $data['employeeNo'],
+                    'jobTitle' => $data['jobTitle'],
+                    'ministry' => $data['ministry'],
+                    'department' => $data['department'],
+                    'borrower_id' => $data['borrower_id'],
+                    'gender'=> $data['gender']
+                ];
+                $this->updateUser($personal);
+            }
 
+            if (isset($data['nextOfKinFirstName'])) {
+                $nok = [
+                    'nok_fname' => $data['nextOfKinFirstName'],
+                    'nok_lname' => $data['nextOfKinLastName'],
+                    'nok_phone' => $data['nextOfKinPhone'],
+                    'nok_relation' => $data['relationship'],
+                    'nok_address' => $data['physicalAddress'],
+                    'user_id' => $data['borrower_id']
+                ];
+                $this->createNOK($nok);
+            }
+            // $guarants = [
+            //     'gfname'=> $data['guarantorName'],
+            //     'gnrc_no'=> $data['guarantorNRC'],
+            //     'gdob'=> $data['guarantorDOB'],
+            //     'gphone'=> $data['guarantorContactNumber'],
+            //     'gphone2'=> $data['alternativeNumber'],
+            //     'gphonesp3'=> $data['spouseContactNumber'],
+            //     'gaddress'=> $data['guarantorAddress'],
+            //     'g_relation'=> $data['relationshipToBorrower'],
+            //     'application_id' => $data['application_id']
+            // ];
+            if (isset($data['hrFirstName'])) {
+                $refs = [
+                    'hrFname'=> $data['hrFirstName'],
+                    'hrLname'=> $data['hrLastName'],
+                    'hrContactNumber'=> $data['hrContactNumber'],
+                    'supervisorFirstName'=> $data['supervisorFirstName'],
+                    'supervisorLastName'=> $data['supervisorLastName'],
+                    'supervisorContactNumber'=> $data['supervisorContactNumber'],
+                    'user_id' => $data['borrower_id'],
+                    'application_id' => $data['application_id']
+                ];
+                $this->createRefs($refs);  
+            }
 
-            $this->updateUser($personal);
-            if (isset($data['application_id'])) {
-                $loan = Application::where('id', $data['application_id'])->first();
-                $loan->save();
+            if (isset($data['bankName'])) {
+                $bank = [
+                    'bankName'=> $data['bankName'],
+                    'branchName'=> $data['branchName'],
+                    'accountNames'=> $data['accountNames'],
+                    'accountNumber'=> $data['accountNumber'],
+                    'user_id' => auth()->user()->id,
+                ];
+                $this->createBankDetails($bank);
             }
             
-            // Create Next of Kin
-            $this->createNOK($nok);
-    
-            // Update Guarantors
-            $this->updateGuarantors($guarants);
-    
-            // Update reference details
-            $this->createRefs($refs);
-    
-            // Update bank details
-            $this->createBankDetails($bank);
-            return redirect()->back();
+            
+            if($request->wantsJson()){
+                return response()->json([
+                    "status" => 200, 
+                    "success" => true
+                ]);
+            }else{
+                return redirect()->back();
+            } 
         } catch (\Throwable $th) {
             dd($th);
         }

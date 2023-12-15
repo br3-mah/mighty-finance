@@ -3,10 +3,13 @@
 <!DOCTYPE html>
 <html lang="en">
   @php
+    // Gobal Variables
+    $meta = App\Models\User::meta();
     $activeLoan = App\Models\Application::currentApplication();
     $status = App\Models\Application::currentApplication()->continue;
     $kyc = App\Models\Application::currentApplication()->complete;
     $route = request()->route()->getName();
+    
   @endphp
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <head>
@@ -566,7 +569,6 @@
       if (!employeeNo.value || !jobTitleInput.value || !dobInput.value || !phoneInput.value || !nrcInput.value || !genderInput.value || !nrc_idInput.value) {
           return false;
       } else {
-          // Update or Create data to the database
           // Prepare data to send to the server
           var formData = new FormData();
           formData.append('jobTitle', jobTitleInput.value);
@@ -592,7 +594,7 @@
           })
           .catch(error => {
               // Handle the error response from the server
-              console.error('Error updating or creating data:', error);
+              // console.error('Error updating or creating data:', error);
           });
           return true;
       }
@@ -605,23 +607,49 @@
       var fileInput2 = document.getElementById('fileInput2');
       var fiileInput2Error = document.getElementById('fiileInput2Error');
 
+      var nrcExists = "{{$meta->uploads->where('name', 'nrc_file')->first()->path}}";
+      var tpinExists = "{{$meta->uploads->where('name', 'tpin_file')->first()->path}}";
+
       // In this example, we'll check if the input is not empty
-      if (!fileInput.value) {
+      if (!fileInput.value && nrcExists === 'null') {
         nrcFileError.textContent = 'Please upload copy of national ID';
       }
-      if (!fileInput2.value) {
+      if (!fileInput2.value && tpinExists === 'null') {
         fiileInput2Error.textContent = 'Please upload copy of Tpin';
       }
       
-      if (!fileInput2.value || !fileInput.value ) {
+      if (!fileInput2.value && tpinExists === 'null' || !fileInput.value && nrcExists === 'null') {
           return false;
       } else {
+  
+          // Prepare data to send to the server
+          var formData = new FormData();
+
+          // Get the files
+          formData.append('nrc_file', fileInput.files[0]);
+          formData.append('tpin_file', fileInput2.files[0]);
+    
+          // Perform Fetch API request to the Laravel backend
+          fetch("{{ route('continue-loan') }}", {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              // Handle the success response from the server
+              console.log('Data successfully updated or created:', data);
+          })
+          .catch(error => {
+              // Handle the error response from the server
+              // console.error('Error updating or creating data:', error);
+          });
           return true;
       }
 
     } 
 
     function _validate_step3(){
+      // Required
       var nextOfKinFirstName = document.getElementById('nextOfKinFirstName');
       var nokFNError = document.getElementById('nokFNError');
       var nextOfKinLastName = document.getElementById('nextOfKinLastName');
@@ -630,7 +658,9 @@
       var nextOfKinPhoneError = document.getElementById('nextOfKinPhoneError');
       var relationshipInput = document.getElementById('relationship');
       var relationError = document.getElementById('relationError');
-
+      // optionals
+      var physicalAddress = document.getElementById('physicalAddress');
+      
       
 
       // In this example, we'll check if the input is not empty
@@ -650,6 +680,29 @@
       if (!nextOfKinLastName.value || !nextOfKinFirstName.value || !nextOfKinPhone.value || !relationshipInput.value ) {
           return false;
       } else {
+          // Prepare data to send to the server
+          var formData = new FormData();
+          formData.append('nextOfKinFirstName', nextOfKinFirstName.value);
+          formData.append('nextOfKinLastName', nextOfKinLastName.value);
+          formData.append('nextOfKinPhone', nextOfKinPhone.value);
+          formData.append('relationship', relationshipInput.value);
+          formData.append('physicalAddress', physicalAddress.value);
+          formData.append('borrower_id', '{{ auth()->user()->id }}');
+    
+          // Perform Fetch API request to the Laravel backend
+          fetch("{{ route('continue-loan') }}", {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              // Handle the success response from the server
+              console.log('Data successfully updated or created:', data);
+          })
+          .catch(error => {
+              // Handle the error response from the server
+              // console.error('Error updating or creating data:', error);
+          });
           return true;
       }
 
@@ -693,6 +746,31 @@
       if (!hrFirstName.value || !hrLastName.value || !hrContactNumber.value || !supervisorLastName.value || !supervisorFirstName.value || !supervisorContactNumber.value  ) {
           return false;
       } else {
+          // Prepare data to send to the server
+          var formData = new FormData();
+          formData.append('hrFirstName', hrFirstName.value);
+          formData.append('hrLastName', hrLastName.value);
+          formData.append('hrContactNumber', hrContactNumber.value);
+          formData.append('supervisorFirstName', supervisorFirstName.value);
+          formData.append('supervisorLastName', supervisorLastName.value);
+          formData.append('supervisorContactNumber', supervisorContactNumber.value);
+          formData.append('application_id', '{{ $activeLoan->id }}');
+          formData.append('borrower_id', '{{ auth()->user()->id }}');
+    
+          // Perform Fetch API request to the Laravel backend
+          fetch("{{ route('continue-loan') }}", {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              // Handle the success response from the server
+              console.log('Data successfully updated or created:', data);
+          })
+          .catch(error => {
+              // Handle the error response from the server
+              // console.error('Error updating or creating data:', error);
+          });
           return true;
       }
     }
@@ -724,6 +802,28 @@
       if (!bankName.value || !branchName.value || !accountNumber.value || !accountNames.value ) {
           return false;
       } else {
+          // Prepare data to send to the server
+          var formData = new FormData();
+          formData.append('bankName', bankName.value);
+          formData.append('branchName', branchName.value);
+          formData.append('accountNames', accountNames.value);
+          formData.append('accountNumber', accountNumber.value);
+          formData.append('user_id', '{{ auth()->user()->id }}');
+    
+          // Perform Fetch API request to the Laravel backend
+          fetch("{{ route('continue-loan') }}", {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              // Handle the success response from the server
+              console.log('Data successfully updated or created:', data);
+          })
+          .catch(error => {
+              // Handle the error response from the server
+              // console.error('Error updating or creating data:', error);
+          });
           return true;
       }
     }
@@ -740,26 +840,61 @@
       var fileInput7 = document.getElementById('fileInput7');
       var letterError = document.getElementById('letterError');
 
-      // In this example, we'll check if the input is not empty
-      if (!fileInput3.value) {
+      
+      var payslipExists = "{{$meta->uploads->where('name', 'nrc_file')->first()->path}}";
+      var bankExists = "{{$meta->uploads->where('name', 'bankstatement')->first()->path}}";
+      var passportExists = "{{$meta->uploads->where('name', 'passport')->first()->path}}";
+      var preapprovalExists = "{{$meta->uploads->where('name', 'preapproval')->first()->path}}";
+      var letterExists = "{{$meta->uploads->where('name', 'letterofintro')->first()->path}}";
+
+      // we'll check if the input is not empty
+      if (!fileInput3.value && payslipExists === 'null') {
         payslipError.textContent = 'Please upload copy of Latest Payslip';
       }
-      if (!fileInput4.value) {
+      if (!fileInput4.value && bankExists === 'null') {
         bankstatementError.textContent = 'Please upload copy of Bank Statement';
       }
-      if (!fileInput5.value) {
+      if (!fileInput5.value && passportExists === 'null') {
         passportError.textContent = 'Please upload a Passport size photo';
       }
-      if (!fileInput6.value) {
+      if (!fileInput6.value && preapprovalExists === 'null') {
         preapprovalError.textContent = 'Please upload signed Preapproval form';
       }
-      if (!fileInput7.value) {
+      if (!fileInput7.value && letterExists === 'null') {
         letterError.textContent = 'Please upload Letter of Introduction';
       }
       
-      if (!fileInput3.value || !fileInput4.value || !fileInput5.value || !fileInput6.value || !fileInput7.value ) {
+      if (!fileInput3.value && payslipExists === 'null'|| 
+          !fileInput4.value && bankExists === 'null' || 
+          !fileInput5.value && passportExists === 'null'|| 
+          !fileInput6.value && preapprovalExists === 'null' || 
+          !fileInput7.value && letterExists === 'null' ) {
           return false;
       } else {
+          // Prepare data to send to the server
+          var formData = new FormData();
+
+          // Get the files
+          formData.append('payslip_file', fileInput3.files[0]);
+          formData.append('bankstatement', fileInput4.files[0]);
+          formData.append('passport', fileInput5.files[0]);
+          formData.append('preapproval', fileInput6.files[0]);
+          formData.append('letterofintro', fileInput7.files[0]);
+    
+          // Perform Fetch API request to the Laravel backend
+          fetch("{{ route('continue-loan') }}", {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              // Handle the success response from the server
+              console.log('Data successfully updated or created:', data);
+          })
+          .catch(error => {
+              // Handle the error response from the server
+              // console.error('Error updating or creating data:', error);
+          });
           return true;
       }
 

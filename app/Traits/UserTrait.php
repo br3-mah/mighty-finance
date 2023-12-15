@@ -130,6 +130,7 @@ trait UserTrait{
             'gender' => $data['nok_gender'],
             'user_id' => $data['user_id']
         ]);
+        return true;
     }
 
     public function updateNOK($data){
@@ -143,6 +144,7 @@ trait UserTrait{
             'gender' => $data['nok_gender'],
             'user_id' => $data['user_id']
         ]);
+        return true;
     }
 
     public function updateUser($data){
@@ -159,9 +161,11 @@ trait UserTrait{
     }
     public function createRefs($data){
         References::create($data);
+        return true;
     }
     public function createBankDetails($data){
         BankDetails::create($data);
+        return true;
     }
 }
 
