@@ -477,11 +477,11 @@ input:focus {
                     <div class="col-lg-9 col-md-9" style="padding: 3%" id="successForm">
                         <div class="mb-5 pb-2 col-lg-12">
                             <!-- Final step -->
-                            <div class="alert alert-sm alert-primary text-center" role="alert">
+                            <div class="alert alert-sm alert-primary" role="alert">
                                 <h5 class="p-4">
                                     You're almost there! 🚀 Continue to do the following easy steps.
                                 </h5>
-                                <ol>
+                                <ol class="text-left">
                                     <li>1. Fill up the final <b>Submission Form</b>.</li>
                                     <li>2. Upload Loan Documents (<b>Preapproval Form</b> & <b>Letter of Introduction</b> ).</li>
                                     <li>3. Complete KYC (Upload Copy of <b>National ID</b> & <b>TPIN</b> ).</li>
