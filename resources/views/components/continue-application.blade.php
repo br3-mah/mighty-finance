@@ -6,7 +6,7 @@
             <div class="modal-header">
                 <h3 class="modal-title text-center ">
                     
-                    Submission Form</h3>
+                    Loan Completion Form</h3>
 
                 {{-- <span style="cursor:pointer" onclick="closeModal()">x</span> --}}
             </div>
@@ -80,12 +80,12 @@
                                             class="form-control"
                                             {{-- wire:model.defer="state.id_type" --}}
                                             >  
-                                            <option value="">-- Choose --</option>
+                                            <option value="">-- ID TYPE --</option>
                                             <option {{ auth()->user()->id_type == 'NRC' ? 'selected' : ''}} value="NRC">NRC</option>
                                             <option {{ auth()->user()->id_type == 'Passport' ? 'selected' : ''}} value="Passport">Passport</option>
                                             <option {{ auth()->user()->id_type == 'Driver Liecense' ? 'selected' : ''}} value="Driver Liecense">Driver Liecense</option>
                                         </select>
-                                        <input value="{{auth()->user()->nrc_no ?? auth()->user()->nrc}}" type="text" class="form-control" id="nrc" name="nrc">
+                                        <input value="{{auth()->user()->nrc_no ?? auth()->user()->nrc}}" type="text" placeholder="ID Number" class="form-control" id="nrc" name="nrc">
                                     </div>
                                     <small id="nrcError" class="text-danger"></small>
                                     <br>

@@ -338,7 +338,7 @@ input:focus {
                             </div>
                         
                             {{-- Make this col disabled --}}
-                            <div class="col">
+                            {{-- <div class="col">
                                 {{-- onclick="selectCard(this)" --}}
                                 <label  class="card text-center h-70 py-2 disabled-card">
                                     <input type="radio" name="loan_type" value="SME" class="d-none" disabled>
@@ -348,7 +348,7 @@ input:focus {
                                         <p class="card-text">Small / Medium / Enterprise Loan</p>
                                     </div>
                                 </label>
-                            </div>
+                            </div> --}}
                         </div>
                         
                         <!-- /cards -->
@@ -372,7 +372,7 @@ input:focus {
                                 <div class="range-slider_line">
                                 <div id="slider_line" class="range-slider_line-fill"></div>
                                 </div>
-                                <input id="slider_input" name="duration" class="range-slider_input" type="range" value="2" min="0" max="100">
+                                <input id="slider_input" name="duration" class="range-slider_input" type="range" value="2" min="1" max="100">
                             </div>
                         </div>  
                         <div class="row">
