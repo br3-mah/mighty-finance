@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="jobTitle">JOB TITLE</label>
-                                    <input value="{{ auth()->user()->occupation ?? auth()->user()->jobTitle }}" data-validation="email" type="text" class="form-control" id="jobTitle" name="jobTitle">
+                                    <input value="{{ auth()->user()->occupation ?? auth()->user()->jobTitle }}"  type="text" class="form-control" id="jobTitleInput" name="jobTitle">
                                     <small id="jobTitleError" class="text-danger"></small>
                                 </div>
                             </div>
