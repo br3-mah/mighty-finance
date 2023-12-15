@@ -9,12 +9,13 @@ use App\Models\References;
 use App\Models\User;
 use App\Models\Wallet;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Collection;
 
 
 trait UserTrait{
 
     public function registerUser($input){
-        $password = 'Mighty4you';
+        $password = 'mighty4you';
 
         if($input['email'] !== null){
             $check = User::where('email', $input['email'])->exists();
@@ -25,7 +26,7 @@ trait UserTrait{
                         'fname' => $input['fname'],
                         'lname' => $input['lname'],
                         'mname' => $input['mname'],
-                        'phone2' => $input['phone2'],
+                        'phone' => $input['phone'],
                         'email' => $input['email'],
                         'password' => Hash::make($password),
                         'terms' => 'accepted'
@@ -73,6 +74,51 @@ trait UserTrait{
         
     }
 
+    public function isKYCComplete(){
+        $loan = Application::where('status', 0)
+        ->where('complete', 0)
+        ->where('user_id', auth()->user()->id)
+        ->orderBy('created_at', 'desc')
+        ->get();
+        $user = User::where('id', auth()->user()->id)->with('uploads')->get()->toArray(); 
+        if($loan->first() !== null && !empty($user)){
+            if(!empty($user[0]['phone']) && !empty($user[0]['nrc_no']) && !empty($user[0]['dob'])){
+                $files = collect($user[0]['uploads']);
+                if(
+                    $files->contains('name', 'nrc_file') &&
+                    $files->contains('name', 'tpin_file')
+                ){
+                    Application::where('status', 0)
+                    ->where('complete', 0)
+                    ->where('user_id',auth()->user()->id)
+                    ->update(['complete' => 1]);
+                }
+            }
+        }
+    }
+    public function isUserKYCComplete($id){
+        $loan = Application::where('status', 0)
+        ->where('complete', 0)
+        ->where('user_id', $id)
+        ->orderBy('created_at', 'desc')
+        ->get();
+        $user = User::where('id', $id)->with('uploads')->get()->toArray(); 
+        if($loan->first() !== null && !empty($user)){
+            if(!empty($user['phone']) && !empty($user['nrc_no']) && !empty($user['dob'])){
+                if(
+                    isset($user[0]['uploads'][0]) &&
+                    isset($user[0]['uploads'][1]) &&
+                    isset($user[0]['uploads'][2]) &&
+                    isset($user[0]['uploads'][3]) &&
+                    isset($user[0]['uploads'][4]) 
+                ){
+                    $loan->complete = 1;
+                    $loan->save();
+                }
+            }
+        }
+    }
+
     public function createNOK($data){
         NextOfKing::create([
             'email' => $data['nok_email'],
@@ -84,6 +130,7 @@ trait UserTrait{
             'gender' => $data['nok_gender'],
             'user_id' => $data['user_id']
         ]);
+        return true;
     }
 
     public function updateNOK($data){
@@ -97,6 +144,7 @@ trait UserTrait{
             'gender' => $data['nok_gender'],
             'user_id' => $data['user_id']
         ]);
+        return true;
     }
 
     public function updateUser($data){
@@ -104,6 +152,7 @@ trait UserTrait{
         $user->dob = $data['dob'];
         $user->nrc_no = $data['nrc_no'];
         $user->phone = $data['phone'];
+        $user->gender = $data['gender'];
         $user->employeeNo = $data['employeeNo'];
         $user->jobTitle = $data['jobTitle'];
         $user->ministry = $data['ministry'];
@@ -112,9 +161,11 @@ trait UserTrait{
     }
     public function createRefs($data){
         References::create($data);
+        return true;
     }
     public function createBankDetails($data){
         BankDetails::create($data);
+        return true;
     }
 }
 

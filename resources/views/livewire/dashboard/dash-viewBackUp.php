@@ -222,7 +222,8 @@
                         <div class="items-center">
                             <h4>Apply for a Loan</h4>
                         </div>
-                    {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#applyForLoanNow" id="applyForLoanNow">Apply For a Loan</button> --}}
+                    {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#applyForLoanNow" id="applyForLoanNow">Apply For a Loan</button>
+                         --}}
                         @include('livewire.dashboard.__parts.loan-application-standalone')  
                     @endif
                 @endrole
@@ -268,21 +269,6 @@
                                             <option value="week">This Weeks</option>
                                             <option value="today">Today</option>
                                         </select>
-
-                                        {{-- <div class="dropdown custom-dropdown">
-                                            <div class="btn sharp btn-primary tp-btn " data-bs-toggle="dropdown">
-                                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8.47908 4.58333C8.47908 3.19 9.60659 2.0625 10.9999 2.0625C12.3933 2.0625 13.5208 3.19 13.5208 4.58333C13.5208 5.97667 12.3933 7.10417 10.9999 7.10417C9.60658 7.10417 8.47908 5.97667 8.47908 4.58333ZM12.1458 4.58333C12.1458 3.95083 11.6324 3.4375 10.9999 3.4375C10.3674 3.4375 9.85408 3.95083 9.85408 4.58333C9.85408 5.21583 10.3674 5.72917 10.9999 5.72917C11.6324 5.72917 12.1458 5.21583 12.1458 4.58333Z" fill="#252289" />
-                                                    <path d="M8.47908 17.4163C8.47908 16.023 9.60659 14.8955 10.9999 14.8955C12.3933 14.8955 13.5208 16.023 13.5208 17.4163C13.5208 18.8097 12.3933 19.9372 10.9999 19.9372C9.60658 19.9372 8.47908 18.8097 8.47908 17.4163ZM12.1458 17.4163C12.1458 16.7838 11.6324 16.2705 10.9999 16.2705C10.3674 16.2705 9.85408 16.7838 9.85408 17.4163C9.85408 18.0488 10.3674 18.5622 10.9999 18.5622C11.6324 18.5622 12.1458 18.0488 12.1458 17.4163Z" fill="#252289" />
-                                                    <path d="M8.47908 11.0003C8.47908 9.60699 9.60659 8.47949 10.9999 8.47949C12.3933 8.47949 13.5208 9.60699 13.5208 11.0003C13.5208 12.3937 12.3933 13.5212 10.9999 13.5212C9.60658 13.5212 8.47908 12.3937 8.47908 11.0003ZM12.1458 11.0003C12.1458 10.3678 11.6324 9.85449 10.9999 9.85449C10.3674 9.85449 9.85408 10.3678 9.85408 11.0003C9.85408 11.6328 10.3674 12.1462 10.9999 12.1462C11.6324 12.1462 12.1458 11.6328 12.1458 11.0003Z" fill="#252289" />
-                                                </svg>
-                                            </div>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item active selected" href="javascript:void(0);">Option 1</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Option 2</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Option 3</a>
-                                            </div>
-                                        </div> --}}
                                     </div>
                                     <div class="progress-content">
                                         <div class="d-flex justify-content-between">
@@ -309,27 +295,6 @@
                                 <div>
                                     <h2 class="heading">Lastest 5 Requests</h2>
                                 </div>
-                                {{-- <div class="d-flex align-items-center">
-                                    <select class="image-select default-select dashboard-select me-2 bg-white" aria-label="Default">
-                                        <option selected>This Month</option>
-                                        <option value="1">This Weeks</option>
-                                        <option value="2">Today</option>
-                                    </select>
-                                    <div class="dropdown custom-dropdown">
-                                        <div class="btn sharp btn-primary tp-btn mx-2" data-bs-toggle="dropdown">
-                                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8.47908 4.58333C8.47908 3.19 9.60659 2.0625 10.9999 2.0625C12.3933 2.0625 13.5208 3.19 13.5208 4.58333C13.5208 5.97667 12.3933 7.10417 10.9999 7.10417C9.60658 7.10417 8.47908 5.97667 8.47908 4.58333ZM12.1458 4.58333C12.1458 3.95083 11.6324 3.4375 10.9999 3.4375C10.3674 3.4375 9.85408 3.95083 9.85408 4.58333C9.85408 5.21583 10.3674 5.72917 10.9999 5.72917C11.6324 5.72917 12.1458 5.21583 12.1458 4.58333Z" fill="#252289" />
-                                                <path d="M8.47908 17.4163C8.47908 16.023 9.60659 14.8955 10.9999 14.8955C12.3933 14.8955 13.5208 16.023 13.5208 17.4163C13.5208 18.8097 12.3933 19.9372 10.9999 19.9372C9.60658 19.9372 8.47908 18.8097 8.47908 17.4163ZM12.1458 17.4163C12.1458 16.7838 11.6324 16.2705 10.9999 16.2705C10.3674 16.2705 9.85408 16.7838 9.85408 17.4163C9.85408 18.0488 10.3674 18.5622 10.9999 18.5622C11.6324 18.5622 12.1458 18.0488 12.1458 17.4163Z" fill="#252289" />
-                                                <path d="M8.47908 11.0003C8.47908 9.60699 9.60659 8.47949 10.9999 8.47949C12.3933 8.47949 13.5208 9.60699 13.5208 11.0003C13.5208 12.3937 12.3933 13.5212 10.9999 13.5212C9.60658 13.5212 8.47908 12.3937 8.47908 11.0003ZM12.1458 11.0003C12.1458 10.3678 11.6324 9.85449 10.9999 9.85449C10.3674 9.85449 9.85408 10.3678 9.85408 11.0003C9.85408 11.6328 10.3674 12.1462 10.9999 12.1462C11.6324 12.1462 12.1458 11.6328 12.1458 11.0003Z" fill="#252289" />
-                                            </svg>
-                                        </div>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="javascript:void(0);">Option 1</a>
-                                            <a class="dropdown-item" href="javascript:void(0);">Option 2</a>
-                                            <a class="dropdown-item" href="javascript:void(0);">Option 3</a>
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
                             <div class="card-body p-0">
                                 <!--list-->
@@ -354,35 +319,6 @@
                                                 <td>
                                                     <span class="font-w400">{{ $loan->created_at->toFormattedDateString() }}</span>
                                                 </td>
-                                                <td class="pe-3">
-                                                    <div class="d-flex align-items-center justify-content-center">
-                                                        {{-- <div class="icon-box btn-secondary light me-2">
-                                                            <a href="javascript:void(0);">
-                                                                <svg width="22" height="22" viewBox="0 0 22 22" fill="#252289" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M13.7499 20.8538H8.24992C3.27242 20.8538 1.14575 18.7272 1.14575 13.7497V8.24967C1.14575 3.27217 3.27242 1.14551 8.24992 1.14551H13.7499C18.7274 1.14551 20.8541 3.27217 20.8541 8.24967V13.7497C20.8541 18.7272 18.7274 20.8538 13.7499 20.8538ZM8.24992 2.52051C4.02409 2.52051 2.52075 4.02384 2.52075 8.24967V13.7497C2.52075 17.9755 4.02409 19.4788 8.24992 19.4788H13.7499C17.9758 19.4788 19.4791 17.9755 19.4791 13.7497V8.24967C19.4791 4.02384 17.9758 2.52051 13.7499 2.52051H8.24992Z" fill="#252289" />
-                                                                    <path d="M10.9999 13.9879C10.8257 13.9879 10.6516 13.9238 10.5141 13.7863L7.76407 11.0363C7.49824 10.7704 7.49824 10.3304 7.76407 10.0646C8.02991 9.79878 8.4699 9.79878 8.73574 10.0646L10.9999 12.3288L13.2641 10.0646C13.5299 9.79878 13.9699 9.79878 14.2357 10.0646C14.5016 10.3304 14.5016 10.7704 14.2357 11.0363L11.4857 13.7863C11.3482 13.9238 11.1741 13.9879 10.9999 13.9879Z" fill="#252289" />
-                                                                    <path d="M11 13.9886C10.6242 13.9886 10.3125 13.6769 10.3125 13.3011V5.96777C10.3125 5.59194 10.6242 5.28027 11 5.28027C11.3758 5.28027 11.6875 5.59194 11.6875 5.96777V13.3011C11.6875 13.6861 11.3758 13.9886 11 13.9886Z" fill="#252289" />
-                                                                    <path d="M11.0001 16.7107C9.0659 16.7107 7.12257 16.399 5.28007 15.7848C4.92257 15.6657 4.73007 15.2715 4.84924 14.914C4.96841 14.5565 5.3534 14.3548 5.72007 14.4832C9.13007 15.6198 12.8792 15.6198 16.2892 14.4832C16.6467 14.364 17.0409 14.5565 17.1601 14.914C17.2792 15.2715 17.0867 15.6657 16.7292 15.7848C14.8776 16.4082 12.9342 16.7107 11.0001 16.7107Z" fill="#252289" />
-                                                                </svg>
-                                                            </a>
-                                                        </div> --}}
-                                                        {{-- <div class="dropdown custom-dropdown">
-                                                            <div class="btn sharp btn-secondary light icon-box  border-0 me-0 " data-bs-toggle="dropdown">
-                                                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M8.47908 4.58333C8.47908 3.19 9.60659 2.0625 10.9999 2.0625C12.3933 2.0625 13.5208 3.19 13.5208 4.58333C13.5208 5.97667 12.3933 7.10417 10.9999 7.10417C9.60658 7.10417 8.47908 5.97667 8.47908 4.58333ZM12.1458 4.58333C12.1458 3.95083 11.6324 3.4375 10.9999 3.4375C10.3674 3.4375 9.85408 3.95083 9.85408 4.58333C9.85408 5.21583 10.3674 5.72917 10.9999 5.72917C11.6324 5.72917 12.1458 5.21583 12.1458 4.58333Z" fill="#252289" />
-                                                                    <path d="M8.47908 17.4163C8.47908 16.023 9.60659 14.8955 10.9999 14.8955C12.3933 14.8955 13.5208 16.023 13.5208 17.4163C13.5208 18.8097 12.3933 19.9372 10.9999 19.9372C9.60658 19.9372 8.47908 18.8097 8.47908 17.4163ZM12.1458 17.4163C12.1458 16.7838 11.6324 16.2705 10.9999 16.2705C10.3674 16.2705 9.85408 16.7838 9.85408 17.4163C9.85408 18.0488 10.3674 18.5622 10.9999 18.5622C11.6324 18.5622 12.1458 18.0488 12.1458 17.4163Z" fill="#252289" />
-                                                                    <path d="M8.47908 11.0003C8.47908 9.60699 9.60659 8.47949 10.9999 8.47949C12.3933 8.47949 13.5208 9.60699 13.5208 11.0003C13.5208 12.3937 12.3933 13.5212 10.9999 13.5212C9.60658 13.5212 8.47908 12.3937 8.47908 11.0003ZM12.1458 11.0003C12.1458 10.3678 11.6324 9.85449 10.9999 9.85449C10.3674 9.85449 9.85408 10.3678 9.85408 11.0003C9.85408 11.6328 10.3674 12.1462 10.9999 12.1462C11.6324 12.1462 12.1458 11.6328 12.1458 11.0003Z" fill="#252289" />
-                                                                </svg>
-                                                            </div>
-                                                            <div class="dropdown-menu dropdown-menu-end">
-                                                                <a wire:click="stall({{ $loan->id }})" class="dropdown-item" href="#">Stall</a>
-                                                                <a wire:click="accept({{ $loan->id }})" class="dropdown-item" href="#">Accept Request</a>
-                                                                <a wire:click="reject({{ $loan->id }})" class="dropdown-item" href="#">Reject Loan Request</a>
-                                                                <a @disabled(true) disabled class="dropdown-item" href="#">View More Details</a>
-                                                            </div>
-                                                        </div> --}}
-                                                    </div>
-                                                </td>
                                             </tr>
                                             @empty
                                             <tr>
@@ -397,23 +333,6 @@
                             </div>
                             <div class="table-pagenation pt-3 mt-0">
                                 <a class="btn btn-xs btn-square btn-info" href="{{ route('view-loan-requests') }}">See more</a>
-                                {{-- <p>Showing 1-5 from 100 data</p> --}}
-                                {{-- <nav>
-                                    <ul class="pagination pagination-gutter pagination-primary no-bg me-3">
-                                        <li class="page-item page-indicator">
-                                            <a class="page-link" href="javascript:void(0)">
-                                                <i class="fa-solid fa-angle-left"></i></a>
-                                        </li>
-                                        <li class="page-item "><a class="page-link" href="javascript:void(0)">1</a>
-                                        </li>
-                                        <li class="page-item active"><a class="page-link" href="javascript:void(0)">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                                        <li class="page-item page-indicator">
-                                            <a class="page-link" href="javascript:void(0)">
-                                                <i class="fa-solid fa-angle-right"></i></a>
-                                        </li>
-                                    </ul>
-                                </nav> --}}
                             </div>
                         </div>
                         @endcan
@@ -425,20 +344,6 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-center justify-content-between mb-3">
                                             <h4 class="fs-20 font-w600 mb-0">Users</h4>
-                                            {{-- <div class="dropdown custom-dropdown">
-                                                <div class="btn sharp btn-primary tp-btn " data-bs-toggle="dropdown">
-                                                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M8.47908 4.58333C8.47908 3.19 9.60659 2.0625 10.9999 2.0625C12.3933 2.0625 13.5208 3.19 13.5208 4.58333C13.5208 5.97667 12.3933 7.10417 10.9999 7.10417C9.60658 7.10417 8.47908 5.97667 8.47908 4.58333ZM12.1458 4.58333C12.1458 3.95083 11.6324 3.4375 10.9999 3.4375C10.3674 3.4375 9.85408 3.95083 9.85408 4.58333C9.85408 5.21583 10.3674 5.72917 10.9999 5.72917C11.6324 5.72917 12.1458 5.21583 12.1458 4.58333Z" fill="#252289" />
-                                                        <path d="M8.47908 17.4163C8.47908 16.023 9.60659 14.8955 10.9999 14.8955C12.3933 14.8955 13.5208 16.023 13.5208 17.4163C13.5208 18.8097 12.3933 19.9372 10.9999 19.9372C9.60658 19.9372 8.47908 18.8097 8.47908 17.4163ZM12.1458 17.4163C12.1458 16.7838 11.6324 16.2705 10.9999 16.2705C10.3674 16.2705 9.85408 16.7838 9.85408 17.4163C9.85408 18.0488 10.3674 18.5622 10.9999 18.5622C11.6324 18.5622 12.1458 18.0488 12.1458 17.4163Z" fill="#252289" />
-                                                        <path d="M8.47908 11.0003C8.47908 9.60699 9.60659 8.47949 10.9999 8.47949C12.3933 8.47949 13.5208 9.60699 13.5208 11.0003C13.5208 12.3937 12.3933 13.5212 10.9999 13.5212C9.60658 13.5212 8.47908 12.3937 8.47908 11.0003ZM12.1458 11.0003C12.1458 10.3678 11.6324 9.85449 10.9999 9.85449C10.3674 9.85449 9.85408 10.3678 9.85408 11.0003C9.85408 11.6328 10.3674 12.1462 10.9999 12.1462C11.6324 12.1462 12.1458 11.6328 12.1458 11.0003Z" fill="#252289" />
-                                                    </svg>
-                                                </div>
-                                                <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="javascript:void(0);">Option 1</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);">Option 2</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);">Option 3</a>
-                                                </div>
-                                            </div> --}}
                                         </div>
                                         <div id="pieChart1"></div>
                                         <div class="chart-labels">
@@ -492,133 +397,15 @@
                                 </div>
                             </div>
                             <div class="card-body pb-0 pt-3 px-3 d-flex align-items-center flex-wrap">
-                                <div id="pieChart2"></div>
-                                <div class="weeklydata">
-                                    <h6 class="mb-0 fs-14 font-w400">
-                                    K {{ App\Models\Transaction::total_collected() }}
-                                    </h6>
-                                    {{-- <div class="d-flex align-items-center">
-                                        <svg class="me-2" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect x="0.000488281" width="14" height="14" rx="3" fill="#d5dfe7" />
-                                        </svg>
-                                        <h6 class="mb-0 fs-14 font-w400">Unknown</h6>
-                                        <span class="text-primary font-w700 ms-auto">10%</span>
-                                    </div> --}}
+                                <div class="p-3">
+                                    <h2>
+                                        <b>
+                                        K {{ App\Models\Transaction::total_collected() }}
+                                        </b>
+                                    </h2>
                                 </div>
                             </div>
-                            {{-- <div wire:ignore class="card-body pt-0 pb-0 px-3">
-                                <div id="columnChart1" class="chartjs"></div>
-                            </div> --}}
-
                         </div>
-                            {{-- <div class="card h-auto">
-                                <div class="card-body">
-                                    <h4 class="fs-20 mb-0 mt-0">Notices Sent</h4>
-                                    <span>Lorem ipsum dolor sit amet, consectetur</span>
-                                    <div id="radialchart"></div>
-                                    <h5 class="mb-0 fs-18 font-w500 text-center">On Progress <span class="text-primary fs-18 font-w500s">70%</span></h5>
-                                </div>
-                            </div> --}}
-                        {{-- <div class="card contacts h-auto">
-                            <div class="card-header border-0 pb-0">
-                                <div>
-                                    <h2 class="heading mb-0">Invoices Sent</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur</p>
-                                </div>
-
-                            </div>
-                            <div class="card-body loadmore-content  recent-activity-wrapper py-0 dz-scroll" id="RecentActivityContent">
-                                <!--student-->
-                                <div class="d-flex align-items-center student">
-                                    <span class="dz-media">
-                                        <img src="images/invoice-send-img/pic1.jpg" class=" avtar avtar-lg" alt="">
-                                    </span>
-                                    <div class="user-info">
-                                        <h6 class="name"><a href="app-profile.html">Dedi Cahyadi</a></h6>
-                                        <span class="fs-14 font-w400 text-wrap">Head Manager</span>
-                                    </div>
-                                    <span class="text-primary ms-auto invoice-price">K776</span>
-                                </div>
-                                <!--/student-->
-                                <!--student-->
-                                <div class="d-flex align-items-center student">
-                                    <span class="dz-media">
-                                        <img src="images/invoice-send-img/pic2.jpg" class=" avtar avtar-lg" alt="">
-                                    </span>
-                                    <div class="user-info">
-                                        <h6 class="name"><a href="app-profile.html">Evans John</a></h6>
-                                        <span class=" text-wrap text-break">Programmer</span>
-                                    </div>
-                                    <span class="text-primary ms-auto invoice-price">K777</span>
-
-                                </div>
-                                <div class="d-flex align-items-center student">
-                                    <span class="dz-media">
-                                        <img src="images/invoice-send-img/pic1.jpg" class=" avtar avtar-lg" alt="">
-                                    </span>
-                                    <div class="user-info">
-                                        <h6 class="name"><a href="app-profile.html">Dedi Cahyadi</a></h6>
-                                        <span class="fs-14 font-w400 text-wrap">Head Manager</span>
-                                    </div>
-                                    <span class="text-primary ms-auto invoice-price">K778</span>
-                                </div>
-                                <div class="d-flex align-items-center student">
-                                    <span class="dz-media">
-                                        <img src="images/invoice-send-img/pic2.jpg" class=" avtar avtar-lg" alt="">
-                                    </span>
-                                    <div class="user-info">
-                                        <h6 class="name"><a href="app-profile.html">Evans John</a></h6>
-                                        <span class=" text-wrap text-break">Programmer</span>
-                                    </div>
-                                    <span class="text-primary ms-auto invoice-price">K779</span>
-
-                                </div>
-                                <!--/student-->
-                                <!--student-->
-                                <div class="d-flex align-items-center student">
-                                    <span class="dz-media">
-                                        <img src="images/invoice-send-img/pic3.jpg" class="avtar avtar-lg" alt="">
-                                    </span>
-                                    <div class="user-info">
-                                        <h6 class="name"><a href="app-profile.html">Brian Brandon</a></h6>
-                                        <span>Graphic Designer</span>
-                                    </div>
-                                    <span class="text-primary ms-auto invoice-price">K776</span>
-
-                                </div>
-                                <!--/student-->
-                                <!--student-->
-                                <div class="d-flex align-items-center student">
-                                    <span class="dz-media">
-                                        <img src="images/invoice-send-img/pic4.jpg" class="avtar avtar-lg" alt="">
-                                    </span>
-                                    <div class="user-info">
-                                        <h6 class="name"><a href="app-profile.html">Bella Brownlee</a></h6>
-                                        <span class=" text-wrap">Software Engineer</span>
-                                    </div>
-                                    <span class="text-primary ms-auto invoice-price">K710</span>
-
-                                </div>
-                                <!--/student-->
-                                <!--student-->
-                                <div class="d-flex align-items-center student">
-                                    <span class="dz-media">
-                                        <img src="images/invoice-send-img/pic2.jpg" class="avtar avtar-lg" alt="">
-                                    </span>
-                                    <div class="user-info">
-                                        <h6 class="name"><a href="app-profile.html">Evans John</a></h6>
-                                        <span class=" text-wrap">Programmer</span>
-                                    </div>
-                                    <span class="text-primary ms-auto invoice-price">K711</span>
-
-                                </div>
-                                <!--/student-->
-
-                            </div>
-                            <div class="card-footer border-0 pt-3 px-3 px-sm-4">
-                                <a hxref="contact.html" class="btn btn-block btn-primary  dz-load-more" id="RecentActivity" rel="ajax/recentactivity.html">VIEW MORE</a>
-                            </div>
-                        </div> --}}
                     </div>
                     @endcan
                 </div>

@@ -31,6 +31,7 @@
     h1,
     p {
       font-family: 'Basier Circle', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+      font-size:12px;
     }
 
     @media screen and (max-width: 530px) {
@@ -72,8 +73,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 216px;
-    height: 56px;
+    width: 60%;
+    height: 5%;
+    padding: 2%;
     text-align: center;
     border-radius: 12px;
   }
@@ -83,7 +85,7 @@
   }
   
   .-bg {
-    background: #ffee00;
+    background: #370933;
   }
   
   .-txt {
@@ -96,8 +98,8 @@
   </style>
 </head>
 
-<body style="margin:0;padding:0;word-spacing:normal;background-color:#ffffff;">
-  <div role="article" aria-roledescription="email" lang="en" style="text-size-adjust:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;background-color:#f8e8da;">
+<body style="margin:0;padding:6%;word-spacing:normal;background-color:#662d91">
+  <div role="article" aria-roledescription="email" lang="en" style="text-size-adjust:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;background-color: #662d91;">
     <table role="presentation" style="width:100%;border:none;border-spacing:0;">
       <tr>
         <td align="center" style="padding:0;">
@@ -106,34 +108,38 @@
           <tr>
           <td>
           <![endif]-->
-          <table role="presentation" style="width:94%;max-width:600px;border:none;border-spacing:0;text-align:left;font-family:'Basier Circle', 'Roboto', 'Helvetica', 'Arial', sans-serif;font-size:1em;line-height:1.37em;color:#384049;">
+          <table role="presentation" style="padding:6%;width:94%;max-width:600px;border:none;border-spacing:0;text-align:left;font-family:'Basier Circle', 'Roboto', 'Helvetica', 'Arial', sans-serif;font-size:1em;line-height:1.37em;color:#384049;">
             <!--  Logo headder -->
             <tr>
-              <td style="padding:30px 20px 20px 20px;text-align:center;font-size:1.5em;font-weight:bold; background: #ffffff;">
+              <td style="padding:30px 20px 20px 20px;text-align:center;font-size:1.5em;font-weight:bold; background-color: linear-gradient(to right, #662d91, #912d73);">
                 <a href="https://mightyfinance.co.zm" style=" text-decoration:none;">
-                  <img style="width:120px; height:90px" alt="Mighty Finance Solutions" src="{{ asset('public/web/images/01-ft-logo.png') }}">
+                  <img style="width:90px; height:60px" alt="Mighty Finance Solutions" src="https://mightyfinance.co.zm/public/web/images/logo.png">
                 </a>
               </td>
             </tr>
             <!--  Intro Section -->
             <tr>
-              <td style="padding:30px;background-color:#ffffff;">
-                <h1 style="margin-top:0;margin-bottom:1.38em;font-size:1.953em;line-height:1.3;font-weight:bold;letter-spacing:-0.02em;">
+              <td style="padding:6%;background-color:#ffffff;">
+                <h1 style="text-align:center; margin-top:0;margin-bottom:1.38em;font-size:1.953em;line-height:1.3;font-weight:bold;letter-spacing:-0.02em;">
                    {{  $data['subject']  }}
                 </h1>
-                <p style="margin:0;">Hello, {{ $data['name'] }}</p>
+                
                 <p style="text-align: left;">
                     {{  $data['message']  }}. 
                 </p>
-                <a target="_blank" href="https://mightyfinance.co.zm/client-loan-requests" class="-btn -bg -txt">
-                    Sign In
-                </a>
-                <br>
-                <p>Best Regards</p>
+                <p style="text-align: left;">
+                    {{  $data['message2']  }}. 
+                </p>
+                <div style="width: 100%; text-align: center; display: flex; align-items: center; justify-content: center;">
+                    <a style="color: #fff; padding:10%;" target="_blank" href="https://mightyfinance.co.zm/dashboard" class="-btn -bg -txt">
+                        Complete loan application
+                    </a>
+                </div>
+                
               </td>
             </tr>
             <tr>
-              <td style="padding:30px;text-align:center;font-size: 0.75em;background-color:#ffeada;color:#384049;border: 1em solid #fff;">
+              <td style="padding:30px;text-align:center;font-size: 0.75em;background-color:rgb(59, 5, 55) 17, 80);color:#384049;border: 1em solid #fff;">
                 <p style="margin:0 0 0.75em 0;line-height: 0;">
                   <!--      LinkedIn logo            -->
                   <a href="{{App\Models\ContactSetting::linkedin()}}" style="display:inline-block;text-decoration:none;margin: 0 5px;">

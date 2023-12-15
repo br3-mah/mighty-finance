@@ -33,7 +33,8 @@
     <link href="{{ asset('public/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
     <!-- Style css -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
-    <link href="{{ asset('public/css/style.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('public/mfs/css/style.css')}}" />
   
 </head>
 
@@ -43,15 +44,18 @@
             <div class="row justify-content-center h-100 align-items-center">
                 <div class="col-md-7">
                     <div class="form-input-content text-center error-page">
-                        <h1 class="error-text fw-bold"> 
+                        <h1 style="color: #662d91" class="error-text fw-bold"> 
                             @yield('code')
                         </h1>
                         <h4><i class="fa fa-exclamation-triangle text-warning"></i> 
                             @yield('message')
                         </h4>
                         <p>@yield('submessage')</p>
-						<div>
-                            <a class="btn btn-primary" href="{{route('welcome')}}">Back to Home</a>
+                        <img width="170" style="border-radius: 50%" src="https://i.pinimg.com/736x/76/f5/0c/76f50c518d95c7f57fd395c6bf3c95e1.jpg" alt="">
+						<br>
+						<br>
+                        <div>
+                            <a class="btn" style="background-color: #662d91" href="{{route('welcome')}}">Back to Home</a>
                         </div>
                     </div>
                 </div>

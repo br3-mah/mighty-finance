@@ -1,549 +1,592 @@
 <style>
-body {
-    color: #000;
-    overflow-x: hidden;
-    height: 100%;
-    background-repeat: no-repeat
-}
-.card0 {
-    background-color: #F5F5F5;
-    border-radius: 8px;
-    z-index: 0
-}
-
-.card00 {
-    z-index: 0
-}
-
-.card1 {
-    margin-left: 140px;
-    z-index: 0;
-    border-right: 1px solid #F5F5F5
-}
-
-.card2 {
-    display: none
-}
-
-.card2.show {
-    display: block
-}
-
-.social {
+    
+    .main-content .wizard-form .progressbar-list::before{
+    content: " ";
+    background-color: rgb(155, 155, 155);
+    border: 10px solid #fff;
     border-radius: 50%;
-    background-color: #ffd900;
-    color: #52138d;
-    height: 47px;
-    width: 47px;
-    padding-top: 16px;
-    cursor: pointer
-}
-
-input,
-select {
-    padding: 2px;
-    border-radius: 0px;
-    box-sizing: border-box;
-    color: #9E9E9E;
-    border: 1px solid #BDBDBD;
-    font-size: 16px;
-    letter-spacing: 1px;
-    height: 50px !important
-}
-
-select {
-    width: 100%;
-    margin-bottom: 85px
-}
-
-input:focus,
-select:focus {
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    border: 1px solid #52138d !important;
-    outline-width: 0 !important
-}
-
-.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-    background-color: #52138d
-}
-
-.form-group {
-    position: relative;
-    margin-bottom: 1.5rem;
-    width: 77%
-}
-
-.form-control-placeholder {
-    position: absolute;
-    top: 0px;
-    padding: 12px 2px 0 2px;
-    transition: all 300ms;
-    opacity: 0.5
-}
-
-.form-control:focus+.form-control-placeholder,
-.form-control:valid+.form-control-placeholder {
-    font-size: 95%;
-    top: 10px;
-    transform: translate3d(0, -100%, 0);
-    opacity: 1;
-    background-color: #fff
-}
-
-.next-button {
-    width: 18%;
-    height: 50px;
-    background-color: #BDBDBD;
-    color: #fff;
-    border-radius: 6px;
-    padding: 10px;
-    cursor: pointer
-}
-
-.next-button:hover {
-    background-color: #52138d;
-    color: #fff
-}
-
-.get-bonus {
-    margin-left: 154px
-}
-
-.pic {
-    width: 230px;
-    height: 110px
-}
-
-#progressbar {
-    position: absolute;
-    left: 35px;
-    overflow: hidden;
-    color: #52138d
-}
-
-#progressbar li {
-    list-style-type: none;
-    font-size: 8px;
-    font-weight: 400;
-    margin-bottom: 36px
-}
-
-#progressbar li:nth-child(3) {
-    margin-bottom: 88px
-}
-
-#progressbar .step0:before {
-    content: "";
-    color: #fff
-}
-
-#progressbar li:before {
+    display: block;
     width: 30px;
     height: 30px;
-    line-height: 30px;
-    display: block;
-    font-size: 20px;
-    background: #fff;
-    border: 2px solid #52138d;
-    border-radius: 50%;
-    margin: auto
-}
-
-#progressbar li:last-child:before {
-    width: 40px;
-    height: 40px
-}
-
-#progressbar li:after {
-    content: '';
-    width: 3px;
-    height: 66px;
-    background: #BDBDBD;
+    margin: 9px auto;
+    box-shadow: 1px 1px 3px #662d91;
+    transition:all;
+    }
+    .main-content .wizard-form .progressbar-list::after{
+    content: "";
+    background-color: rgb(155, 155, 155);
+    padding: 0px 0px;
     position: absolute;
-    left: 58px;
-    top: 15px;
-    z-index: -1
-}
-
-#progressbar li:last-child:after {
-    top: 147px;
-    height: 132px
-}
-
-#progressbar li:nth-child(3):after {
-    top: 81px
-}
-
-#progressbar li:nth-child(2):after {
-    top: 0px
-}
-
-#progressbar li:first-child:after {
-    position: absolute;
-    top: -81px
-}
-
-#progressbar li.active:after {
-    background: #52138d
-}
-
-#progressbar li.active:before {
-    background: #52138d;
-    font-family: FontAwesome;
-    content: "\f00c"
-}
-
-.tick {
-    width: 100px;
-    height: 100px
-}
-
-.prev {
-    display: block;
-    position: absolute;
-    left: 40px;
-    top: 20px;
-    cursor: pointer
-}
-
-.prev:hover {
-    color: #D50000 !important
-}
-
-@media screen and (max-width: 912px) {
-    .card00 {
-        padding-top: 30px
+    top: 14px;
+    left: -50%;
+    width: 100%;
+    height: 2px;
+    margin: 9px auto;
+    z-index: -1;
+    transition: all 0.8s;
     }
-
-    .card1 {
-        border: none;
-        margin-left: 50px
+    .main-content .wizard-form .progressbar-list.active::after{
+        background-color: #662d91;
     }
-
-    .card2 {
-        border-bottom: 1px solid #F5F5F5;
-        margin-bottom: 25px
+    .main-content .wizard-form .progressbar-list:first-child::after{
+        content: none;
     }
-
-    .social {
-        height: 30px;
-        width: 30px;
-        font-size: 15px;
-        padding-top: 8px;
-        margin-top: 7px
+    .main-content .wizard-form .progressbar-list.active::before{
+        font-family: "Font Awesome 5 free";
+        content: "\f00c";
+        font-size: 11px;
+        font-weight: 600;
+        color: #fff;
+        padding: 6px;
+        background-color: #662d91;
+        border: 1px solid #662d91;
+        box-shadow: 0 0 0 7.5px rgb(176 60 70 / 11%);
     }
-
-    .get-bonus {
-        margin-top: 40px !important;
-        margin-left: 75px
+    .progressbar-list{
+        color:#662d91;
     }
-
-    #progressbar {
-        left: -25px
+    .active{
+        color:#000;
     }
-}
-
-/* div {
-  position: absolute;
-} */
-#rangeValue {
-  position: relative;
-  display: block;
-  font-size: 6em;
-  color: #67188b;
-  font-weight: 400;
-}
-.range {
-  width: 400px;
-  -webkit-appearance: none;
-  background: #ffffff;
-  outline: none;
-  /* border-radius: 15px; */
-  overflow: hidden;
-  /* box-shadow: inset 0 0 5px rgba(0, 0, 0, 1); */
-}
-.range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: #ffe600;
-  cursor: pointer;
-  border: 4px solid #333;
-  box-shadow: -407px 0 0 400px #fdcf00;
-}
-
-</style>
-<div class="content-body">
-        <div class="container-fluid px-1 py-5 ">
-            <h2 class="mx-4">Get a Loan</h2>
-            <form action="{{ route("apply-loan") }}" method="POST" enctype="multipart/form-data" class="container">
-                @csrf
-                <input type="hidden" name="user_id" value="{{auth()->user()->id}}" />
-                <div id="mystep1" class="">
-                    <div class="mt-2 block">
-                        <div class="w-full card p-4">
-                            <h4>Loan Amount</h4>
-                            <span id="rangeValue">K10000</span>
-                            <input id="biz_name" class="range" type="range" step="1000" name="amount" value="10000" min="10000" max="200000" onChange="rangeSlide(this.value)" onmousemove="rangeSlide(this.value)"/>
-                        </div>
-                        <button type="button" class="goto2 btn btn-primary">
-                            Continue
-                        </button>
-                    </div>
-                </div>
-                <div id="mystep2" class="">
-                    <div style="cursor:pointer" class="goto1 flex space-x-2 items-center content-center hover:bg-gradient-to-bl focus:ring-4">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                            </svg>
-                        </span>
-                        <span>Back to Step 1</span>
-                    </div>
-                    
-                    <div class="mt-2">
-                        <div class="w-full card p-4">
-                            <h4>Duration</h4>
-                            <div class="input-group">
-                                <select name="duration" id="biz_email" class="">
-                                    <option selected>Choose...</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                </select>
-                                <div class="input-group-append">
-                                    <span class="input-group-text"></span>
-                                    <span class="input-group-text">Months</span>
-                                </div>
-                            </div>                        
-                        </div>
-                        <button type="button" class="goto3 btn btn-primary">
-                            Continue
-                        </button>
-                    </div>
-                </div>
-                <div id="mystep3" class="box-border order-first w-full text-black border-solid md:w-3/4 md:pl-10 md:order-none">
-                    <div style="cursor:pointer" class="goto2 flex space-x-2 items-center content-center hover:bg-gradient-to-bl focus:ring-4">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                            </svg>
-                        </span>
-                        <span>Back to Step 2</span>
-                    </div>
-                    {{-- <h2 class="m-0 text-xl font-extrabold leading-tight border-0 border-gray-300 lg:text-3xl md:text-2xl">
-                        Give customers a phone number so they can call your business
-                    </h2>
-                    <p class="pt-4 pb-8 m-0 leading-7 text-gray-700 border-0 border-gray-300 sm:pr-12 xl:pr-32 lg:text-sm">
-                        Add the phone number of <span class='bname'></span> to help customers connect with you.                    
-                    </p> --}}
-                    <div class="mt-2">
+    /* card */
+    .card img{
+        width: 40px;
+    }
+    .card{
+        border: 3px solid #fbf6f6;
+        cursor: pointer;
+    }
+    .active-card{
+        color:#662d91;
+        font-weight: bold;
+        border: 3px solid #662d91;
+    }
+    .form-check-input:focus {
+        box-shadow: none;
+    }
+    .bg-color-info{
+        background-color:#662d91 !important;
+    }
+    .border-color{
+        border-color: #662d91;
+    }
+    .btn{
+        padding:16px 30px;
+    }
+    .back-to-wizard{
+        transform: translate(-50%, -139%) !important;
+    }
+    .bg-success-color{
+        background-color:#87D185;
+    }
+    .bg-success-color:focus{
+        box-shadow: 0 0 0 0.25rem rgb(55 197 20 / 25%);
+    }
+    
+    .selected-card {
+        background-color: #ffd500; /* Light red background color */
+        border: 1px solid #ffd900; /* Red border color */
+    }
+    
+    /* Input Field Style */
+    /* General styling for all inputs */
+    input {
+        
+        padding: 10px;
+        border: 2px solid #662d91; /* Border color */
+        border-radius: 5px; /* Rounded corners */
+        font-size: 24px; /* Increased font size */
+        font-family: 'Arial', sans-serif;
+    }
+    
+    /* Styling for text-type inputs */
+    input[name='amount'] {
+        text-align: right;
+    }
+    
+    /* Hover effect */
+    input:hover {
+        border-color: #662d91; /* Border color on hover */
+    }
+    
+    /* Focus effect */
+    input:focus {
+        outline: none;
+        border-color: #662d91; /* Border color when focused */
+        box-shadow: 0 0 10px rgba(185, 60, 231, 0.8); /* Box shadow when focused */
+    }
+    
+    
+    /* ranger */
+    @import url("https://fonts.googleapis.com/css2?family=Creepster&family=Roboto:wght@700&display=swap");
+    
+    /* .container {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    } */
+    
+    .range-slider {
+        position: relative;
+        width: 80vmin;
+        height: 20vmin;
+    }
+    
+    .range-slider_input {
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        z-index: 3;
+        transform: translateY(-50%);
+        -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      opacity: 0;
+        margin: 0;
+    }
+    
+    .range-slider_input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+        border-radius: 50%;
+        opacity: 0;
+    }
+    
+    .range-slider_input::-moz-range-thumb {
+      width: 14vmin;
+      height: 14vmin;
+      cursor: pointer;
+        border-radius: 50%;
+        opacity: 0;
+    }
+    
+    .range-slider_thumb {
+        width: 14vmin;
+        height: 14vmin;
+        border: 0.6vmin solid #662d91;
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 700;
+        font-size: 4vmin;
+        color: #662d91;
+        z-index: 2;
+    }
+    
+    .range-slider_line {
+        height: 0.5vmin;
+        width: 100%;
+        background-color: #e1e1e1;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        position: absolute;
+        z-index: 1;
+    }
+    
+    .range-slider_line-fill {
+        position: absolute;
+        height: 0.5vmin;
+        width: 0;
+        background-color: #662d91;
+    }
+    
+    .disabled-card {
+        opacity: 0.5; /* Adjust the opacity as needed */
+        pointer-events: none; /* Disable pointer events */
+        cursor: not-allowed; /* Set the cursor to "not-allowed" */
+    }
+    </style>
+    <div class="content-body">
+            <div class="">
+                {{-- <h2 class="mx-4">Get a Loan</h2> --}}
+                <!-- section -->
+                <section>
+                    <!-- container -->
+                    <div class="container">
+                    <!-- main content -->
+                    <form  action="{{ route("apply-loan") }}" method="POST" enctype="multipart/form-data" class="main-content">
+                        @csrf
                         
-                        <div class="w-full d-flex flex justify-content-between card p-4">
-                            <div class="w-1/2">
-                                <h4>Loan Type</h4>
-                                <select onchange="getLoanPicked()" id="selectedLoan" type="text" name="loan_type" minlength="6" class="w-full" >
-                                    <option value="">--Choose--</option>        
-                                    <option value="Personal">Personal Loan</option>        
-                                    <option value="Small Business Loan">Small Business Loan</option>        
-                                    <option value="Small-Medium Enterprise Business Loan">Small-Medium Enterprise Business Loan</option>        
-                                </select>
-                            </div>
-                            <div id="more_loans">
-                                <br>
-                                <hr>
-                                <div class="w-1/2">
-                                    <h4>Personal Loan Type</h4>
-                                    <select type="text" name="personal_loan_type" minlength="6" class="w-full" >
-                                        <option value="Salary Advance">Salary Advance</option>        
-                                        <option value="Collateral Loan">Collateral Loan</option>        
-                                    </select>
+                        <!-- alert box -->
+                        <div class="row justify-content-center">
+                        <div class="col-lg-7 col-md-8">
+                            <!-- svg -->
+                            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                </symbol>
+                            </svg>
+                            <!-- /svg -->
+                            <div class="alert alert-danger d-flex align-items-center mt-3 d-none mb-0" id="alertBox" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                <div>
+                                    Please fill up all the neccessary fields
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="goto4 btn btn-primary">
-                            Submit
-                        </button>
-                    </div>
-                </div>
-                {{-- <div id="mystep4" class="box-border order-first w-full text-black border-solid md:w-3/4 md:pl-10 md:order-none">
-                    <div style="cursor:pointer" class="goto3 flex space-x-2 items-center content-center hover:bg-gradient-to-bl focus:ring-4">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                            </svg>
-                        </span>
-                        <span>Back to Step 3</span>
-                    </div>
-                    <h2 class="m-0 text-xl font-extrabold leading-tight border-0 border-gray-300 lg:text-3xl md:text-2xl">
-                        Let the Customers search & find your business in specific Categories
-                    </h2>
-                    <p class="pt-4 pb-8 m-0 leading-7 text-gray-700 border-0 border-gray-300 sm:pr-12 xl:pr-32 lg:text-sm">
-                        We’ll use this information to help you claim your Yelp page. Your business will come up automatically if it is already listed.
-                    </p>
-                    <div class="mt-2">
-                        <label class="block text-gray-700">Business Categories</label>
-                        <input type="hidden" name="category_ids" id="category_ids" placeholder="Choose" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none">
-                        <div id="selectedCats" class="py-4">
-
                         </div>
-                        <div class="border-t border-gray-200 rounded p-8">
-                            <p class="py-4 text-xs">Select categories matching your business/company:</p>
-                            
-                        </div>
-                        <button type="button" class="goto5 text-white mt-2 bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                            Continue
-                        </button>
-                    </div>
-                </div>
-                <div id="mystep5" class="box-border order-first w-full text-black border-solid md:w-3/4 md:pl-10 md:order-none">
-                    <div style="cursor:pointer" class="goto4 flex space-x-2 items-center content-center hover:bg-gradient-to-bl focus:ring-4">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                            </svg>
-                        </span>
-                        <span>Back to Step 4</span>
-                    </div>
-                    <h2 class="m-0 text-xl font-extrabold leading-tight border-0 border-gray-300 lg:text-3xl md:text-2xl">
-                        How you are going to be login into Vokamba
-                    </h2>
-                    <p class="pt-4 pb-8 m-0 leading-7 text-gray-700 border-0 border-gray-300 sm:pr-12 xl:pr-32 lg:text-sm">
-                        You will be using this information to help you login to your Vokamba business dashboard.
-                    </p>
-                    <div class="mt-2">
-                        <div class="flex">
-                            <div class="w-1/2">
-                                <label class="block text-gray-700">First Name</label>
-                                <input type="text" name="fname" id="" placeholder="Use your email" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" >
+                        <!-- alert box -->
+                        <!-- row -->
+                        <div class="row justify-content-center pt-0 p-2" id="wizardRow">
+                        <!-- col -->
+                        <div class="col-md-12 text-center">
+                            <!-- wizard -->
+                            <div class="wizard-form py-4 my-2">
+                            <!-- ul -->
+                            <ul id="progressBar" class="progressbar px-lg-5 px-0">
+                                <li id="progressList-1"
+                                class="d-inline-block fw-bold w-25 position-relative text-center float-start progressbar-list active">
+                                Amount </li>
+                                <li id="progressList-2"
+                                class="d-inline-block fw-bold w-25 position-relative text-center float-start progressbar-list">
+                                Loan</li>
+                                <li id="progressList-3"
+                                class="d-inline-block fw-bold w-25 position-relative text-center float-start progressbar-list">
+                                Repayment</li>
+                                <li id="progressList-4"
+                                class="d-inline-block fw-bold w-25 position-relative text-center float-start progressbar-list">
+                                Requirements</li>
+                            </ul>
+                            <!-- /ul -->
                             </div>
-                            <div class="w-1/2">
-                                <label class="block text-gray-700">Last Name</label>
-                                <input type="text" name="lname" id="" placeholder="Use your email" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" >
-                            </div>
+                            <!-- /wizard -->
                         </div>
-                        <label class="block text-gray-700">New Username</label>
-                        <input type="text" name="username" id="" placeholder="Use your email" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" >
-                        
-                        <label class="block text-gray-700">New Password</label>
-                        <input type="text" name="password" id="" placeholder="New Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" >
-                        
-                        <label class="block text-gray-700">Confirm Password</label>
-                        <input type="text" name="confirmed_password" id="" placeholder="Re-type Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" >
-                        <button type="submit" class="text-white mt-2 bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                            Continue
-                        </button>
+                        <!-- /col -->
+                        </div>
+                        <!-- /row -->
+                        <!-- row -->
+                        <div class="row justify-content-center" id="cardSection">
+                            <!-- col -->
+                            <div class="col-lg-9 col-md-9" style="padding: 3%">
+                                <h3 class="fw-bold pt-2">Loan Details</h3>
+                                <p class="small pb-0">How much would you like to borrow?</p>
+                                <!-- cards -->
+                                <div>
+                                    <div class="col-md-12">
+                                        <input type="text" contentEditable='true' data-mask='K #,##0.00' id="amountInput" name="amount"/>
+                                    </div>
+                                </div>
+                                {{-- <div class="row row-cols-1 row-cols-lg-2 g-4 pb-5 border-bottom">
+                                    <div class="col">
+                                        <div class="card text-center h-100 py-5 shadow-sm">
+                                        <i class="fas fa-microphone fa-beat-fade card-img-top mx-auto img-light fs-1 pb-1"></i>
+                                        <div class="card-body px-0">
+                                            <h5 class="card-title title-binding">Locutor</h5>
+                                            <p class="card-text">
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card text-center h-100 py-5"><i class="fas fa-headphones fa-beat-fade  card-img-top mx-auto img-light fs-1 pb-1"></i>
+                                        <div class="card-body px-0">
+                                            <h5 class="card-title title-binding">Controles</h5>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div> --}}
+                                <!-- /cards -->
+                                <!-- NEXT BUTTON-->
+                                <button type="button" class="btn text-white float-end next mt-4 rounded-3 bg-color-info">Continue</button>
+                                <!-- /NEXT BUTTON-->
+                            </div>
+                            <!-- /col -->
+                        </div>
+                        <!-- /row -->
+                        <!-- row -->
+                        <div class="row justify-content-center form-business">
+                            <!-- col -->
+                            <div class="col-lg-9 col-md-9" style="padding: 3%">
+                                <h3 class="fw-bold pt-2">Loan Detail</h3>
+                                <p class="small pb-0">What is your reason for a loan?</p>
+                                <!-- cards -->
+                                <div class="row row-cols-2 row-cols-lg-3 g-4 pb-2 border-bottom">
+                                    <div class="col">
+                                        <label onclick="selectCard(this)" class="card text-center h-70 py-2">
+                                            <input type="radio" name="loan_type" value="GRZ" class="d-none">
+                                            <i class="fas fa-users card-img-top mx-auto img-light fs-1"></i>
+                                            <div class="card-body px-0">
+                                                <h5 class="card-title title-binding">GRZ Loan</h5>
+                                                <p class="card-text">Civil servant<br>based loan</p>
+                                            </div>
+                                        </label>
+                                    </div>
+                                
+                                    {{-- Make this col disabled --}}
+    
+                                    {{-- <div class="col">
+                                        onclick="selectCard(this)"
+                                        <label class="card text-center h-70 py-2 disabled-card">
+                                            <input type="radio" name="loan_type" value="Business" class="d-none" disabled>
+                                            <i class="fas fa-briefcase card-img-top mx-auto img-light fs-1"></i>
+                                            <div class="card-body px-0">
+                                                <h5 class="card-title title-binding">Business Loan</h5>
+                                                <p class="card-text">For starting <br>a business</p>
+                                            </div>
+                                        </label>
+                                    </div> --}}
+                                
+                                    {{-- Make this col disabled --}}
+                                   {{-- <div class="col">
+                                        onclick="selectCard(this)"
+                                        <label  class="card text-center h-70 py-2 disabled-card">
+                                            <input type="radio" name="loan_type" value="SME" class="d-none" disabled>
+                                            <i class="fas fa-store card-img-top mx-auto img-light fs-1"></i>
+                                            <div class="card-body px-0 pt-4">
+                                                <h5 class="card-title title-binding">SME Loans</h5>
+                                                <p class="card-text">Small / Medium / Enterprise Loan</p>
+                                            </div>
+                                        </label>
+                                    </div>  --}}
+                                </div>
+                                
+                                <!-- /cards -->
+                                <!-- NEXT BUTTON-->
+                                <button type="button" class="btn btn-dark text-white float-start back mt-0 rounded-3">Go Back</button>
+                                <button type="button" class="btn text-white float-end next mt-0 rounded-3 bg-color-info">Next</button>
+                                <!-- /NEXT BUTTON-->
+                            </div>
+                            <!-- /col -->
+                        </div>
+                        <!-- /row -->
+                        <!-- row -->
+                        <div class="row justify-content-center form-business">
+                        <!-- col -->
+                            <div class="col-lg-9 col-md-9" style="padding: 3%">
+                            <h3 class="fw-bold pt-2">Repayment Options</h3>
+                            <p class="small pb-0">How will you pay back?</p>
+                            <div>
+                                <div class="range-slider">
+                                    <div id="slider_thumb" class="range-slider_thumb"></div>
+                                    <div class="range-slider_line">
+                                    <div id="slider_line" class="range-slider_line-fill"></div>
+                                    </div>
+                                    <input id="slider_input" name="duration" class="range-slider_input" type="range" value="2" min="1" max="12">
+                                </div>
+                            </div>  
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <p id="interest_value">Interest Rate: 21%</p>
+                                            <p id="principal_value"></p>
+                                        </div> 
+                                        <div class="col-lg-6">
+                                            <p id="slider_value">2 Months</p>
+                                            <p id="interest_value">Interest Rate: 21%</p>
+                                            <p id="interest_value">Service Charge: K3.50</p>
+                                        </div>
+                                    </div>
+                                    {{-- <p id="principal_value"></p> --}}
+                                    <p style="padding: 2%; background-color:#662d91" class="bg-[#662d91] text-white" id="payback_value">Calculator</p>
+                                </div>
+                            </div>
+                            <!-- /cards -->
+                            <!-- NEXT BUTTON-->
+                            <button type="button" class="btn btn-dark text-white float-start back mt-0 rounded-3">Go Back</button>
+                            <button type="button" class="btn text-white float-end next mt-0 rounded-3 bg-color-info confirm">Continue</button>
+                            <!-- /NEXT BUTTON-->
+                            </div>
+                            <!-- /col -->
+                        </div>
+                        <!-- /row -->
+                        <!-- row -->
+                        <div class="row justify-content-center form-business">
+                            <!-- col -->
+                            <div class="col-lg-7 col-md-8" id="successMessage">
+                            <!-- success message -->
+                            <div class="position-relative success-content">
+                                <span class="w-100" id="successImage" alt="success-message">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle fill="#BB14FF" stroke="#BB14FF" stroke-width="2" r="15" cx="40" cy="100"><animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.4"></animate></circle><circle fill="#BB14FF" stroke="#BB14FF" stroke-width="2" r="15" cx="100" cy="100"><animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.2"></animate></circle><circle fill="#BB14FF" stroke="#BB14FF" stroke-width="2" r="15" cx="160" cy="100"><animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="0"></animate></circle></svg>
+                                </span>
+                                <p class="py-2 text-primary">Submitting your loan request ...🚀</p>
+                            </div>
+                            <!-- /success message -->
+                            </div>
+                            <!-- col -->
+                            <div class="col-lg-9 col-md-9" style="padding: 3%" id="successForm">
+                                <div class="mb-5 pb-2 col-lg-12">
+                                    <!-- Final step -->
+                                    <div class="alert alert-sm alert-primary" role="alert">
+                                        <h5 class="p-4">
+                                            You're almost there! 🚀 Continue to do the following easy steps.
+                                        </h5>
+                                        <ol class="text-left">
+                                            <li>1. Fill up the final <b>Submission Form</b>.</li>
+                                            <li>2. Upload Loan Documents (<b>Preapproval Form</b> & <b>Letter of Introduction</b> ).</li>
+                                            <li>3. Complete KYC (Upload Copy of <b>National ID</b> & <b>TPIN</b> ).</li>
+                                        </ol>
+    
+                                    </div>
+                                    {{-- <div class="form-check mt-3">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        Gracias por participar
+                                        </label>
+                                    </div> --}}
+                                    <!-- /Final step -->
+                                </div>
+                                <!-- NEXT BUTTON-->
+                                <button type="button" class="btn btn-dark text-white float-start back rounded-3">Go Back</button>
+                                <button type="submit" class="btn text-white float-end submit-button rounded-3 bg-color-info">Continue</button>
+                                <!-- /NEXT BUTTON-->
+                            </div>
+                        <!-- /col -->
+                        </div>
+                    </form>
+                    <!-- /main content -->
                     </div>
-                </div> --}}
-            </form>
+                    <!-- /container -->
+                </section>
+                <!-- /section -->
+    
+            </div>
         </div>
-    </div>
-    <!-- pickdate -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-    <script type="text/javascript">
-
-            $("#mystep2").hide();
-            $("#mystep3").hide();
-            $("#mystep4").hide();
-            $("#mystep5").hide();
-            $("#more_loans").hide();
-            
-            $(".goto1").click(() => {
-                $("#mystep1").show();
-                $("#mystep2").hide();
-                $("#mystep3").hide();
-                $("#mystep4").hide();
-                $("#mystep5").hide();
-            });
-
-            $(".goto2").click(() => {
-                var inputField = document.getElementById("biz_name");
-                $('.bname').html("<strong>"+inputField.value+"</strong>")
-                if (inputField.value === '') {
-                        inputField.style.borderColor = "red";
-                        inputField.classList.add("shake");
-                    setTimeout(function() {
-                        inputField.classList.remove("shake");
-                    }, 500);
-                } else {
-                    $("#mystep2").show();
-                    $("#mystep1").hide();
-                    $("#mystep3").hide();
-                    $("#mystep4").hide();
-                    $("#mystep5").hide();
-                }
-            });
-
-            $(".goto3").click(() => {
-                var inputField = document.getElementById("biz_email");
-                if (inputField.value === '') {
-                    inputField.style.borderColor = "red";
-                    inputField.classList.add("shake");
-                    setTimeout(function() {
-                        inputField.classList.remove("shake");
-                    }, 500);
-                } else {
-                    $("#mystep1").hide();
-                    $("#mystep2").hide();
-                    $("#mystep3").show();
-                    $("#mystep4").hide();
-                    $("#mystep5").hide();
-                }
-            });
-
-            $(".goto4").click(() => {
-                var inputField = document.getElementById("selectedLoan");
-                if (inputField.value === '') {
-                    inputField.style.borderColor = "red";
-                    inputField.classList.add("shake");
-                    setTimeout(function() {
-                        inputField.classList.remove("shake");
-                    }, 500);
-                } else {
-                    $("#mystep1").hide();
-                    $("#mystep2").hide();
-                    $("#mystep3").hide();
-                    $("#mystep4").show();
-                    $("#mystep5").hide(); 
-                }
-            });
-
-            $(".goto5").click(() => {
-                $("#mystep1").hide();
-                $("#mystep2").hide();
-                $("#mystep3").hide();
-                $("#mystep4").hide();
-                $("#mystep5").show();
-            });
-            
-            function rangeSlide(value) {
-                document.getElementById('rangeValue').innerHTML = 'K'+value;
+        <!-- pickdate -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        {{-- <script src="{{ asset('public/js/zan/dist/zangdar.min.js')}}"></script> --}}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var principal = 0;
+                var rate = 21;
+                
+                // hidden things
+                $(".form-business").hide();
+                $("#successMessage").hide();
+                // next button
+                $(".next").on({
+                    click: function () {
+                        // select any card
+                        var getValue = $(this).parents(".row").find(".card").hasClass("active-card");
+                        // alert(getValue);
+                        if (getValue) {
+                            $("#progressBar").find(".active").next().addClass("active");
+                            $("#alertBox").addClass("d-none");
+                            $(this).parents(".row").fadeOut("slow", function () {
+                                $(this).next(".row").fadeIn("slow");
+                            });
+                            
+                        } else {
+                            $("#progressBar").find(".active").next().addClass("active");
+                            $("#alertBox").addClass("d-none");
+                            $(this).parents(".row").fadeOut("slow", function () {
+                                $(this).next(".row").fadeIn("slow");
+                            });
+                        // $("#alertBox").removeClass("d-none");
+                        }
+                    }
+                });
+                // back button
+                $(".back").on({
+                    click: function () {
+                        $("#progressBar .active").last().removeClass("active");
+                        $(this).parents(".row").fadeOut("slow", function () {
+                            $(this).prev(".row").fadeIn("slow");
+                        });
+                    }
+                });
+                //finish button
+                $(".submit-button").on({
+                    click: function () {
+                        $("#wizardRow").fadeOut(300);
+                        $(this).parents(".row").children("#successForm").fadeOut(300);
+                        $(this).parents(".row").children("#successMessage").fadeIn(3000);
+                    }
+                });
+                //Active card on click function
+                $(".card").on({
+                    click: function () {
+                        $(this).toggleClass("active-card");
+                        $(this).parent(".col").siblings().children(".card").removeClass("active-card");
+                    }
+                });
+                //back to wizard
+                $(".back-to-wizard").on({
+                    click: function () {
+                        location.reload(true);
+                    }
+                });
+    
+                // Get the input element by its ID
+                const amountInput = document.getElementById('amountInput');
+    
+                // Add an input event listener to the input element
+                amountInput.addEventListener('input', function() {
+                    // Get the current value of the input
+                    var inputValue = amountInput.value;
+    
+                    // Remove non-numeric characters (letters, symbols, commas)
+                    var numericValue = inputValue.replace(/[^0-9.]/g, '');
+    
+                    // Convert the numeric value to a float
+                    principal = parseInt(numericValue);
+    
+                    var my_returns = (parseInt(principal) * 0.21) * parseInt(2) + parseInt(principal);
+                    // Log the cleaned and converted value to the console
+                    console.log('Borrowing: ', principal);
+                    $('#payback_value').text( 'Payback amount of: K'+my_returns.toFixed(2));
+                    $('#principal_value').text( 'Borrowing: K'+principal);
+                    // Update a display element with the current value
+                    $('#slider_value').text( 'Payback in 2 Months');
+                });
+    
+    
+                // Use input event to track changes in the range input value
+                $('#slider_input').on('input', function () {
+    
+                    // Get the current value of the range input
+                    var sliderValue = $(this).val();
+    
+                    var my_returns = (parseInt(principal) * 0.21) * parseInt(sliderValue) + parseInt(principal);
+    
+                    $('#payback_value').text( 'Payback amount of: K'+my_returns.toFixed(2));
+                    $('#principal_value').text( 'Borrowing: K'+principal);
+                    // Update a display element with the current value
+                    $('#slider_value').text( 'Payback in '+sliderValue + ' Months');
+                });
+            }); 
+    
+    
+    
+            const slider_input = document.getElementById('slider_input'),
+            slider_thumb = document.getElementById('slider_thumb'),
+            slider_line = document.getElementById('slider_line');
+    
+            function showSliderValue() {
+                slider_thumb.innerHTML = slider_input.value;
+                const bulletPosition = (slider_input.value /slider_input.max),
+                        space = slider_input.offsetWidth - slider_thumb.offsetWidth;
+    
+                slider_thumb.style.left = (bulletPosition * space) + 'px';
+                slider_line.style.width = slider_input.value + '%';
             }
-            function getLoanPicked() {
-                // Get the select element
-                var selectElement = document.getElementById("selectedLoan");
-                
-                // Get the selected option value
-                var selectedValue = selectElement.value;
-                
-                if(selectedValue === 'Personal'){
-                    $("#more_loans").show();
-                }else{
-                    $("#more_loans").hide();
-                }
+    
+            showSliderValue();
+            window.addEventListener("resize",showSliderValue);
+            slider_input.addEventListener('input', showSliderValue, false);
+    
+            function selectCard(selectedLabel) {
+                // Remove the 'selected-card' class from all labels
+                var labels = document.querySelectorAll('.card');
+                labels.forEach(function (label) {
+                    label.classList.remove('selected-card');
+                });
+    
+                // Add the 'selected-card' class to the clicked label
+                selectedLabel.classList.add('selected-card');
             }
         </script>
-</div>
+        
+    </div>
+    

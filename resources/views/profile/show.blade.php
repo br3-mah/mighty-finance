@@ -1,212 +1,162 @@
 <x-dash-layout>
+<div>
+  @php
+  if (isset($_GET['view'])) {
+      // Retrieve the value of the 'view' parameter
+      $param = $_GET['view'];
 
+      // Use the $view variable as needed
+      $view = htmlspecialchars($param);
+  } 
+  @endphp
     <div class="content-body">
-        <div class="container-fluid">
-            <!-- row -->
-            <div class="row">
-                <div class="col-xl-3 col-lg-4">
-                    <div class="clearfix h-100">
-                        <div class="card card-bx profile-card author-profile m-b30">
-                            <div class="card-body">
-                                <div class="p-3">
-                                    <div class="author-profile">
-                                        {{-- <div class="author-media">
-                                            <img src="images/user.jpg" alt="">
-                                            <div class="upload-link" title="" data-toggle="tooltip" data-placement="right" data-original-title="update">
-                                                <input type="file" class="update-flie">
-                                                <i class="fa fa-camera"></i>
-                                            </div>
-                                        </div> --}}
-                                        <div class="author-info">
-                                            <h6 class="title">{{ auth()->user()->fname.' '.auth()->user()->lname }}</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="info-list">
-                                    <ul>
-                                        <li><a class="btn btn-sm" href="#" onclick="displayGeneral()">Basic Info</a></li>
-                                        <li><a class="btn btn-sm" href="#" onclick="displayUploads()">Attachments</a></li>
-                                        <li><a class="btn btn-sm" href="#" onclick="displaySecurity()">Security & Password</a></li>
-                                        {{-- <li><a href="#" onclick="displayTwoFactor()">2 Factor Authentication</a></li> --}}
-                                        <li><a class="btn btn-sm" href="#" onclick="displaySessions()">Sessions</a></li>
-                                        {{-- <li><a href="#" onclick="displayCloseAccount()">Close Account</a></li> --}}
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                {{-- <div class="input-group mb-3">
-                                    <div class="form-control rounded text-center bg-white">Portfolio</div>
-                                </div>
-                                <div class="input-group">
-                                    <a href="https://www.dexignlab.com/" class="form-control text-primary rounded text-start bg-white">https://www.dexignzone.com/</a>
-                                </div> --}}
-                            </div>
-                        </div>
-                    </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xxl-12 col-xl-12">
+              <div class="page-title" style="display: flex; gap:3%">
+                <span>
+                  <a href="{{ route('settings') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="26" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                    </svg>
+                  </a>
+                </span>
+                @switch($view)
+                    @case('profile')
+                        <h4>Profile</h4>
+                        @break
+                    @case('kyc')
+                        <h4>Kyc Information</h4>
+                        @break
+                    @case('privacy-security')
+                        <h4>Privacy & Security</h4>
+                        @break
+                    @case('issue')
+                        <h4>Support (Report Issue)</h4>
+                        @break
+                    @default
+                      <h4>Profile</h4>
+                      @break
+                        
+                @endswitch
+              </div>
+              <div class="">
+     
+                <div class="col-xxl-12 col-xl-12 col-lg-12 px-4">
+                  @if (session('success'))
+                      <div class="alert alert-success">
+                          {{ session('success') }}
+                      </div>
+                  @endif
+
+                  @if (session('error'))
+                      <div class="alert alert-danger">
+                          {{ session('error') }}
+                      </div>
+                  @endif
                 </div>
-                <div class="col-xl-9 col-lg-8">
-                    <div id="generalProfileSection">
+                <div id="updateProfile" class="">
+                  <div class="row">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12">
                         @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                            @livewire('profile.update-profile-information-form')
-                        @endif
-
-                    </div>
-
-                    <div id="logoutDevices">       
-                        <div class="mt-10 sm:mt-0">
-                            @livewire('profile.logout-other-browser-sessions-form')
-                        </div>
-                    </div>
-
-                    <div id="diactivateAccount">
-                        @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
-                            <div class="mt-10 sm:mt-0">
-                                @livewire('profile.delete-user-form')
-                            </div>
+                            @include('profile.update-profile-information-form')
                         @endif
                     </div>
-
-                    <div id="updateSecurity">
-                        @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
-                            <div class="mt-10 sm:mt-0">
-                                @livewire('profile.update-password-form')
-                            </div>
-                        @endif
-                        @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-                            <div class="mt-10 sm:mt-0">
-                                @livewire('profile.two-factor-authentication-form')
-                            </div>
-                        @endif
-                    </div>
-
-                    <div id="fileUploadSection" class="card profile-card card-bx m-b30 p-4">
-                        <form action="{{ route("update-file-uploads") }}" method="POST" enctype="multipart/form-data">
-                            @csrf   
-                            <div>
-                                <h3>
-                                    {{ __('Upload Documents') }}
-                                </h3>
-                            
-                                <p>
-                                    {{ __('Upload neccessary documents as required.') }}
-                                </p>
-                            </div>
-                            <div class="row pt-4">
-                                <div class="col-xl-6">
-                                    <div class="form-group">
-                                        <div class="input-box">
-                                            <div class="mb-3">
-                                                <label for="formFile" class="form-label">Copy of NRC</label>
-                                                <input class="form-control" name="nrc_file" type="file" id="formFile">
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6">
-                                    <div class="form-group">
-                                        <div class="input-box">
-                                            <div class="mb-3">
-                                                <label for="formFile" class="form-label">Business Profile</label>
-                                                <input class="form-control" name="business_file" type="file" id="formFile">
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6">
-                                    <div class="form-group">
-                                        <div class="input-box">
-                                            <div class="mb-3">
-                                                <label for="payslip_file" class="form-label">Payslip</label>
-                                                <input class="form-control" name="payslip_file" type="file" id="payslip_file">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6">
-                                    <div class="form-group">
-                                        <div class="input-box">
-                                            <div class="mb-3">
-                                                <label for="tpin_file" class="form-label">Tpin</label>
-                                                <input class="form-control" name="tpin_file" type="file" id="tpin_file">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <button class="btn btn-primary">Upload</button>
-                            </div>
-                        </form>
-                    </div>
+                  </div>
                 </div>
-            </div>	
+                <div id="twoFactor" class="">
+                  <div class="row">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12">
+                      @if (Laravel\Fortify\Features::canUpdateProfileInformation())
+                          @livewire('profile.update-password-form')
+                      @endif
+                    </div>
+                    <div class="col-xxl-12 col-xl-12 col-lg-12">
+                        @if (Laravel\Fortify\Features::canUpdateProfileInformation())
+                            @livewire('profile.logout-other-browser-sessions-form')
+                        @endif
+                    </div>
+                  </div>
+                </div>
+                <div id="browserSession" class="">
+                  <div class="row">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12">
+                        @if (Laravel\Fortify\Features::canUpdateProfileInformation())
+                            @livewire('profile.update-password-form')
+                        @endif
+                    </div>
+                    <div class="col-xxl-12 col-xl-12 col-lg-12">
+                        @if (Laravel\Fortify\Features::canUpdateProfileInformation())
+                            @livewire('profile.logout-other-browser-sessions-form')
+                        @endif
+                    </div>
+                  </div>
+                </div>
+
+                <div id="docUploads" class="">
+                  <div class="row">
+                    @include('profile.kyc-update')
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-    <script>
-        const general = document.getElementById("generalProfileSection");
-        const uploads = document.getElementById("fileUploadSection");
-        const browserSessions = document.getElementById("logoutDevices");
-        const updateSecurity = document.getElementById("updateSecurity");
-        const closeAccount = document.getElementById("diactivateAccount");
-        const twoFactor = document.getElementById("twoFactorAuth");
+      </div>
+      <script>
+        
+          document.getElementById('twoFactor').style.display = "none";
+          document.getElementById('browserSession').style.display = "none";
+          var view = '{{$view}}';
+          switch (view) {
+            case 'profile':
+              profileTab();
+              break;
+            case 'kyc':
+              docUplaodsTab()
+              break;
+            case 'privacy-security':
+              
+              securityTab();
+              break;
+            case 'issue':
+              activityTab();
+              break;
+          
+            default:
+              profileTab();
+              break;
+          }
 
-        general.style.display = "block";
-        uploads.style.display = "none";
-        browserSessions.style.display = "none";
-        updateSecurity.style.display = "none";
-        closeAccount.style.display = "none";
-        twoFactor.style.display = "none";
-
-        function displayGeneral() {
-            general.style.display = "block";
-            uploads.style.display = "none";
-            uploads.style.display = "none";
-            browserSessions.style.display = "none";
-            updateSecurity.style.display = "none";
-            closeAccount.style.display = "none";
-            twoFactor.style.display = "none";
-        }
-        function displayUploads() {
-            uploads.style.display = "block";
-            general.style.display = "none";
-            browserSessions.style.display = "none";
-            updateSecurity.style.display = "none";
-            closeAccount.style.display = "none";
-            twoFactor.style.display = "none";
-        }
-        function displaySessions() {
-            uploads.style.display = "none";
-            general.style.display = "none";
-            browserSessions.style.display = "block";
-            updateSecurity.style.display = "none";
-            closeAccount.style.display = "none";
-            twoFactor.style.display = "none";
-        }
-        function displaySecurity() {
-            uploads.style.display = "none";
-            general.style.display = "none";
-            browserSessions.style.display = "none";
-            updateSecurity.style.display = "block";
-            closeAccount.style.display = "none";
-            twoFactor.style.display = "none";
-        }
-        function displayCloseAccount() {
-            uploads.style.display = "none";
-            general.style.display = "none";
-            browserSessions.style.display = "none";
-            updateSecurity.style.display = "none";
-            closeAccount.style.display = "block";
-            twoFactor.style.display = "none";
-        }
-        function displayTwoFactor() {
-            uploads.style.display = "none";
-            general.style.display = "none";
-            browserSessions.style.display = "none";
-            updateSecurity.style.display = "none";
-            closeAccount.style.display = "none";
-            twoFactor.style.display = "block";
-        }
-        </script>
+          function profileTab() {
+            document.getElementById('updateProfile').style.display = "block";
+            document.getElementById('twoFactor').style.display = "none";
+            document.getElementById('browserSession').style.display = "none";
+            document.getElementById('docUploads').style.display = "none";
+          }
+          function activityTab() {
+            document.getElementById('updateProfile').style.display = "none";
+            document.getElementById('twoFactor').style.display = "none";
+            document.getElementById('browserSession').style.display = "block";
+            document.getElementById('docUploads').style.display = "none";
+          }
+          function securityTab() {
+            document.getElementById('updateProfile').style.display = "none";
+            document.getElementById('twoFactor').style.display = "block";
+            document.getElementById('browserSession').style.display = "none";
+            document.getElementById('docUploads').style.display = "none";
+          }
+          function docUplaodsTab() {
+            document.getElementById('updateProfile').style.display = "none";
+            document.getElementById('twoFactor').style.display = "none";
+            document.getElementById('browserSession').style.display = "none";
+            document.getElementById('docUploads').style.display = "block";
+          }
+      </script>
+      <script src="{{ asset('public/mfs/vendor/jquery/jquery.min.js')}}"></script>
+      <script src="{{ asset('public/mfs/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+</div>
 </x-dash-layout>

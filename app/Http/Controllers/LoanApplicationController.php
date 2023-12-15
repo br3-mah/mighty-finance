@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\User;
-use App\Models\UserFile;
 use App\Models\WithdrawRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\File;
 use App\Traits\EmailTrait;
+use App\Traits\FileTrait;
 use App\Traits\LoanTrait;
 use App\Traits\UserTrait;
 use App\Traits\WalletTrait;
@@ -17,7 +16,7 @@ use Illuminate\Support\Facades\Session;
 
 class LoanApplicationController extends Controller
 {     
-    use EmailTrait, LoanTrait, UserTrait, WalletTrait;
+    use EmailTrait, LoanTrait, UserTrait, WalletTrait, FileTrait;
     /**
      * Display a listing of the resource.
      *
@@ -26,6 +25,12 @@ class LoanApplicationController extends Controller
     public function index()
     {
         //
+    }
+
+    public function alreadyLoaned($id){
+        $check = Application::where('status', 0)->where('complete', 0)
+        ->where('user_id', $id)->orderBy('created_at', 'desc')->get();
+        return view('livewire.already-have-loan');
     }
 
     /**
@@ -74,10 +79,11 @@ class LoanApplicationController extends Controller
         try {
         DB::beginTransaction();
         $form = $request->toArray();
+        // dd($form);
         if ($form['package_personal'] == 'salary_advance') {
-            $loan_type = 'Civil Servant';
+            $loan_type = 'GRZ Loan';
         }else{
-            $loan_type = 'Civil Servant';
+            $loan_type = 'GRZ Loan';
         }
         
         if($request->file('tpin_file') !== null){               
@@ -94,7 +100,7 @@ class LoanApplicationController extends Controller
             'mname'=> $form['mname'],
             'phone2'=> $form['phone2'],
             'email'=> $form['email'] ?? '',
-            'password' => 'Mighty4you',
+            'password' => 'mighty4you',
             'terms' => 'accepted'
         ];
         $user = $this->registerUser($register);
@@ -121,33 +127,41 @@ class LoanApplicationController extends Controller
             
             // $this->apply_loan($data);
             $res = $this->apply_loan($data);
-
-            if($res == 1){
+            
+            if($res == 'exists'){
+                $loan = Application::where('status', 0)->where('complete', 0)
+                                    ->where('user_id', $user->id)->orderBy('created_at', 'desc')->first();
                 return response()->json([
                     "status" => 500, 
                     "success" => false, 
-                    "message" => "Already have a Loan."
+                    "message" => "Already have a Loan.",
+                    "loan_id" => $loan->id,
+                    "amount" => $loan->amount
+                ]); 
+            }else{
+                
+                $mail = [
+                    'user_id' => $user->id,
+                    'name' => $form['name'].' '.$form['lname'],
+                    'loan_type' => $form['type'].' '.$form['package_personal'],
+                    'phone' => $form['phone'],
+                    'duration' => $form['repayment_plan'],
+                    'amount' => $form['amount'],
+                    'type' => 'loan-application',
+                    'msg' => 'You have new a '.$form['type'].' loan application request, please visit the site to view more details'
+                ];  
+        
+                // Send information to the admin
+                $this->send_loan_email($mail);
+                
+                DB::commit();
+                return response()->json([
+                    "status" => 200, 
+                    "success" => true, 
+                    "message" => "Your loan has been sent."
                 ]); 
             }
-            $mail = [
-                'user_id' => $user->id,
-                'name' => $form['name'].' '.$form['lname'],
-                'loan_type' => $form['type'].' '.$form['package_personal'],
-                'phone' => $form['phone'],
-                'duration' => $form['repayment_plan'],
-                'amount' => $form['amount'],
-                'type' => 'loan-application',
-                'msg' => 'You have new a '.$form['type'].' loan application request, please visit the site to view more details'
-            ];  
     
-            $this->send_loan_email($mail);
-            
-            DB::commit();
-            return response()->json([
-                "status" => 200, 
-                "success" => true, 
-                "message" => "Your loan has been sent."
-            ]);     
         }else{
             
             DB::rollback();
@@ -165,52 +179,66 @@ class LoanApplicationController extends Controller
 
     public function updateFiles(Request $request)
     {
-        DB::beginTransaction();
-        $i = auth()->user();   
+        // DB::beginTransaction();  
         try {
+            $user = Application::where('user_id',auth()->user()->id)->where('status', 0)->where('complete', 0)->first();
+
             if($request->file('nrc_file') !== null){
                 $nrc_file = $request->file('nrc_file')->store('nrc_file', 'public'); 
-                $user = Application::where('user_id',auth()->user()->id)->where('status', 0)->where('complete', 0)->first();
                 $user->nrc_file = $nrc_file;
                 $user->save();      
             }
     
             if($request->file('tpin_file') !== null){               
                 $tpin_file = $request->file('tpin_file')->store('tpin_file', 'public');   
-                $user = Application::where('user_id',auth()->user()->id)->where('status', 0)->where('complete', 0)->first();
                 $user->tpin_file = $tpin_file;
                 $user->save();           
             }
     
             if($request->file('payslip_file') !== null){               
                 $payslip_file = $request->file('payslip_file')->store('payslip_file', 'public');  
-                $user = Application::where('user_id',auth()->user()->id)->where('status', 0)->where('complete', 0)->first();
                 $user->payslip_file = $payslip_file;
                 $user->save();        
             }
 
-            if($i->id_type !== null && $i->net_pay !== null && $i->basic_pay !== null && $i->address !== null && $i->phone !== null && $i->occupation !== null && $i->gender !== null && $i->nrc_no !== null && $i->dob !== null){
-                $loan = Application::where('status', 0)->where('complete', 0)
-                            ->where('user_id', auth()->user()->id)->first();
-                            
-                if($loan !== null){
-                    if($loan->tpin_file !== 'no file' && $loan->payslip_file !== 'no file' && $loan->nrc_file !== null){
-                        // dd('here in loan');
-                        $loan->complete = 1;
-                        $loan->save();
-                        DB::commit();
-                        return redirect()->to('/dashboard');
-                    }
-                }
-            }
+            $this->isKYCComplete();
             
-            DB::commit();
+            // DB::commit();
             return redirect()->to('/user/profile');
         } catch (\Throwable $th) {
-            DB::rollback();
+            dd($th);
+            // DB::rollback();
             return redirect()->to('/user/profile');
         }
 
+    }
+
+    public function updateKYCFiles(Request $request){
+        try {
+            // First Upload the files
+            $this->uploadCommonFiles($request);
+
+            // Personal Info
+            $input = $request->toArray();
+            $user = auth()->user();
+            $user->fname = $input['fname'];
+            $user->lname = $input['lname'];
+            $user->phone = $input['phone'];
+            // $user->email = $input['email'];
+            $user->address = $input['address'];
+            $user->occupation = $input['occupation'];
+            $user->id_type = $input['id_type'];
+            $user->nrc_no = $input['nrc_no'];
+            $user->nrc = $input['nrc_no'];
+            $user->dob = $input['dob'];
+            $user->gender = $input['gender'];
+            $user->save();
+
+            $this->isKYCComplete();
+            return redirect()->route('dashboard')->with('success', 'KYC Updated successfully');
+        } catch (\Throwable $th) {
+            return redirect()->route('dashboard')->with('success', 'KYC Update failed');
+        }
     }
 
     /**
@@ -221,62 +249,43 @@ class LoanApplicationController extends Controller
      */
     public function new_loan(Request $request)
     {
-
+        $form = $request->toArray();
+        // Remove non-numeric characters
+        $amount = intval(str_replace(['K', ',', '$', "'", '"', ' '], '', $form['amount']));
+        
         DB::beginTransaction();
         try {
-            $form = $request->toArray();
-            // dd($form);
-            if($request->file('tpin_file') !== null){               
-                $tpin_file = $request->file('tpin_file')->store('tpin_file', 'public');                
-            }
-    
-            if($request->file('payslip_file') !== null){               
-                $payslip_file = $request->file('payslip_file')->store('payslip_file', 'public');         
-            }
+            
+            // First Upload the files
+            $this->uploadCommonFiles($request);
     
             $data = [
                 'user_id'=> auth()->user()->id,
                 'lname'=> auth()->user()->lname,
                 'fname'=> auth()->user()->fname,
                 'email'=>  auth()->user()->email,
-                'amount'=> $form['amount'],
-                // 'phone'=> $form['phone'],
+                'amount'=> $amount,
                 'gender'=> auth()->user()->gender,
                 'type'=> $form['loan_type'],
                 'repayment_plan'=> $form['duration'],
-                'cust_type'=> $form['customer_type'],
-                'personal_loan_type'=> $form['personal_loan_type'],
-                'tpin_file' => $tpin_file ?? 'no file',
-                'payslip_file' => $payslip_file ?? 'no file',
-                'complete' => 0
+                'personal_loan_type'=> $form['loan_type'],
+                'status' => 0,
+                'continue' => 1
             ];
-            // if($form['type'] !== 'Asset Financing' ){
-            //     $nok = [
-            //         'nok_email' => $form['nok_email'],
-            //         'nok_fname' => $form['nok_fname'],
-            //         'nok_lname' => $form['nok_lname'],
-            //         'nok_phone' => $form['nok_phone'],
-            //         'nok_relation' => $form['nok_relation'],
-            //         'nok_gender' => $form['nok_gender'],
-            //         'user_id' => $form['user_id']
-            //     ];
-            //     $this->createNOK($nok);
-            // }
             $application = $this->apply_loan($data);
+            $this->isKYCComplete();
             $mail = [
                 'user_id' => auth()->user()->id,
                 'application_id' => $application,
-                'name' => $form['fname'].' '.$form['lname'],
-                'loan_type' => $form['type'],
-                'phone' => $form['phone'],
-                'duration' => $form['repayment_plan'],
-                'amount' => $form['amount'],
+                'name' => $data['fname'].' '.$data['lname'],
+                'loan_type' => $data['type'],
+                'duration' => $data['repayment_plan'],
+                'amount' => $data['amount'],
                 'type' => 'loan-application',
-                'msg' => 'You have new a '.$form['type'].' loan application request, please visit the site to view more details'
+                'msg' => 'You have new a '.$data['type'].' loan application request, please visit the site to view more details'
             ];
-    
             $process = $this->send_loan_email($mail);
-    
+            
             if($request->wantsJson()){
                 return response()->json([
                     "status" => 200, 
@@ -555,130 +564,82 @@ class LoanApplicationController extends Controller
     public function continue_loan(Request $request){
         try {
             $data = $request->toArray();
-            // dd($data);
-            if($request->file('preapproval') !== null){               
-                $preapproval = $request->file('preapproval')->store('preapproval', 'public'); 
-                UserFile::create([
-                    'name' => $request->file('preapproval')->getClientOriginalName(),
-                    'path' => $preapproval,
-                    'user_id' => auth()->user()->id
-                ]);               
+           
+            // First Upload the files
+            $this->uploadCommonFiles($request);
+
+            // Data Segmentation
+            if(isset($data['dob'])){
+                $personal = [
+                    'dob' => $data['dob'],
+                    'nrc_no' => $data['nrc'],
+                    'phone' => $data['phone'],
+                    'employeeNo' => $data['employeeNo'],
+                    'jobTitle' => $data['jobTitle'],
+                    'ministry' => $data['ministry'],
+                    'department' => $data['department'],
+                    'borrower_id' => $data['borrower_id'],
+                    'gender'=> $data['gender']
+                ];
+                $this->updateUser($personal);
             }
-            if($request->file('passport') !== null){               
-                $passport = $request->file('passport')->store('passport', 'public');
-                UserFile::create([
-                    'name' => $request->file('passport')->getClientOriginalName(),
-                    'path' => $passport,
-                    'user_id' => auth()->user()->id
-                ]);                
+
+            if (isset($data['nextOfKinFirstName'])) {
+                $nok = [
+                    'nok_fname' => $data['nextOfKinFirstName'],
+                    'nok_lname' => $data['nextOfKinLastName'],
+                    'nok_phone' => $data['nextOfKinPhone'],
+                    'nok_relation' => $data['relationship'],
+                    'nok_address' => $data['physicalAddress'],
+                    'user_id' => $data['borrower_id']
+                ];
+                $this->createNOK($nok);
             }
-            if($request->file('bankstatement') !== null){               
-                $bankstatement = $request->file('bankstatement')->store('bankstatement', 'public');
-                UserFile::create([
-                    'name' => $request->file('bankstatement')->getClientOriginalName(),
-                    'path' => $bankstatement,
-                    'user_id' => auth()->user()->id
-                ]);                 
+            // $guarants = [
+            //     'gfname'=> $data['guarantorName'],
+            //     'gnrc_no'=> $data['guarantorNRC'],
+            //     'gdob'=> $data['guarantorDOB'],
+            //     'gphone'=> $data['guarantorContactNumber'],
+            //     'gphone2'=> $data['alternativeNumber'],
+            //     'gphonesp3'=> $data['spouseContactNumber'],
+            //     'gaddress'=> $data['guarantorAddress'],
+            //     'g_relation'=> $data['relationshipToBorrower'],
+            //     'application_id' => $data['application_id']
+            // ];
+            if (isset($data['hrFirstName'])) {
+                $refs = [
+                    'hrFname'=> $data['hrFirstName'],
+                    'hrLname'=> $data['hrLastName'],
+                    'hrContactNumber'=> $data['hrContactNumber'],
+                    'supervisorFirstName'=> $data['supervisorFirstName'],
+                    'supervisorLastName'=> $data['supervisorLastName'],
+                    'supervisorContactNumber'=> $data['supervisorContactNumber'],
+                    'user_id' => $data['borrower_id'],
+                    'application_id' => $data['application_id']
+                ];
+                $this->createRefs($refs);  
             }
-    
-            if($request->file('payslip_file') !== null){               
-                $payslip_file = $request->file('payslip_file')->store('payslip_file', 'public');
-                UserFile::create([
-                    'name' => $request->file('payslip_file')->getClientOriginalName(),
-                    'path' => $payslip_file,
-                    'user_id' => auth()->user()->id
-                ]);          
+
+            if (isset($data['bankName'])) {
+                $bank = [
+                    'bankName'=> $data['bankName'],
+                    'branchName'=> $data['branchName'],
+                    'accountNames'=> $data['accountNames'],
+                    'accountNumber'=> $data['accountNumber'],
+                    'user_id' => auth()->user()->id,
+                ];
+                $this->createBankDetails($bank);
             }
-    
-            if($request->file('nrc_file') !== null){               
-                $nrc_file = $request->file('nrc_file')->store('nrc_file', 'public');
-                UserFile::create([
-                    'name' => $request->file('nrc_file')->getClientOriginalName(),
-                    'path' => $nrc_file,
-                    'user_id' => auth()->user()->id
-                ]);         
-            }
-            // Update Personal Info & KYC status
-            $personal = [
-                'dob' => $data['dob'],
-                'nrc_no' => $data['nrc'],
-                'phone' => $data['phone'],
-                'employeeNo' => $data['employeeNo'],
-                'jobTitle' => $data['jobTitle'],
-                'ministry' => $data['ministry'],
-                'department' => $data['department'],
-                'borrower_id' => $data['borrower_id']
-            ];
-            $this->updateUser($personal);
-            $loan = Application::where('id', $data['application_id'])->first();
-            $loan->complete = 1;
-            $loan->save();
-            // Handle file uploads
-            // if (array_key_exists('files', $data) && is_array($data['files'])) {
-            //     foreach ($data['files'] as $file) {
-            //         // Store the file in the storage/app/public directory (you can change the path as needed)
-            //         $path = $file->store('public/user_files');
-                    
-            //         // Save the file path in the database if you have a table for file records
-            //         UserFile::create([
-            //             'name' => $file->getClientOriginalName(),
-            //             'path' => $path,
-            //             'user_id' => $data['borrower_id']
-            //         ]);
-            //     }
-            // }
-            // Create Next of Kin
-            $nok = [
-                'nok_fname' => $data['nextOfKinFirstName'],
-                'nok_lname' => $data['nextOfKinLastName'],
-                'nok_phone' => $data['nextOfKinPhone'],
-                'nok_relation' => $data['relationship'],
-                'nok_address' => $data['physicalAddress'],
-                'user_id' => $data['borrower_id']
-            ];
-            $this->createNOK($nok);
-    
-    
-            // Update Guarantors
-            $guarants = [
-                'gfname'=> $data['guarantorName'],
-                'gnrc_no'=> $data['guarantorNRC'],
-                'gdob'=> $data['guarantorDOB'],
-                'gphone'=> $data['guarantorContactNumber'],
-                'gphone2'=> $data['alternativeNumber'],
-                'gphonesp3'=> $data['spouseContactNumber'],
-                'gaddress'=> $data['guarantorAddress'],
-                'g_relation'=> $data['relationshipToBorrower'],
-                'application_id' => $data['application_id']
-            ];
-        
-            $this->updateGuarantors($guarants);
-    
-    
-    
-            // Update reference details
-            $refs = [
-                'hrFname'=> $data['hrFirstName'],
-                'hrLname'=> $data['hrLastName'],
-                'hrContactNumber'=> $data['hrContactNumber'],
-                'supervisorFirstName'=> $data['supervisorFirstName'],
-                'supervisorLastName'=> $data['supervisorLastName'],
-                'supervisorContactNumber'=> $data['supervisorContactNumber'],
-                'user_id' => $data['borrower_id'],
-                'application_id' => $data['application_id']
-            ];
-            $this->createRefs($refs);
-    
-            // Update bank details
-            $bank = [
-                'bankName'=> $data['bankName'],
-                'branchName'=> $data['branchName'],
-                'accountNames'=> $data['accountNames'],
-                'accountNumber'=> $data['accountNumber'],
-                'user_id' => $data['borrower_id'],
-            ];
-            $this->createBankDetails($bank);
-            return redirect()->back();
+            
+            
+            if($request->wantsJson()){
+                return response()->json([
+                    "status" => 200, 
+                    "success" => true
+                ]);
+            }else{
+                return redirect()->back();
+            } 
         } catch (\Throwable $th) {
             dd($th);
         }

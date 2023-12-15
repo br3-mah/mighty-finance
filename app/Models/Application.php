@@ -71,8 +71,8 @@ class Application extends Model
         'personal_loan_type',
         'age',
         'is_zambian',
-        'nationality'
-
+        'nationality',
+        'continue'
     ];
     protected $appends = [
         'done_by',
@@ -138,11 +138,19 @@ class Application extends Model
     //     // }
     // }
 
+    // Pending for approval
     public static function currentApplication(){
         return Application::where('user_id', auth()->user()->id)
-        ->where('status', 0)->where('complete', 0)->first();
+        ->orderBy('created_at', 'desc')->first();
+        // ->where('status', 0)->where('complete', 0)->first();
     }
- 
+
+    // Pending for payback
+    public static function activeApplication(){
+        return Application::where('user_id', auth()->user()->id)
+        ->where('status', 1)->where('complete', 1)->first();
+    }
+
     public static function payback($principal, $duration){
         // 1 month
         if( $duration == 1){
