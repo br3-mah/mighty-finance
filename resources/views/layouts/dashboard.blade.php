@@ -537,9 +537,12 @@
       var nrc_idInput = document.getElementById('nrc_id');
       var nrcIDError = document.getElementById('nrcIDError');
 
+      var ministry = document.getElementById('ministry');
+      var department = document.getElementById('department');
+
       // In this example, we'll check if the input is not empty
       if (!employeeNo.value) {
-        employeeNoError.textContent = 'Employee Number is required';
+          employeeNoError.textContent = 'Employee Number is required';
       }
       if (!jobTitleInput.value) {
           jobTitleError.textContent = 'Job Title is required';
@@ -557,12 +560,40 @@
           genderError.textContent = 'Gender is required';
       } 
       if (!nrc_idInput.value) {
-        nrcIDError.textContent = 'Identification Type is required';
+          nrcIDError.textContent = 'Identification Type is required';
       } 
       
-      if (!jobTitleInput.value || !dobInput.value || !phoneInput.value || !nrcInput.value || !genderInput.value || !nrc_idInput.value) {
+      if (!employeeNo.value || !jobTitleInput.value || !dobInput.value || !phoneInput.value || !nrcInput.value || !genderInput.value || !nrc_idInput.value) {
           return false;
       } else {
+          // Update or Create data to the database
+          // Prepare data to send to the server
+          var formData = new FormData();
+          formData.append('jobTitle', jobTitleInput.value);
+          formData.append('dob', dobInput.value);
+          formData.append('phone', phoneInput.value);
+          formData.append('nrc', nrcInput.value);
+          formData.append('gender', genderInput.value);
+          formData.append('nrc_id', nrc_idInput.value);
+          formData.append('employeeNo', employeeNo.value);
+          formData.append('ministry', ministry.value);
+          formData.append('department', department.value);
+          formData.append('borrower_id', '{{ auth()->user()->id }}');
+    
+          // Perform Fetch API request to the Laravel backend
+          fetch("{{ route('continue-loan') }}", {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              // Handle the success response from the server
+              console.log('Data successfully updated or created:', data);
+          })
+          .catch(error => {
+              // Handle the error response from the server
+              console.error('Error updating or creating data:', error);
+          });
           return true;
       }
 

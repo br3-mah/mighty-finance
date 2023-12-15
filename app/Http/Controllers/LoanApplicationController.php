@@ -580,25 +580,6 @@ class LoanApplicationController extends Controller
                 'borrower_id' => $data['borrower_id'],
                 'gender'=> $data['gender']
             ];
-            $this->updateUser($personal);
-            $loan = Application::where('id', $data['application_id'])->first();
-            $loan->complete = 1;
-            $loan->save();
-            // Handle file uploads
-            // if (array_key_exists('files', $data) && is_array($data['files'])) {
-            //     foreach ($data['files'] as $file) {
-            //         // Store the file in the storage/app/public directory (you can change the path as needed)
-            //         $path = $file->store('public/user_files');
-                    
-            //         // Save the file path in the database if you have a table for file records
-            //         UserFile::create([
-            //             'name' => $file->getClientOriginalName(),
-            //             'path' => $path,
-            //             'user_id' => $data['borrower_id']
-            //         ]);
-            //     }
-            // }
-            // Create Next of Kin
             $nok = [
                 'nok_fname' => $data['nextOfKinFirstName'],
                 'nok_lname' => $data['nextOfKinLastName'],
@@ -607,10 +588,6 @@ class LoanApplicationController extends Controller
                 'nok_address' => $data['physicalAddress'],
                 'user_id' => $data['borrower_id']
             ];
-            $this->createNOK($nok);
-    
-    
-            // Update Guarantors
             $guarants = [
                 'gfname'=> $data['guarantorName'],
                 'gnrc_no'=> $data['guarantorNRC'],
@@ -622,12 +599,6 @@ class LoanApplicationController extends Controller
                 'g_relation'=> $data['relationshipToBorrower'],
                 'application_id' => $data['application_id']
             ];
-        
-            $this->updateGuarantors($guarants);
-    
-    
-    
-            // Update reference details
             $refs = [
                 'hrFname'=> $data['hrFirstName'],
                 'hrLname'=> $data['hrLastName'],
@@ -638,9 +609,6 @@ class LoanApplicationController extends Controller
                 'user_id' => $data['borrower_id'],
                 'application_id' => $data['application_id']
             ];
-            $this->createRefs($refs);
-    
-            // Update bank details
             $bank = [
                 'bankName'=> $data['bankName'],
                 'branchName'=> $data['branchName'],
@@ -648,6 +616,24 @@ class LoanApplicationController extends Controller
                 'accountNumber'=> $data['accountNumber'],
                 'user_id' => $data['borrower_id'],
             ];
+
+
+            $this->updateUser($personal);
+            if (isset($data['application_id'])) {
+                $loan = Application::where('id', $data['application_id'])->first();
+                $loan->save();
+            }
+            
+            // Create Next of Kin
+            $this->createNOK($nok);
+    
+            // Update Guarantors
+            $this->updateGuarantors($guarants);
+    
+            // Update reference details
+            $this->createRefs($refs);
+    
+            // Update bank details
             $this->createBankDetails($bank);
             return redirect()->back();
         } catch (\Throwable $th) {
