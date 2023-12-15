@@ -372,7 +372,7 @@
                                     <div class="range-slider_line">
                                     <div id="slider_line" class="range-slider_line-fill"></div>
                                     </div>
-                                    <input id="slider_input" name="duration" class="range-slider_input" type="range" value="2" min="0" max="12">
+                                    <input id="slider_input" name="duration" class="range-slider_input" type="range" value="2" min="1" max="12">
                                 </div>
                             </div>  
                             <div class="row">
