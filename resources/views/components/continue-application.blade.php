@@ -2,7 +2,7 @@
 <div id="overlay"></div>
 <div class="modal" style="z-index: 99999" id="continue-loan-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
     
-        <div class="container p-6 modal-content">
+        <div class="p-6 modal-content">
             <div class="modal-header">
                 <h3 class="modal-title text-center ">
                     
@@ -10,12 +10,12 @@
 
                 {{-- <span style="cursor:pointer" onclick="closeModal()">x</span> --}}
             </div>
-            <div class="modal-body row">
-                <div class="col-xxl-3 col-xl-3 col-lg-3 container">
+            <div class="modal-body row" style="overflow-y: scroll; overflow-x:hidden; height:63vh">
+                <div class="col-xxl-3 col-xl-3 col-lg-3" >
                     <img width="240" src="https://img.freepik.com/free-vector/account-concept-illustration_114360-279.jpg?w=740&t=st=1700475235~exp=1700475835~hmac=99f4c6fbffcf369cc925fde13256cbcdefd9c50ab8b470e1d74610f67d158f4d">
                 </div>
                 <div class="col-xxl-9 col-xl-9 col-lg-9">
-                    <form class="col-xxl-12 col-xl-12 col-lg-12 " method="post" action="{{ route('continue-loan') }}"  id="wizard" enctype="multipart/form-data">
+                    <form class="py-6 pb-4 col-xxl-12 col-xl-12 col-lg-12 " method="post" action="{{ route('continue-loan') }}"  id="wizard" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="MAX_FILE_SIZE" value="64000000" />
                         <input type="hidden" name="application_id" value="{{ App\Models\Application::currentApplication()->id }}">
@@ -38,10 +38,12 @@
                                 <div class="col-md-6">
                                     <label for="dob">D.O.B</label>
                                     <input value="{{auth()->user()->dob}}" type="date" class="form-control" id="dob" name="dob">
+                                    <small id="jobDOBError" class="text-danger"></small>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="jobTitle">JOB TITLE</label>
-                                    <input value="{{ auth()->user()->occupation ?? auth()->user()->jobTitle }}" type="text" class="form-control" id="jobTitle" name="jobTitle">
+                                    <input value="{{ auth()->user()->occupation ?? auth()->user()->jobTitle }}" data-validation="email" type="text" class="form-control" id="jobTitle" name="jobTitle">
+                                    <small id="jobTitleError" class="text-danger"></small>
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -61,6 +63,7 @@
                                             placeholder="77 214 77 55"
                                         />
                                     </div>
+                                    <small id="phoneError" class="text-danger"></small>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="employeeNo">EMPLOYEE NO</label>
@@ -69,8 +72,24 @@
                             </div>
                             <div class="row mb-4">
                                 <div class="col-md-6">
-                                    <label for="nrc">NRC NUMBER</label>
-                                    <input value="{{auth()->user()->nrc_no ?? auth()->user()->nrc}}" type="text" class="form-control" id="nrc" name="nrc">
+                                    <label for="nrc">NATIONAL ID NUMBER</label>
+                                    <div class="input-group">
+                                        <select
+                                            id="nrc_id"
+                                            name="id_type"
+                                            class="form-control"
+                                            {{-- wire:model.defer="state.id_type" --}}
+                                            >  
+                                            <option value="">-- Choose --</option>
+                                            <option {{ auth()->user()->id_type == 'NRC' ? 'selected' : ''}} value="NRC">NRC</option>
+                                            <option {{ auth()->user()->id_type == 'Passport' ? 'selected' : ''}} value="Passport">Passport</option>
+                                            <option {{ auth()->user()->id_type == 'Driver Liecense' ? 'selected' : ''}} value="Driver Liecense">Driver Liecense</option>
+                                        </select>
+                                        <input value="{{auth()->user()->nrc_no ?? auth()->user()->nrc}}" type="text" class="form-control" id="nrc" name="nrc">
+                                    </div>
+                                    <small id="nrcError" class="text-danger"></small>
+                                    <br>
+                                    <small id="nrcIDError" class="text-danger"></small>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="ministry">MINISTRY</label>
@@ -81,7 +100,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="department">GENDER</label>
                                     <select
-                                        name="gender"
+                                        id="gender"
                                         class="form-control"
                                         name="gender"
                                         {{-- wire:model.defer="state.gender" --}}
@@ -90,6 +109,7 @@
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                     </select>
+                                    <small id="genderError" class="text-danger"></small>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="department">DEPARTMENT</label>
@@ -126,6 +146,8 @@
                                     <div class="pt-2">
                                         <ul class="file-list" id="fileList"></ul>
                                     </div>
+                                    
+                                    <small id="nrcFileError" class="text-danger"></small>
                                 </div>
                                 <div class="file-uploader col-xxl-6 col-xl-6 col-lg-6 border" style="border: 1px #d3d1d1; padding:2%;">
                                     <!-- Use a label for file input and add a Font Awesome icon -->
@@ -142,16 +164,17 @@
                                     <div class="pt-2">
                                         <ul class="file-list-2" id="fileList-2"></ul>
                                     </div>
+                                    <small id="fiileInput2Error" class="text-danger"></small>
                                 </div>
                             </div>
                             <div style="float: right;" class="mt-2">
-                                <button type="button" class="btn btn-light text-dark" onclick="prevStep(6)">
+                                <button type="button" class="btn btn-light text-dark" onclick="prevStep(2)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
                                     </svg>
                                     Back
                                 </button>
-                                <button type="button" class="btn btn-primary" onclick="nextStep(6)">
+                                <button type="button" class="btn btn-primary" onclick="nextStep(2)">
                                     Next 
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
@@ -168,10 +191,12 @@
                                 <div class="form-group col-md-6">
                                     <label for="nextOfKinFirstName">FIRST NAME (Next of Kin)</label>
                                     <input type="text" class="form-control" id="nextOfKinFirstName" name="nextOfKinFirstName">
+                                    <small id="nokFNError" class="text-danger"></small>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="nextOfKinLastName">LAST NAME (Next of Kin)</label>
                                     <input type="text" class="form-control" id="nextOfKinLastName" name="nextOfKinLastName">
+                                    <small id="nokLNError" class="text-danger"></small>
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -190,6 +215,7 @@
                                             placeholder="77 214 77 55"
                                         />
                                     </div>
+                                    <small id="nextOfKinPhoneError" class="text-danger"></small>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="physicalAddress">PHYSICAL ADDRESS (Next of Kin)</label>
@@ -199,15 +225,16 @@
                             <div class="form-group mb-4">
                                 <label for="relationship">RELATIONSHIP WITH APPLICANT</label>
                                 <input type="text" class="form-control" id="relationship" name="relationship">
+                                <small id="relationError" class="text-danger"></small>
                             </div>
                             <div style="float: right;">
-                                <button type="button" class="btn btn-light text-dark" onclick="prevStep(2)">
+                                <button type="button" class="btn btn-light text-dark" onclick="prevStep(3)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
                                     </svg>
                                     Back
                                 </button>
-                                <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+                                <button type="button" class="btn btn-primary" onclick="nextStep(3)">
                                     Next 
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>

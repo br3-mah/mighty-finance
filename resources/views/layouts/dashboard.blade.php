@@ -471,14 +471,133 @@
     }
 
     function nextStep(step) {
-        currentStep += 1;
-        showStep(currentStep);
+      switch (step) {
+        case 1:
+          if (_validate_step1()) {
+            currentStep += 1;
+            showStep(currentStep);
+          }
+          break;
+        case 2:
+          if (_validate_step2()) {
+            currentStep += 1;
+            showStep(currentStep);
+          }
+          break;
+        case 3:
+          if (_validate_step3()) {
+            currentStep += 1;
+            showStep(currentStep);
+          }
+          break;
+      
+        default:
+          break;
+      }
     }
 
     function prevStep(step) {
         currentStep -= 1;
         showStep(currentStep);
     }
+
+    function _validate_step1(){
+      var jobTitleInput = document.getElementById('jobTitle');
+      var jobTitleError = document.getElementById('jobTitleError');
+      var dobInput = document.getElementById('dob');
+      var dobError = document.getElementById('jobDOBError');
+      var phoneInput = document.getElementById('phone');
+      var phoneError = document.getElementById('phoneError');
+      var nrcInput = document.getElementById('nrc');
+      var nrcError = document.getElementById('nrcError');
+      var genderInput = document.getElementById('gender');
+      var genderError = document.getElementById('genderError');
+      var nrc_idInput = document.getElementById('nrc_id');
+      var nrcIDError = document.getElementById('nrcIDError');
+
+      // In this example, we'll check if the input is not empty
+      if (!jobTitleInput.value) {
+          jobTitleError.textContent = 'Job Title is required';
+      }
+      if (!dobInput.value) {
+          dobError.textContent = 'DOB is required';
+      }
+      if (!phoneInput.value) {
+          phoneError.textContent = 'Phone is required';
+      }
+      if (!nrcInput.value) {
+          nrcError.textContent = 'National ID is required';
+      }
+      if (!genderInput.value) {
+          genderError.textContent = 'Gender is required';
+      } 
+      if (!nrc_idInput.value) {
+        nrcIDError.textContent = 'National ID Type is required';
+      } 
+      
+      if (!jobTitleInput.value || !dobInput.value || !phoneInput.value || !nrcInput.value || !genderInput.value || !nrc_idInput.value) {
+          return false;
+      } else {
+          return true;
+      }
+
+    }
+
+    function _validate_step2(){
+      var fileInput = document.getElementById('fileInput');
+      var nrcFileError = document.getElementById('nrcFileError');
+      var fileInput2 = document.getElementById('fileInput2');
+      var fiileInput2Error = document.getElementById('fiileInput2Error');
+
+      // In this example, we'll check if the input is not empty
+      if (!fileInput.value) {
+        nrcFileError.textContent = 'Please upload copy of national ID';
+      }
+      if (!fileInput2.value) {
+        fiileInput2Error.textContent = 'Please upload copy of Tpin';
+      }
+      
+      if (!fileInput2.value || !fileInput.value ) {
+          return false;
+      } else {
+          return true;
+      }
+
+    } 
+
+    function _validate_step3(){
+      var nextOfKinFirstName = document.getElementById('nextOfKinFirstName');
+      var nokFNError = document.getElementById('nokFNError');
+      var nextOfKinLastName = document.getElementById('nextOfKinLastName');
+      var nokLNError = document.getElementById('nokLNError');
+      var nextOfKinPhone = document.getElementById('nextOfKinPhone');
+      var nextOfKinPhoneError = document.getElementById('nextOfKinPhoneError');
+      var relationshipInput = document.getElementById('relationship');
+      var relationError = document.getElementById('relationError');
+
+      
+
+      // In this example, we'll check if the input is not empty
+      if (!nextOfKinFirstName.value) {
+        nokFNError.textContent = 'First Name required';
+      }
+      if (!nextOfKinLastName.value) {
+        nokLNError.textContent = 'First Name required';
+      }
+      if (!nextOfKinPhone.value) {
+        nextOfKinPhoneError.textContent = 'Phone number required';
+      }
+      if (!relationshipInput.value) {
+        relationError.textContent = 'Your relation is required';
+      }
+      
+      if (!nextOfKinLastName.value || !nextOfKinFirstName.value || !nextOfKinPhone.value || !relationshipInput.value ) {
+          return false;
+      } else {
+          return true;
+      }
+
+    } 
 
     // NRC
     // JavaScript to handle file selection and removal
