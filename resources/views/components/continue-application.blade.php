@@ -72,7 +72,7 @@
                             </div>
                             <div class="row mb-4">
                                 <div class="col-md-6">
-                                    <label for="nrc">NATIONAL ID NUMBER</label>
+                                    <label for="nrc">IDENTIFICATION TYPE</label>
                                     <div class="input-group">
                                         <select
                                             id="nrc_id"
