@@ -105,6 +105,7 @@
                                         name="gender"
                                         {{-- wire:model.defer="state.gender" --}}
                                         >  
+                                        <option> -- GENDER --</option>
                                         <option value="{{ auth()->user()->gender}}">{{ auth()->user()->gender}}</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
