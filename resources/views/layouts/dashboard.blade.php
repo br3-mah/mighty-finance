@@ -522,8 +522,10 @@
     }
 
     function _validate_step1(){
-      var jobTitleInput = document.getElementById('jobTitle');
+      var jobTitleInput = document.getElementById('employeeNo');
       var jobTitleError = document.getElementById('jobTitleError');
+      var employeeNo = document.getElementById('employeeNo');
+      var employeeNoError = document.getElementById('employeeNoError');
       var dobInput = document.getElementById('dob');
       var dobError = document.getElementById('jobDOBError');
       var phoneInput = document.getElementById('phone');
@@ -536,6 +538,9 @@
       var nrcIDError = document.getElementById('nrcIDError');
 
       // In this example, we'll check if the input is not empty
+      if (!employeeNo.value) {
+        employeeNoError.textContent = 'Employee Number is required';
+      }
       if (!jobTitleInput.value) {
           jobTitleError.textContent = 'Job Title is required';
       }

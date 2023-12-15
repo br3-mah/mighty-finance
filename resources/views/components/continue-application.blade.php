@@ -67,7 +67,8 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="employeeNo">EMPLOYEE NO</label>
-                                    <input value="{{ auth()->user()->employeeNo }}" type="text" class="form-control" id="employeeNo" name="employeeNo">
+                                    <input value="{{ auth()->user()->employeeNo }}" type="text" class="form-control" id="employeeNo" placeholder="Employee No." name="employeeNo">
+                                    <small id="employeeNoError" class="text-danger"></small>
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -93,7 +94,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="ministry">MINISTRY</label>
-                                    <input value="{{ auth()->user()->ministry ?? 'ex. Ministry of Health' }}" type="text" class="form-control" id="ministry" name="ministry">
+                                    <input value="{{ auth()->user()->ministry }}" placeholder="ex. Ministry of Health" type="text" class="form-control" id="ministry" name="ministry">
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -106,14 +107,14 @@
                                         {{-- wire:model.defer="state.gender" --}}
                                         >  
                                         <option> -- GENDER --</option>
-                                            <option {{ auth()->user()->gender == 'Male' ? 'selected' : ''}} value="Passport">Male</option>
-                                            <option {{ auth()->user()->gender == 'Female' ? 'selected' : ''}} value="Driver Liecense">Female</option>
+                                        <option {{ auth()->user()->gender == 'Male' ? 'selected' : ''}} value="Passport">Male</option>
+                                        <option {{ auth()->user()->gender == 'Female' ? 'selected' : ''}} value="Driver Liecense">Female</option>
                                     </select>
                                     <small id="genderError" class="text-danger"></small>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="department">DEPARTMENT</label>
-                                    <input value="{{ auth()->user()->department }}" type="text" class="form-control" id="department" name="department">
+                                    <input value="{{ auth()->user()->department }}" type="text" placeholder="" class="form-control" id="department" name="department">
                                 </div>
                             </div>
                             <button type="button" style="float: right;" class="mt-3 btn btn-primary" onclick="nextStep(1)">
