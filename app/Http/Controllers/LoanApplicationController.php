@@ -630,7 +630,11 @@ class LoanApplicationController extends Controller
                 ];
                 $this->createBankDetails($bank);
             }
-            
+
+            // Update Loan info
+            $loan = Application::where('id',  $data['application_id'])->first();
+            $loan->continue = 0;
+            $loan->save();
             
             if($request->wantsJson()){
                 return response()->json([
